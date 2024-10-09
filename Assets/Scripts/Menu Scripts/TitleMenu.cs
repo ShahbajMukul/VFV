@@ -48,6 +48,8 @@ public class TitleMenu : MonoBehaviour
     public void HideNetworkErr() {
         GameObject.Find("NetworkErrPanel").transform.localScale = new Vector3(0, 0, 0);
     }
+
+
     public void ToggleFullScreen() {
         Screen.fullScreen = !Screen.fullScreen;
     }
@@ -57,6 +59,24 @@ public class TitleMenu : MonoBehaviour
     public void HideCredits() {
         GameObject.Find("CreditsPanel").transform.localScale = new Vector3(0, 0, 0);
     }
-   
+    public void ShowAIBanner()
+    {
+        GameObject.Find("ChatbotBanner").transform.localScale = new Vector3(3, 3, 1);
+    }
+    public void HideAIBanner()
+    {
+        GameObject.Find("ChatbotBanner").transform.localScale = new Vector3(0, 0, 0);
+    }
+
+    // move them later
+
+    public void ShowChatbotPanel()
+    {
+        GameObject.Find("ChatbotPanel").transform.localScale = new Vector3(3, 3, 1);
+    }
+    public void HideChatbotPanel()
+    {
+        GameObject.Find("ChatbotPanel").transform.localScale = new Vector3(0, 0, 0);
+    }
 }
 

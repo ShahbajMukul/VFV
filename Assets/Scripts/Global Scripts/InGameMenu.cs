@@ -104,10 +104,10 @@ public class InGameMenu : MonoBehaviour
 
                     Time.timeScale = 0.0f;
 
-                    //Old method
-                    //gameObject.GetComponent<Canvas>().enabled = true;
+                    // Old method
+                    // gameObject.GetComponent<Canvas>().enabled = true;
 
-                    //player.GetComponent<Player_Movement>().canMove = false;
+                    // player.GetComponent<Player_Movement>().canMove = false;
                 }
             }
         }
