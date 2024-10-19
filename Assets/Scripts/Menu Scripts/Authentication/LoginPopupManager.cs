@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -7,6 +7,7 @@ public class LoginPopupManager : MonoBehaviour
 {
     public GameObject loginPopup;
     public GameObject registrationPopup;
+    public GameObject resetPassPopup;
     public InputField emailInput;
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
@@ -57,11 +58,6 @@ public class LoginPopupManager : MonoBehaviour
         }
     }
 
-    public void CloseLoginPopup()
-    {
-        loginPopup.SetActive(false);
-    }
-
     public void ShowRegiPopup()
     {
         CloseLoginPopup();
@@ -70,8 +66,14 @@ public class LoginPopupManager : MonoBehaviour
 
     public void ShowResetPopup()
     {
-        // Hide login popup
-        // Show Reset popup later 
+        CloseLoginPopup();
+        resetPassPopup.SetActive(true);
     }
+
+    public void CloseLoginPopup()
+    {
+        loginPopup.SetActive(false);
+    }
+
+
 }
-*/

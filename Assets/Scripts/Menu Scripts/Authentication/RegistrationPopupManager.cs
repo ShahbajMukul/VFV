@@ -8,6 +8,7 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
+    public GameObject resetPassPopup;
     public InputField emailInput;
     public InputField usernameInput;
     public InputField passwordInput;
@@ -19,13 +20,11 @@ public class RegistrationPopupManager : MonoBehaviour
 
     void Start()
     {
+        // ToDo: Implement a method to check if the user already logged in 
         ShowRegistrationPopup();
     }
 
-    public void ShowRegistrationPopup()
-    {
-        registrationPopup.SetActive(true);
-    }
+
 
     public void OnRegisterButtonClicked()
     {
@@ -95,6 +94,7 @@ public class RegistrationPopupManager : MonoBehaviour
                 {
                     Debug.Log("Registration successful!");
                     errorMessageText.text = "Registration successful! Please proceed to the login page.";
+                    // ToDo: Save user info in game so that they don't have to relogin everytime
                     // Do not automatically close the registration popup, allow user to proceed manually
                 }
                 else
@@ -104,6 +104,21 @@ public class RegistrationPopupManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ShowRegistrationPopup()
+    {
+        registrationPopup.SetActive(true);
+    }
+    public void ShowLoginPopup()
+    {
+        CloseRegistrationPopup();
+        loginPopup.SetActive(true);
+    }
+    public void ShowResetPassPopPopup()
+    {
+        CloseRegistrationPopup();
+        resetPassPopup.SetActive(true);
     }
 
     public void OnCancelButtonClicked()
@@ -116,11 +131,7 @@ public class RegistrationPopupManager : MonoBehaviour
         registrationPopup.SetActive(false);
     }
 
-    public void ShowLoginPopup()
-    {
-        CloseRegistrationPopup();
-        loginPopup.SetActive(true);
-    }
+
 
     private bool ValidatePasswordComplexity(string password)
     {
