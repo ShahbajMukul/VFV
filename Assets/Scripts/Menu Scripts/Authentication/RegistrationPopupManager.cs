@@ -8,7 +8,6 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
-    public GameObject resetPassPopup;
     public InputField emailInput;
     public InputField usernameInput;
     public InputField passwordInput;
@@ -20,15 +19,30 @@ public class RegistrationPopupManager : MonoBehaviour
 
     void Start()
     {
-        // ToDo: Implement a method to check if the user already logged in 
+        //// ToDo: Implement a method to check if the user already logged in 
         ShowRegistrationPopup();
     }
 
+    public void ShowRegistrationPopup()
+    {
 
+        // Close other popups if open
+        if (loginPopup != null)
+        {
+            loginPopup.SetActive(false);
+        }
+
+        // Show registration popup
+        if (registrationPopup != null)
+        {
+            registrationPopup.SetActive(true);
+        }
+    }
 
     public void OnRegisterButtonClicked()
     {
-        // Validation
+
+
         if (string.IsNullOrEmpty(emailInput.text) ||
             string.IsNullOrEmpty(usernameInput.text) ||
             string.IsNullOrEmpty(passwordInput.text) ||
@@ -45,14 +59,13 @@ public class RegistrationPopupManager : MonoBehaviour
             return;
         }
 
-        // Password complexity validation
         if (!ValidatePasswordComplexity(passwordInput.text))
         {
             errorMessageText.text = "Password must be at least 8 characters long, include at least one uppercase letter, one symbol, and one number.";
+            Debug.LogWarning("Validation failed: Password does not meet complexity requirements.");
             return;
         }
 
-        // Debug log to check email and password before sending request
         Debug.Log($"Attempting to register with email: {emailInput.text}, username: {usernameInput.text}, password: {passwordInput.text}, secretCode: {registrationCodeInput.text}");
 
         StartCoroutine(RegisterUser(emailInput.text, usernameInput.text, passwordInput.text, registrationCodeInput.text));
@@ -60,23 +73,19 @@ public class RegistrationPopupManager : MonoBehaviour
 
     private IEnumerator RegisterUser(string email, string username, string password, string registrationCode)
     {
-        // Create JSON payload
         string jsonData = $"{{\"email\":\"{email}\",\"username\":\"{username}\",\"password\":\"{password}\",\"secretCode\":\"{registrationCode}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
 
-        // Create UnityWebRequest with JSON data
         using (UnityWebRequest www = new UnityWebRequest(registrationUrl, "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(jsonToSend);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
-            // Log JSON payload being sent
             Debug.Log("Sending registration request with payload: " + jsonData);
 
             yield return www.SendWebRequest();
 
-            // Log more detailed response information
             Debug.Log("HTTP Response Code: " + www.responseCode);
             Debug.Log("HTTP Response Text: " + www.downloadHandler.text);
 
@@ -90,12 +99,12 @@ public class RegistrationPopupManager : MonoBehaviour
             {
                 Debug.Log("Server connected successfully! Response: " + www.downloadHandler.text);
 
-                if (www.responseCode == 201) // Assuming a 201 Created response for successful registration
+                if (www.responseCode == 201)
                 {
+                    //// ToDo: Save user info in game so that they don't have to relogin everytime
                     Debug.Log("Registration successful!");
-                    errorMessageText.text = "Registration successful! Please proceed to the login page.";
-                    // ToDo: Save user info in game so that they don't have to relogin everytime
-                    // Do not automatically close the registration popup, allow user to proceed manually
+                    CloseRegistrationPopup();
+                    ShowLoginPopup();
                 }
                 else
                 {
@@ -106,21 +115,6 @@ public class RegistrationPopupManager : MonoBehaviour
         }
     }
 
-    public void ShowRegistrationPopup()
-    {
-        registrationPopup.SetActive(true);
-    }
-    public void ShowLoginPopup()
-    {
-        CloseRegistrationPopup();
-        loginPopup.SetActive(true);
-    }
-    public void ShowResetPassPopPopup()
-    {
-        CloseRegistrationPopup();
-        resetPassPopup.SetActive(true);
-    }
-
     public void OnCancelButtonClicked()
     {
         CloseRegistrationPopup();
@@ -128,14 +122,30 @@ public class RegistrationPopupManager : MonoBehaviour
 
     void CloseRegistrationPopup()
     {
-        registrationPopup.SetActive(false);
+        if (registrationPopup != null)
+        {
+            registrationPopup.SetActive(false);
+        }
     }
 
+    public void ShowLoginPopup()
+    {
 
+        // Close registration popup
+        if (registrationPopup != null)
+        {
+            registrationPopup.SetActive(false);
+        }
+
+        // Open login popup
+        if (loginPopup != null)
+        {
+            loginPopup.SetActive(true);
+        }
+    }
 
     private bool ValidatePasswordComplexity(string password)
     {
-        // Basic validation for password complexity requirements
         var hasUpperCase = false;
         var hasLowerCase = false;
         var hasDigits = false;

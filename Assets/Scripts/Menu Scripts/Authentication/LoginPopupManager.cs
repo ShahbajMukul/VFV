@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Text;
 
 public class LoginPopupManager : MonoBehaviour
 {
@@ -19,61 +20,105 @@ public class LoginPopupManager : MonoBehaviour
         if (string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text))
         {
             errorMessageText.text = "All fields must be filled!";
+            Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
 
-        // Start the login coroutine
         StartCoroutine(LoginUser(emailInput.text, passwordInput.text));
     }
 
-    private IEnumerator LoginUser(string email, string password)
+    private IEnumerator LoginUser(string identifier, string password)
     {
-        // Create the JSON payload manually
-        string jsonData = JsonUtility.ToJson(new
+        string jsonData;
+
+        if (IsEmail(identifier))
         {
-            username = email,  // The backend uses 'username' field for login (email in your case)
-            password = password
-        });
-
-        // Create a UnityWebRequest to POST the JSON data
-        UnityWebRequest request = new UnityWebRequest(loginUrl, "POST");
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        
-        if (request.isNetworkError || request.isHttpError)
-        {
-            Debug.LogError("Login failed: " + request.downloadHandler.text);
-            errorMessageText.text = "Login failed: " + request.error;
+            // Send email as username field if it is an email
+            jsonData = $"{{\"email\":\"{identifier}\",\"password\":\"{password}\"}}";
         }
         else
         {
-            Debug.Log("Login successful!");
-            errorMessageText.text = "";
-            CloseLoginPopup();
+            // Send username as identifier if it is not an email
+            jsonData = $"{{\"username\":\"{identifier}\",\"password\":\"{password}\"}}";
         }
+
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
+
+        using (UnityWebRequest www = new UnityWebRequest(loginUrl, "POST"))
+        {
+            www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            Debug.Log("Sending login request with payload: " + jsonData);
+
+            yield return www.SendWebRequest();
+
+            Debug.Log("HTTP Response Code: " + www.responseCode);
+            Debug.Log("HTTP Response Text: " + www.downloadHandler.text);
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError("HTTP error received from server: " + www.error);
+                Debug.LogError("Server Response: " + www.downloadHandler.text);
+
+                // Handle incorrect credentials
+                if (www.responseCode == 401)
+                {
+                    errorMessageText.text = "Incorrect email/username or password.";
+                }
+                else
+                {
+                    errorMessageText.text = "Login failed: " + www.downloadHandler.text;
+                }
+            }
+            else
+            {
+                Debug.Log("Server connected successfully! Response: " + www.downloadHandler.text);
+
+                if (www.responseCode == 200) // Assuming a 200 OK response for successful login
+                {
+                    Debug.Log("Login successful!");
+                    errorMessageText.text = "";
+                    CloseLoginPopup();
+                }
+                else
+                {
+                    Debug.LogWarning("Unexpected response code: " + www.responseCode);
+                    errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
+                }
+            }
+        }
+    }
+
+    private bool IsEmail(string input)
+    {
+        return input.Contains("@") && input.Contains(".");
     }
 
     public void ShowRegiPopup()
     {
         CloseLoginPopup();
-        registrationPopup.SetActive(true);
+        if (registrationPopup != null)
+        {
+            registrationPopup.SetActive(true);
+        }
     }
 
     public void ShowResetPopup()
     {
         CloseLoginPopup();
-        resetPassPopup.SetActive(true);
+        if (resetPassPopup != null)
+        {
+            resetPassPopup.SetActive(true);
+        }
     }
 
     public void CloseLoginPopup()
     {
-        loginPopup.SetActive(false);
+        if (loginPopup != null)
+        {
+            loginPopup.SetActive(false);
+        }
     }
-
-
 }
