@@ -9,11 +9,83 @@ public class LoginPopupManager : MonoBehaviour
     public GameObject loginPopup;
     public GameObject registrationPopup;
     public GameObject resetPassPopup;
+    public GameObject ChatPopupPanel; 
     public InputField emailInput;
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
+    public UnityEngine.UI.Text loginStatusMsgLabel;
 
     private string loginUrl = "http://localhost:3000/api/login";
+    private string checkSessionUrl = "http://localhost:3000/api/check-session";
+
+    void Start()
+    {
+        CheckLoginState();
+    }
+
+    void CheckLoginState()
+    {
+        StartCoroutine(CheckSession());
+    }
+
+    private IEnumerator CheckSession()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(checkSessionUrl))
+        {
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("Cookie", PlayerPrefs.GetString("SessionCookie", ""));
+
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError("Error checking session: " + www.error);
+
+                // Show login popup if session check fails
+                if (loginPopup != null)
+                {
+                    loginPopup.SetActive(true);
+                }
+                if (loginStatusMsgLabel != null)
+                {
+                    loginStatusMsgLabel.text = "";
+                }
+            }
+            else
+            {
+                if (www.responseCode == 200)
+                {
+                    Debug.Log("User already logged in.");
+                    if (loginStatusMsgLabel != null)
+                    {
+                        loginStatusMsgLabel.text = "You are already logged in.";
+                    }
+
+                    // Hide login popup and show chat panel if user is already logged in
+                    if (loginPopup != null)
+                    {
+                        loginPopup.SetActive(false);
+                    }
+                    if (ChatPopupPanel != null)
+                    {
+                        ChatPopupPanel.SetActive(true);
+                    }
+                }
+                else
+                {
+                    // Show login popup if session is not valid
+                    if (loginPopup != null)
+                    {
+                        loginPopup.SetActive(true);
+                    }
+                    if (loginStatusMsgLabel != null)
+                    {
+                        loginStatusMsgLabel.text = "";
+                    }
+                }
+            }
+        }
+    }
 
     public void OnLoginButtonClicked()
     {
@@ -29,18 +101,9 @@ public class LoginPopupManager : MonoBehaviour
 
     private IEnumerator LoginUser(string identifier, string password)
     {
-        string jsonData;
-
-        if (IsEmail(identifier))
-        {
-            // Send email as username field if it is an email
-            jsonData = $"{{\"email\":\"{identifier}\",\"password\":\"{password}\"}}";
-        }
-        else
-        {
-            // Send username as identifier if it is not an email
-            jsonData = $"{{\"username\":\"{identifier}\",\"password\":\"{password}\"}}";
-        }
+        string jsonData = IsEmail(identifier)
+            ? $"{{\"email\":\"{identifier}\",\"password\":\"{password}\"}}"
+            : $"{{\"username\":\"{identifier}\",\"password\":\"{password}\"}}";
 
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
 
@@ -54,15 +117,11 @@ public class LoginPopupManager : MonoBehaviour
 
             yield return www.SendWebRequest();
 
-            Debug.Log("HTTP Response Code: " + www.responseCode);
-            Debug.Log("HTTP Response Text: " + www.downloadHandler.text);
-
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.LogError("HTTP error received from server: " + www.error);
                 Debug.LogError("Server Response: " + www.downloadHandler.text);
 
-                // Handle incorrect credentials
                 if (www.responseCode == 401)
                 {
                     errorMessageText.text = "Incorrect email/username or password.";
@@ -76,11 +135,29 @@ public class LoginPopupManager : MonoBehaviour
             {
                 Debug.Log("Server connected successfully! Response: " + www.downloadHandler.text);
 
-                if (www.responseCode == 200) // Assuming a 200 OK response for successful login
+                if (www.responseCode == 200)
                 {
                     Debug.Log("Login successful!");
-                    errorMessageText.text = "";
-                    CloseLoginPopup();
+
+                    // Save the session cookie from the response headers
+                    string setCookieHeader = www.GetResponseHeader("Set-Cookie");
+                    if (!string.IsNullOrEmpty(setCookieHeader))
+                    {
+                        PlayerPrefs.SetString("SessionCookie", setCookieHeader);
+                        PlayerPrefs.Save();
+                    }
+
+                    errorMessageText.text = "Login successful!"; // Show success message on screen
+
+                    // Hide login popup and show chat panel after successful login
+                    if (loginPopup != null)
+                    {
+                        loginPopup.SetActive(false);
+                    }
+                    if (ChatPopupPanel != null)
+                    {
+                        ChatPopupPanel.SetActive(true);
+                    }
                 }
                 else
                 {

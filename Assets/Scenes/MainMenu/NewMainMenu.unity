@@ -5262,7 +5262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0013021978}
+  m_AnchoredPosition: {x: 0, y: 73.80375}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &563259543
@@ -5495,8 +5495,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319514}
-        m_MethodName: ShowResetPassPopPopup
+      - m_Target: {fileID: 1490319516}
+        m_MethodName: ShowResetPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6444,7 +6444,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 948713354}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.95502096
+  m_Size: 0.89774895
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11837,8 +11837,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319514}
-        m_MethodName: ShowResetPassPopPopup
+      - m_Target: {fileID: 1490319516}
+        m_MethodName: ShowResetPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14512,9 +14512,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginPopup: {fileID: 164561759}
   registrationPopup: {fileID: 2130388032}
+  resetPassPopup: {fileID: 0}
+  ChatPopupPanel: {fileID: 0}
   emailInput: {fileID: 1028436783}
   passwordInput: {fileID: 2055099763}
   errorMessageText: {fileID: 207455458}
+  loginStatusMsgLabel: {fileID: 0}
 --- !u!114 &1490319516
 MonoBehaviour:
   m_ObjectHideFlags: 0
