@@ -28,15 +28,13 @@ public class ResetPassPopupManager : MonoBehaviour
 
     public void OnResetButtonClicked()
     {
-
         if (string.IsNullOrEmpty(emailInput.text))
         {
             errorMessageText.text = "All fields must be filled!";
+            errorMessageText.gameObject.SetActive(true); 
             Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
-
-        ShowResetPopup();
 
         StartCoroutine(ResetUserPass(emailInput.text));
     }
@@ -62,8 +60,8 @@ public class ResetPassPopupManager : MonoBehaviour
             {
                 Debug.LogError("HTTP error received from server: " + www.error);
                 Debug.LogError("Server Response: " + www.downloadHandler.text);
-
-                errorMessageText.text = "Error: " + www.downloadHandler.text;
+                errorMessageText.text = "Error: Unable to process the request.";
+                errorMessageText.gameObject.SetActive(true);
             }
             else
             {
@@ -71,14 +69,33 @@ public class ResetPassPopupManager : MonoBehaviour
 
                 if (www.responseCode == 200)
                 {
-                    Debug.Log("Reset code sent successfully!");
-                    errorMessageText.text = "Reset code sent successfully to your email.";
+                    if (www.downloadHandler.text.Contains("Reset code sent successfully"))
+                    {
+                        Debug.Log("Reset code sent successfully!");
+                        errorMessageText.text = "Reset code sent successfully to your email.";
+                    }
+                    else if (www.downloadHandler.text.Contains("No user found for email"))
+                    {
+                        Debug.Log("Email not found in the system.");
+                        errorMessageText.text = "The email address you entered is not registered.";
+                    }
+                    else
+                    {
+                        errorMessageText.text = "A reset code will be sent if the email is registered";
+                    }
+                }
+                else if (www.responseCode == 404)
+                {
+                    Debug.LogWarning("No user found with that email.");
+                    errorMessageText.text = "No user found with the provided email address.";
                 }
                 else
                 {
                     Debug.LogWarning("Unexpected response code: " + www.responseCode);
                     errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
                 }
+
+                errorMessageText.gameObject.SetActive(true);
             }
         }
     }
