@@ -9,6 +9,7 @@ public class ResetPassPopupManager : MonoBehaviour
     public GameObject registrationPopup;
     public GameObject loginPopup;
     public GameObject resetPassPopup;
+    public GameObject resetPassEnterCodePopup;
     public InputField emailInput;
     public UnityEngine.UI.Text errorMessageText;
 
@@ -36,12 +37,12 @@ public class ResetPassPopupManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(ResetUserPass(emailInput.text));
+        StartCoroutine(SubmitResetPassReq(emailInput.text));
     }
 
-    private IEnumerator ResetUserPass(string email)
+    private IEnumerator SubmitResetPassReq(string email)
     {
-        Debug.Log("ResetUserPass coroutine started for email: " + email);
+        Debug.Log("SubmitResetPassReq coroutine started for email: " + email);
 
         string jsonData = $"{{\"email\":\"{email}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
@@ -73,6 +74,9 @@ public class ResetPassPopupManager : MonoBehaviour
                     {
                         Debug.Log("Reset code sent successfully!");
                         errorMessageText.text = "Reset code sent successfully to your email.";
+                        // Let's just take the user to the new password page
+                        CloseResetPassPopup();
+                        resetPassEnterCodePopup.SetActive(true);
                     }
                     else if (www.downloadHandler.text.Contains("No user found for email"))
                     {

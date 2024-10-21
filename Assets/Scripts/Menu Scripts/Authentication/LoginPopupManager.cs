@@ -9,8 +9,7 @@ public class LoginPopupManager : MonoBehaviour
     public GameObject loginPopup;
     public GameObject registrationPopup;
     public GameObject resetPassPopup;
-    public GameObject ChatPopupPanel; 
-    public InputField emailInput;
+    public InputField usernameInput;
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
     public UnityEngine.UI.Text loginStatusMsgLabel;
@@ -61,15 +60,17 @@ public class LoginPopupManager : MonoBehaviour
                         loginStatusMsgLabel.text = "You are already logged in.";
                     }
 
-                    // Hide login popup and show chat panel if user is already logged in
+                    // Hide login popup and show the default menu buttons
                     if (loginPopup != null)
                     {
                         loginPopup.SetActive(false);
                     }
-                    if (ChatPopupPanel != null)
-                    {
-                        ChatPopupPanel.SetActive(true);
-                    }
+
+                    // We don't want to show the user the chatbot right after logging in. If they want to use it, they would need to click the button
+                    //if (ChatPopupPanel != null)
+                    //{
+                    //    ChatPopupPanel.SetActive(true);
+                    //}
                 }
                 else
                 {
@@ -89,14 +90,14 @@ public class LoginPopupManager : MonoBehaviour
 
     public void OnLoginButtonClicked()
     {
-        if (string.IsNullOrEmpty(emailInput.text) || string.IsNullOrEmpty(passwordInput.text))
+        if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(passwordInput.text))
         {
             errorMessageText.text = "All fields must be filled!";
             Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
 
-        StartCoroutine(LoginUser(emailInput.text, passwordInput.text));
+        StartCoroutine(LoginUser(usernameInput.text, passwordInput.text));
     }
 
     private IEnumerator LoginUser(string identifier, string password)
@@ -153,10 +154,6 @@ public class LoginPopupManager : MonoBehaviour
                     if (loginPopup != null)
                     {
                         loginPopup.SetActive(false);
-                    }
-                    if (ChatPopupPanel != null)
-                    {
-                        ChatPopupPanel.SetActive(true);
                     }
                 }
                 else
