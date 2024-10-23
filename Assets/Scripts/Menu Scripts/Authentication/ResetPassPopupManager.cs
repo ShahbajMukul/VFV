@@ -32,17 +32,17 @@ public class ResetPassPopupManager : MonoBehaviour
         if (string.IsNullOrEmpty(emailInput.text))
         {
             errorMessageText.text = "All fields must be filled!";
-            errorMessageText.gameObject.SetActive(true); 
+            errorMessageText.gameObject.SetActive(true);
             Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
 
-        StartCoroutine(SubmitResetPassReq(emailInput.text));
+        StartCoroutine(ResetUserPass(emailInput.text));
     }
 
-    private IEnumerator SubmitResetPassReq(string email)
+    private IEnumerator ResetUserPass(string email)
     {
-        Debug.Log("SubmitResetPassReq coroutine started for email: " + email);
+        Debug.Log("ResetUserPass coroutine started for email: " + email);
 
         string jsonData = $"{{\"email\":\"{email}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
@@ -57,7 +57,11 @@ public class ResetPassPopupManager : MonoBehaviour
 
             yield return www.SendWebRequest();
 
+#if UNITY_2020_1_OR_NEWER
+            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+#else
             if (www.isNetworkError || www.isHttpError)
+#endif
             {
                 Debug.LogError("HTTP error received from server: " + www.error);
                 Debug.LogError("Server Response: " + www.downloadHandler.text);
@@ -74,9 +78,10 @@ public class ResetPassPopupManager : MonoBehaviour
                     {
                         Debug.Log("Reset code sent successfully!");
                         errorMessageText.text = "Reset code sent successfully to your email.";
-                        // Let's just take the user to the new password page
+
+                        // Close current popup and open the next one
                         CloseResetPassPopup();
-                        resetPassEnterCodePopup.SetActive(true);
+                        ShowResetPassEnterCodePopup();
                     }
                     else if (www.downloadHandler.text.Contains("No user found for email"))
                     {
@@ -127,6 +132,19 @@ public class ResetPassPopupManager : MonoBehaviour
         if (resetPassPopup != null)
         {
             resetPassPopup.SetActive(false);
+        }
+    }
+
+    public void ShowResetPassEnterCodePopup()
+    {
+        if (resetPassEnterCodePopup != null)
+        {
+            resetPassEnterCodePopup.SetActive(true);
+            Debug.Log("ResetPassEnterCodePopup opened.");
+        }
+        else
+        {
+            Debug.LogError("resetPassEnterCodePopup is not assigned");
         }
     }
 }
