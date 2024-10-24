@@ -31,6 +31,8 @@ public class LoginPopupManager : MonoBehaviour
             UnityEngine.Debug.Log("Stored session token found. Skipping login...");
             loginPopup.SetActive(false);
             MenuLogoutButton?.gameObject.SetActive(true);
+            MenuLoginButton?.gameObject.SetActive(false);
+
             // loginStatusMsgLabel.text = "You are already logged in.";
         }
         else

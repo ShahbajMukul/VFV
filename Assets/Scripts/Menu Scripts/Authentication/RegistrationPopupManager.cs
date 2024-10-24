@@ -15,6 +15,7 @@ public class RegistrationPopupManager : MonoBehaviour
     public InputField registrationCodeInput;
     public UnityEngine.UI.Text errorMessageText;
     public Button ChatbotButton;
+    public Button MenuLoginButton;
 
 
     private string registrationUrl = "http://localhost:3000/api/register";
@@ -122,6 +123,7 @@ public class RegistrationPopupManager : MonoBehaviour
         {
             ChatbotButton.interactable = false;  // Disable the chatbot button
         }
+        MenuLoginButton?.gameObject.SetActive(true);
         CloseRegistrationPopup();
     }
 
