@@ -90,6 +90,8 @@ public class ResetPassPopupManager : MonoBehaviour
                     }
                     else
                     {
+                        CloseResetPassPopup();
+                        ShowResetPassEnterCodePopup();
                         errorMessageText.text = "A reset code will be sent if the email is registered";
                     }
                 }
