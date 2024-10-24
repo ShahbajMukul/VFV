@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics;
 
 public class LoginPopupManager : MonoBehaviour
 {
@@ -13,78 +15,27 @@ public class LoginPopupManager : MonoBehaviour
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
     public UnityEngine.UI.Text loginStatusMsgLabel;
+    public Button ChatbotButton;
+    public Button MenuLoginButton;
+    public Button MenuLogoutButton;
+
 
     private string loginUrl = "http://localhost:3000/api/login";
-    private string checkSessionUrl = "http://localhost:3000/api/check-session";
+    // private string checkSessionUrl = "http://localhost:3000/api/check-session";
 
     void Start()
     {
-        CheckLoginState();
-    }
-
-    void CheckLoginState()
-    {
-        StartCoroutine(CheckSession());
-    }
-
-    private IEnumerator CheckSession()
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(checkSessionUrl))
+        // Check if a session token is stored locally
+        if (PlayerPrefs.HasKey("SessionToken"))
         {
-            www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Cookie", PlayerPrefs.GetString("SessionCookie", ""));
-
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.LogError("Error checking session: " + www.error);
-
-                // Show login popup if session check fails
-                if (loginPopup != null)
-                {
-                    loginPopup.SetActive(true);
-                }
-                if (loginStatusMsgLabel != null)
-                {
-                    loginStatusMsgLabel.text = "";
-                }
-            }
-            else
-            {
-                if (www.responseCode == 200)
-                {
-                    Debug.Log("User already logged in.");
-                    if (loginStatusMsgLabel != null)
-                    {
-                        loginStatusMsgLabel.text = "You are already logged in.";
-                    }
-
-                    // Hide login popup and show the default menu buttons
-                    if (loginPopup != null)
-                    {
-                        loginPopup.SetActive(false);
-                    }
-
-                    // We don't want to show the user the chatbot right after logging in. If they want to use it, they would need to click the button
-                    //if (ChatPopupPanel != null)
-                    //{
-                    //    ChatPopupPanel.SetActive(true);
-                    //}
-                }
-                else
-                {
-                    // Show login popup if session is not valid
-                    if (loginPopup != null)
-                    {
-                        loginPopup.SetActive(true);
-                    }
-                    if (loginStatusMsgLabel != null)
-                    {
-                        loginStatusMsgLabel.text = "";
-                    }
-                }
-            }
+            UnityEngine.Debug.Log("Stored session token found. Skipping login...");
+            loginPopup.SetActive(false);
+            MenuLogoutButton?.gameObject.SetActive(true);
+            // loginStatusMsgLabel.text = "You are already logged in.";
+        }
+        else
+        {
+            loginPopup.SetActive(true);  // Show login popup if no token is stored
         }
     }
 
@@ -93,7 +44,7 @@ public class LoginPopupManager : MonoBehaviour
         if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(passwordInput.text))
         {
             errorMessageText.text = "All fields must be filled!";
-            Debug.LogWarning("Validation failed: All fields must be filled.");
+            UnityEngine.Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
 
@@ -114,55 +65,63 @@ public class LoginPopupManager : MonoBehaviour
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
-            Debug.Log("Sending login request with payload: " + jsonData);
+            UnityEngine.Debug.Log("Sending login request with payload: " + jsonData);
 
             yield return www.SendWebRequest();
 
             if (www.isNetworkError || www.isHttpError)
             {
-                Debug.LogError("HTTP error received from server: " + www.error);
-                Debug.LogError("Server Response: " + www.downloadHandler.text);
-
-                if (www.responseCode == 401)
-                {
-                    errorMessageText.text = "Incorrect email/username or password.";
-                }
-                else
-                {
-                    errorMessageText.text = "Login failed: " + www.downloadHandler.text;
-                }
+                UnityEngine.Debug.LogError("HTTP error received from server: " + www.error);
+                errorMessageText.text = "Login failed: " + www.downloadHandler.text;
             }
             else
             {
-                Debug.Log("Server connected successfully! Response: " + www.downloadHandler.text);
-
                 if (www.responseCode == 200)
                 {
-                    Debug.Log("Login successful!");
-
-                    // Save the session cookie from the response headers
-                    string setCookieHeader = www.GetResponseHeader("Set-Cookie");
-                    if (!string.IsNullOrEmpty(setCookieHeader))
+                    // On successful login, save the session token
+                    string sessionToken = www.GetResponseHeader("Set-Cookie");
+                    if (!string.IsNullOrEmpty(sessionToken))
                     {
-                        PlayerPrefs.SetString("SessionCookie", setCookieHeader);
+                        PlayerPrefs.SetString("SessionToken", sessionToken);
                         PlayerPrefs.Save();
-                    }
 
-                    errorMessageText.text = "Login successful!"; // Show success message on screen
-
-                    // Hide login popup and show chat panel after successful login
-                    if (loginPopup != null)
-                    {
+                        UnityEngine.Debug.Log("Login successful! Session token saved locally.");
+                        errorMessageText.text = "Login successful!";
                         loginPopup.SetActive(false);
+                        ChatbotButton.gameObject.SetActive(true);
+                        MenuLoginButton.gameObject.SetActive(false);
+                        MenuLogoutButton.gameObject.SetActive(true);
+                        usernameInput.text = string.Empty;
+                        passwordInput.text = string.Empty;
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.LogWarning("No session token found in response.");
+                        errorMessageText.text = "Login successful, but session token not found.";
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Unexpected response code: " + www.responseCode);
-                    errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
+                    UnityEngine.Debug.LogWarning("Unexpected response code: " + www.responseCode);
+                    errorMessageText.text = "Unexpected response from server.";
                 }
             }
         }
+    }
+
+
+
+    public void Logout()
+    {
+        // Clear the stored session token
+        PlayerPrefs.DeleteKey("SessionToken");
+        loginPopup.SetActive(true);
+        loginStatusMsgLabel.text = "You have been logged out.";
+        UnityEngine.Debug.Log("Session token cleared. User logged out.");
+        MenuLoginButton.gameObject.SetActive(true);
+        MenuLogoutButton.gameObject.SetActive(false);
+
+
     }
 
     private bool IsEmail(string input)
@@ -179,6 +138,7 @@ public class LoginPopupManager : MonoBehaviour
         }
     }
 
+
     public void ShowResetPopup()
     {
         CloseLoginPopup();
@@ -190,9 +150,14 @@ public class LoginPopupManager : MonoBehaviour
 
     public void CloseLoginPopup()
     {
-        if (loginPopup != null)
+        if (ChatbotButton != null)
         {
-            loginPopup.SetActive(false);
+            ChatbotButton.interactable = false;  // Disable the chatbot button
         }
+        MenuLoginButton.gameObject.SetActive(true);
+        MenuLogoutButton.gameObject.SetActive(false);
+
+        loginPopup?.SetActive(false);
+
     }
 }

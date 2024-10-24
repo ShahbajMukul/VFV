@@ -14,13 +14,14 @@ public class RegistrationPopupManager : MonoBehaviour
     public InputField confirmPasswordInput;
     public InputField registrationCodeInput;
     public UnityEngine.UI.Text errorMessageText;
+    public Button ChatbotButton;
+
 
     private string registrationUrl = "http://localhost:3000/api/register";
 
     void Start()
     {
-        //// ToDo: Implement a method to check if the user already logged in 
-        ShowRegistrationPopup();
+        // show LoginPanel by default (done)
     }
 
     public void ShowRegistrationPopup()
@@ -115,8 +116,12 @@ public class RegistrationPopupManager : MonoBehaviour
         }
     }
 
-    public void OnCancelButtonClicked()
+    public void OnCloseButtonClicked()
     {
+        if (ChatbotButton != null)
+        {
+            ChatbotButton.interactable = false;  // Disable the chatbot button
+        }
         CloseRegistrationPopup();
     }
 
