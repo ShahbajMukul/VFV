@@ -1,30 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.Networking;
 using UnityEngine.UI;
-using System.Security.Cryptography;
+using System.Text;
+
 public class ChatbotManager : MonoBehaviour
 {
     public GameObject chatbotPopup;
-    public GameObject messagePrefab;  
-    public Transform chatContent;     
-    public InputField chatInputField; 
+    public GameObject messagePrefab;
+    public Transform chatContent;
+    public InputField chatInputField;
     public ScrollRect chatScrollView;
 
     public Transform chatHistoryContent;
     public GameObject historyItemPrefab;
 
-    // for development
+    //Suggestions:
+    /*our local PostgreSQL database in the backend can store the chat history for each user*/
+
+    /*we can create new endpoints for saving and retrieving chat history in aiserver.js*/
+
     private List<List<string>> chatSessions = new List<List<string>>();
-    private List<string> currentSessions = new List<string>();
+    private List<string> currentSession = new List<string>();
+
+    private string aiGenerateTextUrl = "http://localhost:3002/ai/generate-text";
+
+    //the new endpoint would be similar like this:
+    //private string aiSaveChatHistoryUrl = "http://localhost:3002/ai/save-chat-history";
+    //private string aiGetChatHistoryUrl = "http://localhost:3002/ai/get-chat-history";
 
     void Start()
     {
-        LoadChatHistory();
+        //StartCoroutine(GetChatHistory());
+        chatInputField.onEndEdit.AddListener(delegate { OnEnterPressed(); });
     }
-
-
 
     public void OnSendButtonClicked()
     {
@@ -34,67 +44,86 @@ public class ChatbotManager : MonoBehaviour
             return;
 
         DisplayMessage(userMessage, true);
+        currentSession.Add("User: " + userMessage);
 
         chatInputField.text = "";
 
-
-        // imitate ai response
-        Invoke("GenerateAIResponse", 1.0f);
+        // Call the AI API to get the response
+        StartCoroutine(GetAIResponse(userMessage));
     }
 
-    void DisplayMessage(string message, bool isUser)
+    IEnumerator GetAIResponse(string userMessage)
     {
-        // Instantiate a new message object
-        GameObject newMessage = Instantiate(messagePrefab, chatContent);
+        string jsonData = $"{{\"ai_type\":\"default\",\"userMessage\":\"{userMessage}\"}}";
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
 
-        // Set the message text
-        UnityEngine.UI.Text messageText = newMessage.GetComponentInChildren<UnityEngine.UI.Text>();
-        messageText.text = message;
-
-        if (isUser)
+        using (UnityWebRequest www = new UnityWebRequest(aiGenerateTextUrl, "POST"))
         {
-            messageText.alignment = TextAnchor.MiddleRight;  // Right-align for user messages
-            messageText.color = Color.white;  
-        }
-        else
-        {
-            messageText.alignment = TextAnchor.MiddleLeft;  // Left-align for AI messages
-            messageText.color = Color.magenta; 
-        }
+            www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+            www.SetRequestHeader("Accept", "application/json");
 
+            yield return www.SendWebRequest();
 
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError("HTTP Error: " + www.error);
+                DisplayMessage("Error: Unable to get AI response. Please try again.", false);
+            }
+            else if (www.responseCode == 200)
+            {
+                string jsonResponse = www.downloadHandler.text;
 
-        // Scroll to the bottom of the chat after a new message
-        Canvas.ForceUpdateCanvases();
-        chatScrollView.verticalNormalizedPosition = 0;
-    }
-
-    // ToDo: Add actual API call
-    void GenerateAIResponse()
-    {
-        string aiResponse = "This is a simulated AI response!";
-        DisplayMessage(aiResponse, false);
-    }
-
-    void Update()
-    {
-        // If the user clicks enter, send the message
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            OnSendButtonClicked();
+                AIResponse response = JsonUtility.FromJson<AIResponse>(jsonResponse);
+                if (response != null && !string.IsNullOrEmpty(response.content))
+                {
+                    DisplayMessage(response.content, false);
+                    currentSession.Add("AI: " + response.content);
+                }
+                else
+                {
+                    DisplayMessage("Error: Invalid response from AI.", false);
+                }
+            }
         }
     }
+
+    /*IEnumerator GetChatHistory()
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(aiGetChatHistoryUrl))
+        {
+            www.SetRequestHeader("Accept", "application/json");
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError("Error fetching chat history: " + www.error);
+            }
+            else
+            {
+                ChatHistoryResponse response = JsonUtility.FromJson<ChatHistoryResponse>(www.downloadHandler.text);
+                if (response != null && response.sessions != null)
+                {
+                    foreach (ChatSession session in response.sessions)
+                    {
+                        List<string> messages = new List<string>(session.messages);
+                        chatSessions.Add(messages);
+                    }
+                    LoadChatHistory();
+                }
+            }
+        }
+    }*/
 
     public void OnNewChatButtonClicked()
     {
-        // Delete the messages in the display panel
         foreach (Transform child in chatContent)
         {
             Destroy(child.gameObject);
         }
 
-        currentSessions.Clear();
-
+        currentSession.Clear();
         LoadChatHistory();
     }
 
@@ -105,16 +134,36 @@ public class ChatbotManager : MonoBehaviour
 
     public void CloseChatbotPopUp()
     {
-        chatbotPopup.gameObject.SetActive(false);
+        chatbotPopup.SetActive(false);
 
-        // For testing, no need after API implementation
-        if (currentSessions.Count > 0)
+        if (currentSession.Count > 0)
         {
-            chatSessions.Add(new List<string>(currentSessions) );
-            currentSessions.Clear();
+            chatSessions.Add(new List<string>(currentSession));
+            //StartCoroutine(SaveChatHistory(currentSession));
+            currentSession.Clear();
             LoadChatHistory();
         }
     }
+
+    /*IEnumerator SaveChatHistory(List<string> session)
+    {
+        string jsonData = JsonUtility.ToJson(new ChatSession { sessionId = System.Guid.NewGuid().ToString(), messages = session.ToArray() });
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
+
+        using (UnityWebRequest www = new UnityWebRequest(aiSaveChatHistoryUrl, "POST"))
+        {
+            www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError("Error saving chat history: " + www.error);
+            }
+        }
+    }*/
 
     void LoadChatHistory()
     {
@@ -123,7 +172,6 @@ public class ChatbotManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // Populate history panel with API call
         for (int i = 0; i < chatSessions.Count; i++)
         {
             int sessionIndex = i;
@@ -131,7 +179,6 @@ public class ChatbotManager : MonoBehaviour
             UnityEngine.UI.Text historyText = newHistoryItem.GetComponentInChildren<UnityEngine.UI.Text>();
             historyText.text = "Session " + (i + 1);
 
-            // Add click event to load the session
             Button historyButton = newHistoryItem.GetComponent<Button>();
             historyButton.onClick.AddListener(() => LoadChatSession(sessionIndex));
         }
@@ -139,13 +186,11 @@ public class ChatbotManager : MonoBehaviour
 
     void LoadChatSession(int sessionIndex)
     {
-        // Clear current chat display
         foreach (Transform child in chatContent)
         {
             Destroy(child.gameObject);
         }
 
-        // Use API call
         List<string> selectedSession = chatSessions[sessionIndex];
         foreach (string message in selectedSession)
         {
@@ -154,4 +199,56 @@ public class ChatbotManager : MonoBehaviour
         }
     }
 
+    [System.Serializable]
+    public class AIResponse
+    {
+        public string content;
+    }
+
+    [System.Serializable]
+    public class ChatSession
+    {
+        public string sessionId;
+        public string[] messages;
+    }
+
+    [System.Serializable]
+    public class ChatHistoryResponse
+    {
+        public List<ChatSession> sessions;
+    }
+
+    private void DisplayMessage(string message, bool isUser)
+    {
+        
+        GameObject newMessage = Instantiate(messagePrefab, chatContent);
+
+        
+        UnityEngine.UI.Text messageText = newMessage.GetComponentInChildren<UnityEngine.UI.Text>();
+        messageText.text = message;
+
+        if (isUser)
+        {
+            messageText.alignment = TextAnchor.MiddleRight;  
+            messageText.color = Color.white;
+        }
+        else
+        {
+            messageText.alignment = TextAnchor.MiddleLeft;
+            messageText.color = Color.magenta;
+        }
+
+        
+        Canvas.ForceUpdateCanvases();
+        chatScrollView.verticalNormalizedPosition = 0;
+    }
+
+    void OnEnterPressed()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && chatInputField.isFocused)
+        {
+            OnSendButtonClicked();
+            chatInputField.DeactivateInputField(); 
+        }
+    }
 }
