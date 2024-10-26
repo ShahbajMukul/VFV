@@ -11,6 +11,7 @@ public class LoginPopupManager : MonoBehaviour
     public GameObject loginPopup;
     public GameObject registrationPopup;
     public GameObject resetPassPopup;
+    public GameObject errorMessageBackgroundPanel;
     public InputField usernameInput;
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
@@ -39,13 +40,15 @@ public class LoginPopupManager : MonoBehaviour
         {
             loginPopup.SetActive(true);  // Show login popup if no token is stored
         }
+        // Hide error message and panel at start
+        HideErrorMessage();
     }
 
     public void OnLoginButtonClicked()
     {
         if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(passwordInput.text))
         {
-            errorMessageText.text = "All fields must be filled!";
+            ShowErrorMessage("All fields must be filled!");
             UnityEngine.Debug.LogWarning("Validation failed: All fields must be filled.");
             return;
         }
@@ -161,5 +164,27 @@ public class LoginPopupManager : MonoBehaviour
 
         loginPopup?.SetActive(false);
 
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        errorMessageText.text = message;
+        errorMessageText.gameObject.SetActive(true);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(true); // Show the background highlight when an error occurs
+        }
+    }
+
+    private void HideErrorMessage()
+    {
+        errorMessageText.text = "";
+        errorMessageText.gameObject.SetActive(false);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(false); // Hide the background highlight when there's no error
+        }
     }
 }

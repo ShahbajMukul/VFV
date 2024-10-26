@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
+using System.Text.RegularExpressions;
 
 public class ResetPassPopupManager : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class ResetPassPopupManager : MonoBehaviour
     public GameObject loginPopup;
     public GameObject resetPassPopup;
     public GameObject resetPassEnterCodePopup;
+    public GameObject errorMessageBackgroundPanel;
     public InputField emailInput;
     public UnityEngine.UI.Text errorMessageText;
 
     private string resetPasswordUrl = "http://localhost:3000/api/forgot-password";
+
+    void Start()
+    {
+        
+        HideErrorMessage();
+    }
 
     public void ShowResetPopup()
     {
@@ -25,15 +33,23 @@ public class ResetPassPopupManager : MonoBehaviour
         {
             Debug.LogError("resetPassPopup is not assigned");
         }
+        // Hide error message and panel at start
+        HideErrorMessage();
     }
 
     public void OnResetButtonClicked()
     {
         if (string.IsNullOrEmpty(emailInput.text))
         {
-            errorMessageText.text = "All fields must be filled!";
-            errorMessageText.gameObject.SetActive(true);
+            ShowErrorMessage("All fields must be filled!");
             Debug.LogWarning("Validation failed: All fields must be filled.");
+            return;
+        }
+
+        if (!IsValidEmail(emailInput.text))
+        {
+            ShowErrorMessage("Please enter a valid email address!");
+            Debug.LogWarning("Validation failed: Invalid email address.");
             return;
         }
 
@@ -57,16 +73,11 @@ public class ResetPassPopupManager : MonoBehaviour
 
             yield return www.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-#else
             if (www.isNetworkError || www.isHttpError)
-#endif
             {
                 Debug.LogError("HTTP error received from server: " + www.error);
                 Debug.LogError("Server Response: " + www.downloadHandler.text);
-                errorMessageText.text = "Error: Unable to process the request.";
-                errorMessageText.gameObject.SetActive(true);
+                ShowErrorMessage("Error: Unable to process the request.");
             }
             else
             {
@@ -77,36 +88,31 @@ public class ResetPassPopupManager : MonoBehaviour
                     if (www.downloadHandler.text.Contains("Reset code sent successfully"))
                     {
                         Debug.Log("Reset code sent successfully!");
-                        errorMessageText.text = "Reset code sent successfully to your email.";
-
-                        // Close current popup and open the next one
                         CloseResetPassPopup();
                         ShowResetPassEnterCodePopup();
                     }
                     else if (www.downloadHandler.text.Contains("No user found for email"))
                     {
                         Debug.Log("Email not found in the system.");
-                        errorMessageText.text = "The email address you entered is not registered.";
+                        ShowErrorMessage("The email address you entered is not registered.");
                     }
                     else
                     {
                         CloseResetPassPopup();
                         ShowResetPassEnterCodePopup();
-                        errorMessageText.text = "A reset code will be sent if the email is registered";
+                        ShowErrorMessage("A reset code will be sent if the email is registered.");
                     }
                 }
                 else if (www.responseCode == 404)
                 {
                     Debug.LogWarning("No user found with that email.");
-                    errorMessageText.text = "No user found with the provided email address.";
+                    ShowErrorMessage("No user found with the provided email address.");
                 }
                 else
                 {
                     Debug.LogWarning("Unexpected response code: " + www.responseCode);
-                    errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
+                    ShowErrorMessage($"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}");
                 }
-
-                errorMessageText.gameObject.SetActive(true);
             }
         }
     }
@@ -148,5 +154,33 @@ public class ResetPassPopupManager : MonoBehaviour
         {
             Debug.LogError("resetPassEnterCodePopup is not assigned");
         }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        errorMessageText.text = message;
+        errorMessageText.gameObject.SetActive(true);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(true); // Show the background highlight when an error occurs
+        }
+    }
+
+    private void HideErrorMessage()
+    {
+        errorMessageText.text = "";
+        errorMessageText.gameObject.SetActive(false);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(false); // Hide the background highlight when there's no error
+        }
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(email, emailPattern);
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
-
 using System.Text.RegularExpressions;
 
 public class ResetPassEnterCodePopupManager : MonoBehaviour
 {
     public GameObject resetPassEnterCodePopup;
+    public GameObject errorMessageBackgroundPanel;
     public InputField recoveryCodeInput;
     public InputField passwordInput;
     public InputField confirmPasswordInput;
@@ -16,7 +16,12 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
 
     private string resetPasswordUrl = "http://localhost:3000/api/reset-pwd";
 
-    
+    void Start()
+    {
+        // Hide error message and panel at start
+        HideErrorMessage();
+    }
+
     private bool ValidatePassword(string password)
     {
         // Password must be at least 8 characters long, with at least one uppercase letter, one symbol, and one number
@@ -24,7 +29,6 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
         return Regex.IsMatch(password, pattern);
     }
 
-    
     public void OnNewPasswordSubmitButtonClicked()
     {
         if (resetPassEnterCodePopup == null)
@@ -33,31 +37,25 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
             return;
         }
 
-        
         if (string.IsNullOrEmpty(recoveryCodeInput.text) ||
             string.IsNullOrEmpty(passwordInput.text) ||
             string.IsNullOrEmpty(confirmPasswordInput.text))
         {
-            errorMessageText.text = "All fields must be filled!";
-            errorMessageText.gameObject.SetActive(true);
+            ShowErrorMessage("All fields must be filled!");
             Debug.LogWarning("Validation failed: Some fields are empty.");
             return;
         }
 
-        
         if (!ValidatePassword(passwordInput.text))
         {
-            errorMessageText.text = "Password must be at least 8 characters, include at least one uppercase letter, one symbol, and one number.";
-            errorMessageText.gameObject.SetActive(true);
+            ShowErrorMessage("Password must be at least 8 characters, include at least one uppercase letter, one symbol, and one number.");
             Debug.LogWarning("Validation failed: Password does not meet requirements.");
             return;
         }
 
-        
         if (passwordInput.text != confirmPasswordInput.text)
         {
-            errorMessageText.text = "Passwords do not match!";
-            errorMessageText.gameObject.SetActive(true);
+            ShowErrorMessage("Passwords do not match!");
             Debug.LogWarning("Validation failed: Passwords do not match.");
             return;
         }
@@ -66,7 +64,6 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
         StartCoroutine(ResetPassword(recoveryCodeInput.text, passwordInput.text));
     }
 
-    
     private IEnumerator ResetPassword(string resetCode, string newPassword)
     {
         string jsonData = $"{{\"resetCode\":\"{resetCode}\",\"newPassword\":\"{newPassword}\"}}";
@@ -78,34 +75,55 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
+            // Adding Cookie header to retain the session
+            if (PlayerPrefs.HasKey("SessionCookie"))
+            {
+                string sessionCookie = PlayerPrefs.GetString("SessionCookie");
+                www.SetRequestHeader("Cookie", sessionCookie);
+            }
+
             Debug.Log("Sending reset password request with payload: " + jsonData);
             yield return www.SendWebRequest();
 
-#if UNITY_2020_1_OR_NEWER
-            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
-#else
             if (www.isNetworkError || www.isHttpError)
-#endif
             {
                 Debug.LogError("HTTP Error: " + www.error);
-                errorMessageText.text = "Error: Unable to process the request.";
-                errorMessageText.gameObject.SetActive(true);
+                Debug.LogError("Server Response: " + www.downloadHandler.text);
+                ShowErrorMessage("Error: Not authorized. Please try again.");
             }
             else if (www.responseCode == 200)
             {
                 Debug.Log("Password reset successful!");
-                errorMessageText.text = "Password reset successful!";
-                errorMessageText.gameObject.SetActive(true);
-
-                // Close the ResetPassEnterCodePopup after a successful password reset
+                ShowErrorMessage("Password reset successful!");
                 resetPassEnterCodePopup.SetActive(false);
             }
             else
             {
                 Debug.LogWarning("Unexpected response: " + www.responseCode);
-                errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
-                errorMessageText.gameObject.SetActive(true);
+                ShowErrorMessage($"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}");
             }
+        }
+    }
+
+    private void ShowErrorMessage(string message)
+    {
+        errorMessageText.text = message;
+        errorMessageText.gameObject.SetActive(true);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(true);
+        }
+    }
+
+    private void HideErrorMessage()
+    {
+        errorMessageText.text = "";
+        errorMessageText.gameObject.SetActive(false);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(false);
         }
     }
 }

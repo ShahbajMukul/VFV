@@ -8,6 +8,7 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
+    public GameObject errorMessageBackgroundPanel;
     public InputField emailInput;
     public InputField usernameInput;
     public InputField passwordInput;
@@ -23,6 +24,7 @@ public class RegistrationPopupManager : MonoBehaviour
     void Start()
     {
         // show LoginPanel by default (done)
+        HideErrorMessage();
     }
 
     public void ShowRegistrationPopup()
@@ -39,6 +41,8 @@ public class RegistrationPopupManager : MonoBehaviour
         {
             registrationPopup.SetActive(true);
         }
+        // Hide error message and panel at start
+        HideErrorMessage();
     }
 
     public void OnRegisterButtonClicked()
@@ -51,19 +55,19 @@ public class RegistrationPopupManager : MonoBehaviour
             string.IsNullOrEmpty(confirmPasswordInput.text) ||
             string.IsNullOrEmpty(registrationCodeInput.text))
         {
-            errorMessageText.text = "All fields must be filled!";
+            ShowErrorMessage("All fields must be filled!");
             return;
         }
 
         if (passwordInput.text != confirmPasswordInput.text)
         {
-            errorMessageText.text = "Passwords do not match!";
+            ShowErrorMessage("Passwords do not match!");
             return;
         }
 
         if (!ValidatePasswordComplexity(passwordInput.text))
         {
-            errorMessageText.text = "Password must be at least 8 characters long, include at least one uppercase letter, one symbol, and one number.";
+            ShowErrorMessage("Password must be at least 8 characters long, include at least one uppercase letter, one symbol, and one number.");
             Debug.LogWarning("Validation failed: Password does not meet complexity requirements.");
             return;
         }
@@ -95,7 +99,7 @@ public class RegistrationPopupManager : MonoBehaviour
             {
                 Debug.LogError("HTTP error received from server: " + www.error);
                 Debug.LogError("Server Response: " + www.downloadHandler.text);
-                errorMessageText.text = "Registration failed: " + www.downloadHandler.text;
+                ShowErrorMessage("Registration failed: " + www.downloadHandler.text);
             }
             else
             {
@@ -111,7 +115,7 @@ public class RegistrationPopupManager : MonoBehaviour
                 else
                 {
                     Debug.LogWarning("Unexpected response code: " + www.responseCode);
-                    errorMessageText.text = $"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}";
+                    ShowErrorMessage($"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}");
                 }
             }
         }
@@ -125,6 +129,8 @@ public class RegistrationPopupManager : MonoBehaviour
         }
         MenuLoginButton?.gameObject.SetActive(true);
         CloseRegistrationPopup();
+
+        HideErrorMessage();
     }
 
     void CloseRegistrationPopup()
@@ -167,5 +173,28 @@ public class RegistrationPopupManager : MonoBehaviour
         }
 
         return password.Length >= 8 && hasUpperCase && hasLowerCase && hasDigits && hasSpecialChar;
+    }
+
+
+    private void ShowErrorMessage(string message)
+    {
+        errorMessageText.text = message;
+        errorMessageText.gameObject.SetActive(true);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(true); 
+        }
+    }
+
+    private void HideErrorMessage()
+    {
+        errorMessageText.text = "";
+        errorMessageText.gameObject.SetActive(false);
+
+        if (errorMessageBackgroundPanel != null)
+        {
+            errorMessageBackgroundPanel.SetActive(false); 
+        }
     }
 }
