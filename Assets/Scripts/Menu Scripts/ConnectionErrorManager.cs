@@ -12,6 +12,7 @@ public class ConnectionErrorManager : MonoBehaviour
     public GameObject LoginPanel;
     public UnityEngine.UI.Text ConnectionErrorStatusLabel;
     public Button ChatbotButton;
+    public Button MenuLoginButton;
 
     void Start()
     {
@@ -75,5 +76,8 @@ public class ConnectionErrorManager : MonoBehaviour
         {
             ChatbotButton.interactable = false;  // Disable the chatbot button
         }
+        // MenuLogoutButton?.interactable = false;
+        MenuLoginButton.gameObject.SetActive(true);
+        MenuLoginButton.interactable = true;
     }
 }
