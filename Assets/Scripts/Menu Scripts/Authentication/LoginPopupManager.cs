@@ -5,13 +5,13 @@ using UnityEngine.UI;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 using System.Diagnostics;
+using System;
 
 public class LoginPopupManager : MonoBehaviour
 {
     public GameObject loginPopup;
     public GameObject registrationPopup;
     public GameObject resetPassPopup;
-    public GameObject errorMessageBackgroundPanel;
     public InputField usernameInput;
     public InputField passwordInput;
     public UnityEngine.UI.Text errorMessageText;
@@ -77,8 +77,10 @@ public class LoginPopupManager : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                 UnityEngine.Debug.LogError("HTTP error received from server: " + www.error);
-                errorMessageText.text = "Login failed: " + www.downloadHandler.text;
+                var jsonResponse = JsonUtility.FromJson<Response>(www.downloadHandler.text);
+                ShowErrorMessage("Login failed: " + jsonResponse.message);
             }
+            
             else
             {
                 if (www.responseCode == 200)
@@ -109,6 +111,7 @@ public class LoginPopupManager : MonoBehaviour
                 {
                     UnityEngine.Debug.LogWarning("Unexpected response code: " + www.responseCode);
                     errorMessageText.text = "Unexpected response from server.";
+                    ShowErrorMessage("Login failed: Unexpected response from server. Try again later!");
                 }
             }
         }
@@ -170,21 +173,17 @@ public class LoginPopupManager : MonoBehaviour
     {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(true); // Show the background highlight when an error occurs
-        }
     }
 
     private void HideErrorMessage()
     {
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(false); // Hide the background highlight when there's no error
-        }
+    }
+    [Serializable]
+    private class Response
+    {
+        public string message;
     }
 }
+

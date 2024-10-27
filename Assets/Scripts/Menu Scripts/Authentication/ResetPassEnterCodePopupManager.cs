@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 public class ResetPassEnterCodePopupManager : MonoBehaviour
 {
     public GameObject resetPassEnterCodePopup;
-    public GameObject errorMessageBackgroundPanel;
     public InputField recoveryCodeInput;
     public InputField passwordInput;
     public InputField confirmPasswordInput;
@@ -109,21 +108,11 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
     {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(true);
-        }
     }
 
     private void HideErrorMessage()
     {
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(false);
-        }
     }
 }

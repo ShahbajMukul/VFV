@@ -8,7 +8,6 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
-    public GameObject errorMessageBackgroundPanel;
     public InputField emailInput;
     public InputField usernameInput;
     public InputField passwordInput;
@@ -181,20 +180,11 @@ public class RegistrationPopupManager : MonoBehaviour
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
 
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(true); 
-        }
     }
 
     private void HideErrorMessage()
     {
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(false); 
-        }
     }
 }

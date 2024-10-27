@@ -11,7 +11,6 @@ public class ResetPassPopupManager : MonoBehaviour
     public GameObject loginPopup;
     public GameObject resetPassPopup;
     public GameObject resetPassEnterCodePopup;
-    public GameObject errorMessageBackgroundPanel;
     public InputField emailInput;
     public UnityEngine.UI.Text errorMessageText;
 
@@ -160,22 +159,12 @@ public class ResetPassPopupManager : MonoBehaviour
     {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(true); // Show the background highlight when an error occurs
-        }
     }
 
     private void HideErrorMessage()
     {
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
-
-        if (errorMessageBackgroundPanel != null)
-        {
-            errorMessageBackgroundPanel.SetActive(false); // Hide the background highlight when there's no error
-        }
     }
 
     private bool IsValidEmail(string email)
