@@ -35,6 +35,10 @@ public class ChatbotManager : MonoBehaviour
         //StartCoroutine(GetChatHistory());
         chatInputField.onEndEdit.AddListener(delegate { OnEnterPressed(); });
     }
+    void Update()
+    {
+        OnEnterPressed();
+    }
 
     public void OnSendButtonClicked()
     {
@@ -50,6 +54,10 @@ public class ChatbotManager : MonoBehaviour
 
         // Call the AI API to get the response
         StartCoroutine(GetAIResponse(userMessage));
+
+        // test
+        // DisplayMessage("Hello! How can I help you? Hello! How can I help you? Hello! How can I help you? Hello! How can I help you? Hello! How can I help you? ", false);
+
     }
 
     IEnumerator GetAIResponse(string userMessage)
@@ -85,8 +93,10 @@ public class ChatbotManager : MonoBehaviour
                 {
                     DisplayMessage("Error: Invalid response from AI.", false);
                 }
+                StartCoroutine(RefreshLayoutAfterFrame());
             }
         }
+
     }
 
     /*IEnumerator GetChatHistory()
@@ -115,6 +125,14 @@ public class ChatbotManager : MonoBehaviour
             }
         }
     }*/
+    private IEnumerator RefreshLayoutAfterFrame()
+    {
+        yield return new WaitForSeconds(0.1f);  
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chatContent.GetComponent<RectTransform>());
+        chatScrollView.verticalNormalizedPosition = 0;  
+    }
+
 
     public void OnNewChatButtonClicked()
     {
@@ -218,30 +236,64 @@ public class ChatbotManager : MonoBehaviour
         public List<ChatSession> sessions;
     }
 
+
+
+
     private void DisplayMessage(string message, bool isUser)
     {
-        
+        // Instantiate a new message object
         GameObject newMessage = Instantiate(messagePrefab, chatContent);
 
-        
+        // Get components
         UnityEngine.UI.Text messageText = newMessage.GetComponentInChildren<UnityEngine.UI.Text>();
-        messageText.text = message;
+        RectTransform messageRect = newMessage.GetComponent<RectTransform>();
 
+        // Set message text
+        messageText.text = message;
+        messageText.horizontalOverflow = HorizontalWrapMode.Wrap;
+        messageText.verticalOverflow = VerticalWrapMode.Overflow;
+
+        // Set alignment and anchors based on message type
         if (isUser)
         {
-            messageText.alignment = TextAnchor.MiddleRight;  
+            messageText.alignment = TextAnchor.MiddleRight;
             messageText.color = Color.white;
+            messageRect.anchorMin = new Vector2(1, 0);
+            messageRect.anchorMax = new Vector2(1, 0);
+            messageRect.pivot = new Vector2(1, 0);
         }
         else
         {
             messageText.alignment = TextAnchor.MiddleLeft;
             messageText.color = Color.magenta;
+            messageRect.anchorMin = new Vector2(0, 0);
+            messageRect.anchorMax = new Vector2(0, 0);
+            messageRect.pivot = new Vector2(0, 0);
         }
 
-        
+        // Set the width of the message
+        float maxWidth = 600f;
+        messageRect.sizeDelta = new Vector2(maxWidth, 0); 
+
+        // Force layout rebuild to ensure proper positioning
+        LayoutRebuilder.ForceRebuildLayoutImmediate(messageRect);
+
+        // Set the preferred height of the message based on content
+        float preferredHeight = messageText.preferredHeight;
+        messageRect.sizeDelta = new Vector2(maxWidth, preferredHeight + 5f);  // Adjust 20f as needed for padding
+
         Canvas.ForceUpdateCanvases();
         chatScrollView.verticalNormalizedPosition = 0;
+
+        StartCoroutine(RefreshLayoutAfterFrame());
     }
+
+    private IEnumerator RefreshLayoutAfterFrame(RectTransform messageRect)
+{
+    yield return new WaitForEndOfFrame();
+    LayoutRebuilder.ForceRebuildLayoutImmediate(messageRect);
+    Canvas.ForceUpdateCanvases();
+}
 
     void OnEnterPressed()
     {

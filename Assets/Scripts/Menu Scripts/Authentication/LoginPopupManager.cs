@@ -96,6 +96,7 @@ public class LoginPopupManager : MonoBehaviour
                         errorMessageText.text = "Login successful!";
                         loginPopup.SetActive(false);
                         ChatbotButton.gameObject.SetActive(true);
+                        ChatbotButton.interactable = true;
                         MenuLoginButton.gameObject.SetActive(false);
                         MenuLogoutButton.gameObject.SetActive(true);
                         usernameInput.text = string.Empty;
