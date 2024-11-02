@@ -6,6 +6,7 @@ using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 using System.Diagnostics;
 using System;
+using System.Text.RegularExpressions;
 
 public class LoginPopupManager : MonoBehaviour
 {
@@ -20,15 +21,25 @@ public class LoginPopupManager : MonoBehaviour
     public Button MenuLoginButton;
     public Button MenuLogoutButton;
 
-
     private string loginUrl = "http://localhost:3000/api/login";
-    // private string checkSessionUrl = "http://localhost:3000/api/check-session";
 
     void Start()
     {
+        string sessionToken = PlayerPrefs.GetString("SessionToken", string.Empty);
+        if (!string.IsNullOrEmpty(sessionToken))
+        {
+            UnityEngine.Debug.Log("Stored session token found. Skipping login...");
+            
+        }
+        else
+        {
+            UnityEngine.Debug.LogWarning("No session token found, prompting user to log in.");
+
+        }
         // Check if a session token is stored locally
         if (PlayerPrefs.HasKey("SessionToken"))
         {
+
             UnityEngine.Debug.Log("Stored session token found. Skipping login...");
             loginPopup.SetActive(false);
             MenuLogoutButton?.gameObject.SetActive(true);
@@ -39,6 +50,17 @@ public class LoginPopupManager : MonoBehaviour
         else
         {
             loginPopup.SetActive(true);  // Show login popup if no token is stored
+        }
+
+        if (!string.IsNullOrEmpty(sessionToken))
+        {
+            PlayerPrefs.SetString("SessionToken", sessionToken);
+            PlayerPrefs.Save();  // Save PlayerPrefs to ensure it persists
+            UnityEngine.Debug.Log("Session token saved: " + sessionToken);
+        }
+        else
+        {
+            UnityEngine.Debug.LogWarning("No session token found in response.");
         }
         // Hide error message and panel at start
         HideErrorMessage();
@@ -66,6 +88,7 @@ public class LoginPopupManager : MonoBehaviour
 
         using (UnityWebRequest www = new UnityWebRequest(loginUrl, "POST"))
         {
+            www.GetResponseHeader("Set-Cookie");
             www.uploadHandler = new UploadHandlerRaw(jsonToSend);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
@@ -80,7 +103,6 @@ public class LoginPopupManager : MonoBehaviour
                 var jsonResponse = JsonUtility.FromJson<Response>(www.downloadHandler.text);
                 ShowErrorMessage("Login failed: " + jsonResponse.message);
             }
-            
             else
             {
                 if (www.responseCode == 200)
@@ -92,8 +114,34 @@ public class LoginPopupManager : MonoBehaviour
                         PlayerPrefs.SetString("SessionToken", sessionToken);
                         PlayerPrefs.Save();
 
-                        UnityEngine.Debug.Log("Login successful! Session token saved locally.");
+                        // Parse the username from the response
+                        string jsonResponse = www.downloadHandler.text;
+                        LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(jsonResponse);
+
+                        string username = loginResponse.username;
+                        if (string.IsNullOrEmpty(username))
+                        {
+                            // If username is still null, and identifier was a username, use it
+                            if (!IsEmail(identifier))
+                            {
+                                username = identifier;
+                            }
+                            else
+                            {
+                                // Handle the case where the email was used to login, but username is not returned
+                                UnityEngine.Debug.LogWarning("Username not returned by server and identifier was email.");
+                                ShowErrorMessage("Unable to retrieve username. Please try again.");
+                                yield break;
+                            }
+                        }
+
+                        // Save the username in PlayerPrefs
+                        PlayerPrefs.SetString("LoggedInUsername", username);
+                        PlayerPrefs.Save();
+
+                        UnityEngine.Debug.Log("Login successful! Session token and username saved locally.");
                         errorMessageText.text = "Login successful!";
+
                         loginPopup.SetActive(false);
                         ChatbotButton.gameObject.SetActive(true);
                         ChatbotButton.interactable = true;
@@ -118,24 +166,24 @@ public class LoginPopupManager : MonoBehaviour
         }
     }
 
-
-
     public void Logout()
     {
-        // Clear the stored session token
+        // Clear the stored session token and username
         PlayerPrefs.DeleteKey("SessionToken");
+        PlayerPrefs.DeleteKey("LoggedInUsername");
+        PlayerPrefs.Save();
+
         loginPopup.SetActive(true);
         loginStatusMsgLabel.text = "You have been logged out.";
-        UnityEngine.Debug.Log("Session token cleared. User logged out.");
+        UnityEngine.Debug.Log("Session token and username cleared. User logged out.");
         MenuLoginButton.gameObject.SetActive(true);
         MenuLogoutButton.gameObject.SetActive(false);
-
-
     }
 
     private bool IsEmail(string input)
     {
-        return input.Contains("@") && input.Contains(".");
+        // Simple email validation
+        return Regex.IsMatch(input, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
     }
 
     public void ShowRegiPopup()
@@ -146,7 +194,6 @@ public class LoginPopupManager : MonoBehaviour
             registrationPopup.SetActive(true);
         }
     }
-
 
     public void ShowResetPopup()
     {
@@ -167,7 +214,6 @@ public class LoginPopupManager : MonoBehaviour
         MenuLogoutButton.gameObject.SetActive(false);
 
         loginPopup?.SetActive(false);
-
     }
 
     private void ShowErrorMessage(string message)
@@ -186,5 +232,10 @@ public class LoginPopupManager : MonoBehaviour
     {
         public string message;
     }
+    // Added to parse the login response
+    [Serializable]
+    private class LoginResponse
+    {
+        public string username;
+    }
 }
-

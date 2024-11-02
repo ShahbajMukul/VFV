@@ -4,35 +4,62 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
-using System.Diagnostics;
+using System.IO;
+using System;
 
 public class ChatbotManager : MonoBehaviour
 {
     public GameObject chatbotPopup;
-    public GameObject chatContent;       
-    public GameObject aiMessagePrefab;  
+    public GameObject chatContent;
+    public GameObject aiMessagePrefab;
     public GameObject userMessagePrefab;
-    public InputField chatInputField;  
+    public InputField chatInputField;
     public ScrollRect chatScrollRect;
 
-    public GameObject sessionListContent;       
+    public GameObject sessionListContent;
     public GameObject sessionButtonPrefab;
-
-    //Suggestions:
-    /*our local PostgreSQL database in the backend can store the chat history for each user*/
-
-    /*we can create new endpoints for saving and retrieving chat history in aiserver.js*/
 
     private List<ChatSession> chatSessions = new List<ChatSession>();
     private ChatSession currentSession;
     private int sessionCount = 0;
 
+    private string sessionToken;
+    private string userId; // UserID references logged-in username
+    private string userDirectoryPath;
+    private string userChatPath;
+
     void Start()
     {
-        //StartCoroutine(GetChatHistory());
-        CreateNewSession();
+        // Load the session token from PlayerPrefs
+        string sessionToken = PlayerPrefs.GetString("SessionToken", string.Empty);
+        Debug.Log("SessionToken loaded in ChatbotManager: " + sessionToken);
+        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("No logged-in user found. Cannot load chat history.");
+            chatbotPopup.SetActive(false);
+            return;
+        }
+
+        Debug.Log("Logged in as user: " + userId);
+
+        // Initialize paths
+        InitializePaths();
+
+        // Load chat history for the logged-in user
+        LoadChatHistory();
+
+        if (chatSessions == null || chatSessions.Count == 0)
+        {
+            CreateNewSession();
+        }
+        else
+        {
+            // Load the last session
+            LoadSession(chatSessions[chatSessions.Count - 1]);
+        }
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -43,12 +70,18 @@ public class ChatbotManager : MonoBehaviour
 
     private string aiGenerateTextUrl = "http://localhost:3002/ai/generate-text";
 
-    //the new endpoint would be similar like this:
-    //private string aiSaveChatHistoryUrl = "http://localhost:3002/ai/save-chat-history";
-    //private string aiGetChatHistoryUrl = "http://localhost:3002/ai/get-chat-history";
-
     public void CreateNewSession()
     {
+
+        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+        Debug.Log("CreateNewSession called. userId: " + userId);
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID is missing. Cannot create new session.");
+            return;
+        }
+
         sessionCount++;
         string sessionName = "Session " + sessionCount;
 
@@ -65,8 +98,10 @@ public class ChatbotManager : MonoBehaviour
 
         // Automatically switch to the new session
         LoadSession(newSession);
-    }
 
+        // Save chat history after creating a new session
+        SaveChatHistory();
+    }
 
     public void OnSendButtonClicked()
     {
@@ -88,15 +123,49 @@ public class ChatbotManager : MonoBehaviour
             Canvas.ForceUpdateCanvases();
             chatScrollRect.verticalNormalizedPosition = 0f;
 
-            // Simulate AI response
-            // StartCoroutine(TestAIResponse());
+            // Save chat history
+            SaveChatHistory();
 
-            // Actual AI reponse
+            // Actual AI response
             StartCoroutine(GetAIResponse(userInput));
         }
     }
+    public void OnUserLoggedIn()
+    {
+        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+        Debug.Log("OnUserLoggedIn called. userId: " + userId);
 
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID is missing after login.");
+            return;
+        }
 
+        InitializePaths();
+        LoadChatHistory();
+    }
+
+    public void OnUserLoggedOut()
+    {
+        Debug.Log("OnUserLoggedOut called. Clearing chat history and resetting state.");
+
+        // Clear chat sessions and reset variables
+        chatSessions.Clear();
+        currentSession = null;
+        sessionCount = 0;
+        userId = null;
+
+        // Clear the UI
+        foreach (Transform child in chatContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in sessionListContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+    }
     private IEnumerator TestAIResponse()
     {
         // Simulate a typing delay
@@ -115,11 +184,14 @@ public class ChatbotManager : MonoBehaviour
         // Scroll to the bottom
         Canvas.ForceUpdateCanvases();
         chatScrollRect.verticalNormalizedPosition = 0f;
-    }
 
+        // Save chat history
+        SaveChatHistory();
+    }
 
     IEnumerator GetAIResponse(string userMessage)
     {
+
         // Prepare JSON payload
         string jsonData = $"{{\"ai_type\":\"default\",\"userMessage\":\"{userMessage}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
@@ -127,7 +199,6 @@ public class ChatbotManager : MonoBehaviour
         // Instantiate the AI message object in the UI (so it appears immediately)
         GameObject aiMessageObject = Instantiate(aiMessagePrefab, chatContent.transform);
 
-        // Use UnityWebRequest with POST method
         using (UnityWebRequest www = new UnityWebRequest(aiGenerateTextUrl, "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(jsonToSend);
@@ -135,15 +206,26 @@ public class ChatbotManager : MonoBehaviour
             www.SetRequestHeader("Content-Type", "application/json");
             www.SetRequestHeader("Accept", "application/json");
 
+            // Retrieve and add the session token for authorization
+            string sessionToken = PlayerPrefs.GetString("SessionToken", string.Empty);
+            if (string.IsNullOrEmpty(sessionToken))
+            {
+                Debug.LogError("No session token found. Cannot authenticate the request.");
+                aiMessageObject.GetComponentInChildren<UnityEngine.UI.Text>().text = "Error: Unable to get AI response. Please try again.";
+                yield break; // Exit the coroutine since no token is present
+            }
+            www.SetRequestHeader("Authorization", $"Bearer {sessionToken}");
+
             // Default AI response in case of an error
             string aiResponse = "Error: Unable to get AI response. Please try again.";
 
             // Send request and wait for response
             yield return www.SendWebRequest();
 
+            
             if (www.isNetworkError || www.isHttpError)
             {
-                UnityEngine.Debug.LogError("HTTP Error: " + www.error);
+                Debug.LogError("HTTP Error: " + www.error);
                 aiResponse = "Error: Unable to get AI response. Please try again.";
             }
             else if (www.responseCode == 200)
@@ -165,9 +247,15 @@ public class ChatbotManager : MonoBehaviour
                 }
                 catch (System.Exception e)
                 {
-                    UnityEngine.Debug.LogError("JSON Parsing Error: " + e.Message);
+                    Debug.LogError("JSON Parsing Error: " + e.Message);
                     aiResponse = "Error: Failed to parse AI response. Please try again later.";
                 }
+            }
+            else
+            {
+                // Handle unexpected response codes
+                Debug.LogWarning("Unexpected response code: " + www.responseCode);
+                aiResponse = "Error: Unexpected response from AI.";
             }
 
             // Update the AI message object's text with the response
@@ -180,6 +268,9 @@ public class ChatbotManager : MonoBehaviour
             // Scroll to the bottom to show the latest message
             Canvas.ForceUpdateCanvases();
             chatScrollRect.verticalNormalizedPosition = 0f;
+
+            // Save chat history
+            SaveChatHistory();
         }
     }
 
@@ -213,36 +304,6 @@ public class ChatbotManager : MonoBehaviour
         chatScrollRect.verticalNormalizedPosition = 0f;
     }
 
-
-    /*IEnumerator GetChatHistory()
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(aiGetChatHistoryUrl))
-        {
-            www.SetRequestHeader("Accept", "application/json");
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.LogError("Error fetching chat history: " + www.error);
-            }
-            else
-            {
-                ChatHistoryResponse response = JsonUtility.FromJson<ChatHistoryResponse>(www.downloadHandler.text);
-                if (response != null && response.sessions != null)
-                {
-                    foreach (ChatSession session in response.sessions)
-                    {
-                        List<string> messages = new List<string>(session.messages);
-                        chatSessions.Add(messages);
-                    }
-                    LoadChatHistory();
-                }
-            }
-        }
-    }*/
-
-
-
     public void OpenChatbotPopUp()
     {
         chatbotPopup.SetActive(true);
@@ -251,35 +312,7 @@ public class ChatbotManager : MonoBehaviour
     public void CloseChatbotPopUp()
     {
         chatbotPopup.SetActive(false);
-
-        //if (currentSession.Count > 0)
-        //{
-        //    chatSessions.Add(new List<string>(currentSession));
-        //    //StartCoroutine(SaveChatHistory(currentSession));
-        //    currentSession.Clear();
-        //    // LoadChatHistory();
-        //}
     }
-
-    /*IEnumerator SaveChatHistory(List<string> session)
-    {
-        string jsonData = JsonUtility.ToJson(new ChatSession { sessionId = System.Guid.NewGuid().ToString(), messages = session.ToArray() });
-        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
-
-        using (UnityWebRequest www = new UnityWebRequest(aiSaveChatHistoryUrl, "POST"))
-        {
-            www.uploadHandler = new UploadHandlerRaw(jsonToSend);
-            www.downloadHandler = new DownloadHandlerBuffer();
-            www.SetRequestHeader("Content-Type", "application/json");
-
-            yield return www.SendWebRequest();
-
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.LogError("Error saving chat history: " + www.error);
-            }
-        }
-    }*/
 
     void OnEnterPressed()
     {
@@ -290,38 +323,158 @@ public class ChatbotManager : MonoBehaviour
         }
     }
 
+    private void InitializePaths()
+    {
+
+        string persistentPath = Application.persistentDataPath;
+
+        if (string.IsNullOrEmpty(persistentPath))
+        {
+            Debug.LogError("Application.persistentDataPath is empty!");
+
+            return;
+        }
+
+        // Construct paths
+        userDirectoryPath = Path.Combine(persistentPath, "chat_history", userId);
+        userChatPath = Path.Combine(userDirectoryPath, "chat_history.json");
+
+        Debug.Log("Application.persistentDataPath: " + persistentPath);
+        Debug.Log("userDirectoryPath: " + userDirectoryPath);
+        Debug.Log("userChatPath: " + userChatPath);
+
+
+        if (!Directory.Exists(userDirectoryPath))
+        {
+            Directory.CreateDirectory(userDirectoryPath);
+            Debug.Log("Created user directory at: " + userDirectoryPath);
+        }
+    }
+
+    private void SaveChatHistory()
+    {
+
+        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+
+        Debug.Log("SaveChatHistory called. userId: " + userId);
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID is missing. Cannot save chat history.");
+            return;
+        }
+
+        // Re-initialize paths in case they have changed
+        InitializePaths();
+
+        try
+        {
+            ChatHistory chatHistory = new ChatHistory(chatSessions);
+
+            string json = JsonUtility.ToJson(chatHistory, true);
+
+            // Write to file
+            File.WriteAllText(userChatPath, json);
+
+            Debug.Log("Chat history saved for user: " + userId + " at " + userChatPath);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to save chat history: " + e.Message);
+        }
+    }
+
+    private void LoadChatHistory()
+    {
+
+        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+
+        Debug.Log("LoadChatHistory called. userId: " + userId);
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogError("User ID is missing. Cannot load chat history.");
+            return;
+        }
+
+
+        InitializePaths();
+
+        if (File.Exists(userChatPath))
+        {
+            try
+            {
+                string json = File.ReadAllText(userChatPath);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    ChatHistory history = JsonUtility.FromJson<ChatHistory>(json);
+                    if (history != null && history.sessions != null)
+                    {
+                        chatSessions = history.sessions;
+                        sessionCount = chatSessions.Count;
+
+
+                        RefreshSessionListUI();
+
+                        Debug.Log("Chat history loaded for user: " + userId);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Chat history is empty or invalid.");
+                        chatSessions = new List<ChatSession>();
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Chat history file is empty.");
+                    chatSessions = new List<ChatSession>();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Failed to load chat history: " + e.Message);
+                chatSessions = new List<ChatSession>();
+            }
+        }
+        else
+        {
+            Debug.Log("No chat history file found for user: " + userId);
+            chatSessions = new List<ChatSession>();
+        }
+    }
+
+    private void RefreshSessionListUI()
+    {
+
+        foreach (Transform child in sessionListContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (ChatSession session in chatSessions)
+        {
+            GameObject sessionButtonObj = Instantiate(sessionButtonPrefab, sessionListContent.transform);
+            sessionButtonObj.GetComponentInChildren<UnityEngine.UI.Text>().text = session.sessionName;
+
+            Button sessionButton = sessionButtonObj.GetComponent<Button>();
+            sessionButton.onClick.AddListener(() => LoadSession(session));
+        }
+    }
 
     [System.Serializable]
     public class AIResponse
     {
         public string content;
     }
+}
 
-    [System.Serializable]
-    public class ChatSession
+[System.Serializable]
+public class ChatHistory
+{
+    public List<ChatSession> sessions;
+
+    public ChatHistory(List<ChatSession> sessions)
     {
-        public string sessionName;
-        public List<ChatMessage> messages;
-
-        public ChatSession(string name)
-        {
-            sessionName = name;
-            messages = new List<ChatMessage>();
-        }
+        this.sessions = sessions;
     }
-
-    [System.Serializable]
-    public class ChatMessage
-    {
-        public string sender;
-        public string messageText;
-
-        public ChatMessage(string sender, string text)
-        {
-            this.sender = sender;
-            messageText = text;
-        }
-    }
-
-
 }

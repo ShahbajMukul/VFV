@@ -1,9 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatSession : MonoBehaviour
+[System.Serializable]
+public class ChatSession
 {
-    
+    public string sessionName;
+    public List<ChatMessage> messages;
 
+    public ChatSession(string name)
+    {
+        sessionName = name;
+        messages = new List<ChatMessage>();
+    }
+}
+
+[System.Serializable]
+public class ChatMessage
+{
+    public string sender;
+    public string messageText;
+
+    public ChatMessage(string sender, string text)
+    {
+        this.sender = sender;
+        messageText = text;
+    }
 }
