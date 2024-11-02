@@ -23,16 +23,17 @@ public class ChatbotManager : MonoBehaviour
     private ChatSession currentSession;
     private int sessionCount = 0;
 
-    private string sessionToken;
     private string userId; // UserID references logged-in username
     private string userDirectoryPath;
     private string userChatPath;
+    private string sessionFilePath;
 
     void Start()
     {
-        // Load the session token from PlayerPrefs
-        string sessionToken = PlayerPrefs.GetString("SessionToken", string.Empty);
-        Debug.Log("SessionToken loaded in ChatbotManager: " + sessionToken);
+        // Load the session token from the session file
+        sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
+        string sessionToken = LoadSessionToken();
+
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
         if (string.IsNullOrEmpty(userId))
         {
@@ -72,7 +73,6 @@ public class ChatbotManager : MonoBehaviour
 
     public void CreateNewSession()
     {
-
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
         Debug.Log("CreateNewSession called. userId: " + userId);
 
@@ -130,68 +130,9 @@ public class ChatbotManager : MonoBehaviour
             StartCoroutine(GetAIResponse(userInput));
         }
     }
-    public void OnUserLoggedIn()
-    {
-        userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
-        Debug.Log("OnUserLoggedIn called. userId: " + userId);
-
-        if (string.IsNullOrEmpty(userId))
-        {
-            Debug.LogError("User ID is missing after login.");
-            return;
-        }
-
-        InitializePaths();
-        LoadChatHistory();
-    }
-
-    public void OnUserLoggedOut()
-    {
-        Debug.Log("OnUserLoggedOut called. Clearing chat history and resetting state.");
-
-        // Clear chat sessions and reset variables
-        chatSessions.Clear();
-        currentSession = null;
-        sessionCount = 0;
-        userId = null;
-
-        // Clear the UI
-        foreach (Transform child in chatContent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in sessionListContent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-    }
-    private IEnumerator TestAIResponse()
-    {
-        // Simulate a typing delay
-        yield return new WaitForSeconds(1f);
-
-        string aiResponse = "Greetings! I'm your friendly StorAI, here to make your gaming experience smoother. Feel free to ask me anything, from game tips to general questions. I'm always learning and improving, so don't hesitate to challenge me!";
-
-        // Display the AI's message
-        GameObject aiMessageObject = Instantiate(aiMessagePrefab, chatContent.transform);
-        aiMessageObject.GetComponentInChildren<UnityEngine.UI.Text>().text = aiResponse;
-
-        // Save the AI's message to the session
-        ChatMessage aiChatMessage = new ChatMessage("AI", aiResponse);
-        currentSession.messages.Add(aiChatMessage);
-
-        // Scroll to the bottom
-        Canvas.ForceUpdateCanvases();
-        chatScrollRect.verticalNormalizedPosition = 0f;
-
-        // Save chat history
-        SaveChatHistory();
-    }
 
     IEnumerator GetAIResponse(string userMessage)
     {
-
         // Prepare JSON payload
         string jsonData = $"{{\"ai_type\":\"default\",\"userMessage\":\"{userMessage}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
@@ -214,7 +155,9 @@ public class ChatbotManager : MonoBehaviour
                 aiMessageObject.GetComponentInChildren<UnityEngine.UI.Text>().text = "Error: Unable to get AI response. Please try again.";
                 yield break; // Exit the coroutine since no token is present
             }
-            www.SetRequestHeader("Authorization", $"Bearer {sessionToken}");
+
+            // Use only the session ID part, excluding other attributes
+            www.SetRequestHeader("Cookie", sessionToken);
 
             // Default AI response in case of an error
             string aiResponse = "Error: Unable to get AI response. Please try again.";
@@ -222,7 +165,6 @@ public class ChatbotManager : MonoBehaviour
             // Send request and wait for response
             yield return www.SendWebRequest();
 
-            
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.LogError("HTTP Error: " + www.error);
@@ -253,25 +195,31 @@ public class ChatbotManager : MonoBehaviour
             }
             else
             {
-                // Handle unexpected response codes
                 Debug.LogWarning("Unexpected response code: " + www.responseCode);
                 aiResponse = "Error: Unexpected response from AI.";
             }
 
-            // Update the AI message object's text with the response
             aiMessageObject.GetComponentInChildren<UnityEngine.UI.Text>().text = aiResponse;
 
-            // Save the message to the current session
             ChatMessage aiChatMessage = new ChatMessage("AI", aiResponse);
             currentSession.messages.Add(aiChatMessage);
 
-            // Scroll to the bottom to show the latest message
             Canvas.ForceUpdateCanvases();
             chatScrollRect.verticalNormalizedPosition = 0f;
 
-            // Save chat history
             SaveChatHistory();
         }
+
+    }
+
+    private string LoadSessionToken()
+    {
+        if (File.Exists(sessionFilePath))
+        {
+            string token = File.ReadAllText(sessionFilePath).Trim();
+            return token;
+        }
+        return string.Empty;
     }
 
     public void LoadSession(ChatSession session)
@@ -388,8 +336,6 @@ public class ChatbotManager : MonoBehaviour
     {
 
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
-
-        Debug.Log("LoadChatHistory called. userId: " + userId);
 
         if (string.IsNullOrEmpty(userId))
         {
