@@ -57,7 +57,6 @@ public class LoginPopupManager : MonoBehaviour
     {
         UnityEngine.Debug.LogWarning("No session token found, prompting user to log in.");
         loginPopup.SetActive(true);
-
     }
 
     public void OnLoginButtonClicked()
@@ -160,13 +159,24 @@ public class LoginPopupManager : MonoBehaviour
 
     public void Logout()
     {
+        // Remove stored session token
         if (File.Exists(sessionFilePath))
         {
             File.Delete(sessionFilePath);
         }
+
+        // Clear the stored username
         PlayerPrefs.DeleteKey("LoggedInUsername");
         PlayerPrefs.Save();
 
+        // Clear chat history
+        ChatbotManager chatbotManager = FindObjectOfType<ChatbotManager>();
+        if (chatbotManager != null)
+        {
+            chatbotManager.ClearChatHistory();
+        }
+
+        // Update UI to show login again
         loginPopup.SetActive(true);
         loginStatusMsgLabel.text = "You have been logged out.";
         UnityEngine.Debug.Log("Session token and username cleared. User logged out.");
@@ -201,7 +211,7 @@ public class LoginPopupManager : MonoBehaviour
     {
         if (ChatbotButton != null)
         {
-            ChatbotButton.interactable = false;  // Disable the chatbot button
+            ChatbotButton.interactable = false;
         }
         MenuLoginButton.gameObject.SetActive(true);
         MenuLogoutButton.gameObject.SetActive(false);

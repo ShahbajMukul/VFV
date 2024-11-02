@@ -148,7 +148,7 @@ public class ChatbotManager : MonoBehaviour
             www.SetRequestHeader("Accept", "application/json");
 
             // Retrieve and add the session token for authorization
-            string sessionToken = PlayerPrefs.GetString("SessionToken", string.Empty);
+            string sessionToken = LoadSessionToken();
             if (string.IsNullOrEmpty(sessionToken))
             {
                 Debug.LogError("No session token found. Cannot authenticate the request.");
@@ -209,7 +209,6 @@ public class ChatbotManager : MonoBehaviour
 
             SaveChatHistory();
         }
-
     }
 
     private string LoadSessionToken()
@@ -262,24 +261,38 @@ public class ChatbotManager : MonoBehaviour
         chatbotPopup.SetActive(false);
     }
 
-    void OnEnterPressed()
+    public void ClearChatHistory()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && chatInputField.isFocused)
+        // Clear chat sessions and delete history file
+        chatSessions.Clear();
+        sessionCount = 0;
+        currentSession = null;
+
+        if (File.Exists(userChatPath))
         {
-            OnSendButtonClicked();
-            chatInputField.DeactivateInputField();
+            File.Delete(userChatPath);
         }
+
+        // Clear the UI
+        foreach (Transform child in chatContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in sessionListContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        Debug.Log("Chat history cleared for user: " + userId);
     }
 
     private void InitializePaths()
     {
-
         string persistentPath = Application.persistentDataPath;
 
         if (string.IsNullOrEmpty(persistentPath))
         {
             Debug.LogError("Application.persistentDataPath is empty!");
-
             return;
         }
 
@@ -291,7 +304,6 @@ public class ChatbotManager : MonoBehaviour
         Debug.Log("userDirectoryPath: " + userDirectoryPath);
         Debug.Log("userChatPath: " + userChatPath);
 
-
         if (!Directory.Exists(userDirectoryPath))
         {
             Directory.CreateDirectory(userDirectoryPath);
@@ -301,7 +313,6 @@ public class ChatbotManager : MonoBehaviour
 
     private void SaveChatHistory()
     {
-
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
 
         Debug.Log("SaveChatHistory called. userId: " + userId);
@@ -334,7 +345,6 @@ public class ChatbotManager : MonoBehaviour
 
     private void LoadChatHistory()
     {
-
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
 
         if (string.IsNullOrEmpty(userId))
@@ -342,7 +352,6 @@ public class ChatbotManager : MonoBehaviour
             Debug.LogError("User ID is missing. Cannot load chat history.");
             return;
         }
-
 
         InitializePaths();
 
@@ -358,7 +367,6 @@ public class ChatbotManager : MonoBehaviour
                     {
                         chatSessions = history.sessions;
                         sessionCount = chatSessions.Count;
-
 
                         RefreshSessionListUI();
 
@@ -391,7 +399,6 @@ public class ChatbotManager : MonoBehaviour
 
     private void RefreshSessionListUI()
     {
-
         foreach (Transform child in sessionListContent.transform)
         {
             Destroy(child.gameObject);
