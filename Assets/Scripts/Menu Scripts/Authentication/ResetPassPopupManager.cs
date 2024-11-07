@@ -88,6 +88,7 @@ public class ResetPassPopupManager : MonoBehaviour
                     {
                         Debug.Log("Reset code sent successfully!");
                         CloseResetPassPopup();
+                        ShowErrorMessage("Processing...");
                         ShowResetPassEnterCodePopup();
                     }
                     else if (www.downloadHandler.text.Contains("No user found for email"))
@@ -139,6 +140,10 @@ public class ResetPassPopupManager : MonoBehaviour
         if (resetPassPopup != null)
         {
             resetPassPopup.SetActive(false);
+        }
+        if (resetPassEnterCodePopup  != null)
+        {
+            resetPassEnterCodePopup.SetActive(false);
         }
     }
 

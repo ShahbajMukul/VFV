@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Text;
 using System.IO;
 using System;
+using System.Diagnostics;
 
 public class ChatbotManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class ChatbotManager : MonoBehaviour
 
     public GameObject sessionListContent;
     public GameObject sessionButtonPrefab;
+
 
     private List<ChatSession> chatSessions = new List<ChatSession>();
     private ChatSession currentSession;
@@ -37,12 +39,12 @@ public class ChatbotManager : MonoBehaviour
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
         if (string.IsNullOrEmpty(userId))
         {
-            Debug.LogError("No logged-in user found. Cannot load chat history.");
+            UnityEngine.Debug.Log("No logged-in user found. Cannot load chat history.");
             chatbotPopup.SetActive(false);
             return;
         }
 
-        Debug.Log("Logged in as user: " + userId);
+        UnityEngine.Debug.Log("Logged in as user: " + userId);
 
         // Initialize paths
         InitializePaths();
@@ -63,9 +65,22 @@ public class ChatbotManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            OnSendButtonClicked();
+            // Toggle the chatbot popup
+            if (chatbotPopup.activeSelf)
+            {
+                CloseChatbotPopUp();
+            }
+            else
+            {
+                OpenChatbotPopUp();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OpenChatbotPopUp();
         }
     }
 
@@ -74,11 +89,11 @@ public class ChatbotManager : MonoBehaviour
     public void CreateNewSession()
     {
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
-        Debug.Log("CreateNewSession called. userId: " + userId);
+        UnityEngine.Debug.Log("CreateNewSession called. userId: " + userId);
 
         if (string.IsNullOrEmpty(userId))
         {
-            Debug.LogError("User ID is missing. Cannot create new session.");
+            UnityEngine.Debug.LogError("User ID is missing. Cannot create new session.");
             return;
         }
 
@@ -92,9 +107,17 @@ public class ChatbotManager : MonoBehaviour
         GameObject sessionButtonObj = Instantiate(sessionButtonPrefab, sessionListContent.transform);
         sessionButtonObj.GetComponentInChildren<UnityEngine.UI.Text>().text = sessionName;
 
-        // Add a click event to the session button
-        Button sessionButton = sessionButtonObj.GetComponent<Button>();
-        sessionButton.onClick.AddListener(() => LoadSession(newSession));
+        // Initialize the SessionButtonController and add click events
+        SessionButtonController buttonController = sessionButtonObj.GetComponent<SessionButtonController>();
+        if (buttonController != null)
+        {
+            buttonController.Initialize(this, sessionName);
+
+            // Set up the click events: load the session and set the button color
+            Button sessionButton = sessionButtonObj.GetComponent<Button>();
+            sessionButton.onClick.AddListener(() => LoadSession(newSession));
+            sessionButton.onClick.AddListener(buttonController.SetActiveColor);
+        }
 
         // Automatically switch to the new session
         LoadSession(newSession);
@@ -102,6 +125,7 @@ public class ChatbotManager : MonoBehaviour
         // Save chat history after creating a new session
         SaveChatHistory();
     }
+
 
     public void OnSendButtonClicked()
     {
@@ -151,7 +175,7 @@ public class ChatbotManager : MonoBehaviour
             string sessionToken = LoadSessionToken();
             if (string.IsNullOrEmpty(sessionToken))
             {
-                Debug.LogError("No session token found. Cannot authenticate the request.");
+                UnityEngine.Debug.LogError("No session token found. Cannot authenticate the request.");
                 aiMessageObject.GetComponentInChildren<UnityEngine.UI.Text>().text = "Error: Unable to get AI response. Please try again.";
                 yield break; // Exit the coroutine since no token is present
             }
@@ -167,7 +191,7 @@ public class ChatbotManager : MonoBehaviour
 
             if (www.isNetworkError || www.isHttpError)
             {
-                Debug.LogError("HTTP Error: " + www.error);
+                UnityEngine.Debug.LogError("HTTP Error: " + www.error);
                 aiResponse = "Error: Unable to get AI response. Please try again.";
             }
             else if (www.responseCode == 200)
@@ -189,13 +213,13 @@ public class ChatbotManager : MonoBehaviour
                 }
                 catch (System.Exception e)
                 {
-                    Debug.LogError("JSON Parsing Error: " + e.Message);
+                    UnityEngine.Debug.LogError("JSON Parsing Error: " + e.Message);
                     aiResponse = "Error: Failed to parse AI response. Please try again later.";
                 }
             }
             else
             {
-                Debug.LogWarning("Unexpected response code: " + www.responseCode);
+                UnityEngine.Debug.LogWarning("Unexpected response code: " + www.responseCode);
                 aiResponse = "Error: Unexpected response from AI.";
             }
 
@@ -249,7 +273,9 @@ public class ChatbotManager : MonoBehaviour
         // Scroll to the bottom
         Canvas.ForceUpdateCanvases();
         chatScrollRect.verticalNormalizedPosition = 0f;
+
     }
+
 
     public void OpenChatbotPopUp()
     {
@@ -283,7 +309,7 @@ public class ChatbotManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        Debug.Log("Chat history cleared for user: " + userId);
+        UnityEngine.Debug.Log("Chat history cleared for user: " + userId);
     }
 
     private void InitializePaths()
@@ -292,7 +318,7 @@ public class ChatbotManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(persistentPath))
         {
-            Debug.LogError("Application.persistentDataPath is empty!");
+            UnityEngine.Debug.LogError("Application.persistentDataPath is empty!");
             return;
         }
 
@@ -300,14 +326,14 @@ public class ChatbotManager : MonoBehaviour
         userDirectoryPath = Path.Combine(persistentPath, "chat_history", userId);
         userChatPath = Path.Combine(userDirectoryPath, "chat_history.json");
 
-        Debug.Log("Application.persistentDataPath: " + persistentPath);
-        Debug.Log("userDirectoryPath: " + userDirectoryPath);
-        Debug.Log("userChatPath: " + userChatPath);
+        UnityEngine.Debug.Log("Application.persistentDataPath: " + persistentPath);
+        UnityEngine.Debug.Log("userDirectoryPath: " + userDirectoryPath);
+        UnityEngine.Debug.Log("userChatPath: " + userChatPath);
 
         if (!Directory.Exists(userDirectoryPath))
         {
             Directory.CreateDirectory(userDirectoryPath);
-            Debug.Log("Created user directory at: " + userDirectoryPath);
+            UnityEngine.Debug.Log("Created user directory at: " + userDirectoryPath);
         }
     }
 
@@ -315,11 +341,11 @@ public class ChatbotManager : MonoBehaviour
     {
         userId = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
 
-        Debug.Log("SaveChatHistory called. userId: " + userId);
+        UnityEngine.Debug.Log("SaveChatHistory called. userId: " + userId);
 
         if (string.IsNullOrEmpty(userId))
         {
-            Debug.LogError("User ID is missing. Cannot save chat history.");
+            UnityEngine.Debug.LogError("User ID is missing. Cannot save chat history.");
             return;
         }
 
@@ -335,11 +361,11 @@ public class ChatbotManager : MonoBehaviour
             // Write to file
             File.WriteAllText(userChatPath, json);
 
-            Debug.Log("Chat history saved for user: " + userId + " at " + userChatPath);
+            UnityEngine.Debug.Log("Chat history saved for user: " + userId + " at " + userChatPath);
         }
         catch (Exception e)
         {
-            Debug.LogError("Failed to save chat history: " + e.Message);
+            UnityEngine.Debug.LogError("Failed to save chat history: " + e.Message);
         }
     }
 
@@ -349,7 +375,7 @@ public class ChatbotManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(userId))
         {
-            Debug.LogError("User ID is missing. Cannot load chat history.");
+            UnityEngine.Debug.LogError("User ID is missing. Cannot load chat history.");
             return;
         }
 
@@ -370,49 +396,113 @@ public class ChatbotManager : MonoBehaviour
 
                         RefreshSessionListUI();
 
-                        Debug.Log("Chat history loaded for user: " + userId);
+                        UnityEngine.Debug.Log("Chat history loaded for user: " + userId);
                     }
                     else
                     {
-                        Debug.LogWarning("Chat history is empty or invalid.");
+                        UnityEngine.Debug.LogWarning("Chat history is empty or invalid.");
                         chatSessions = new List<ChatSession>();
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("Chat history file is empty.");
+                    UnityEngine.Debug.LogWarning("Chat history file is empty.");
                     chatSessions = new List<ChatSession>();
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError("Failed to load chat history: " + e.Message);
+                UnityEngine.Debug.LogError("Failed to load chat history: " + e.Message);
                 chatSessions = new List<ChatSession>();
             }
         }
         else
         {
-            Debug.Log("No chat history file found for user: " + userId);
+            UnityEngine.Debug.Log("No chat history file found for user: " + userId);
             chatSessions = new List<ChatSession>();
         }
     }
 
     private void RefreshSessionListUI()
     {
+        // Clear existing buttons in the session list
         foreach (Transform child in sessionListContent.transform)
         {
             Destroy(child.gameObject);
         }
 
+        // Create a button for each session with a delete option
         foreach (ChatSession session in chatSessions)
         {
             GameObject sessionButtonObj = Instantiate(sessionButtonPrefab, sessionListContent.transform);
             sessionButtonObj.GetComponentInChildren<UnityEngine.UI.Text>().text = session.sessionName;
 
-            Button sessionButton = sessionButtonObj.GetComponent<Button>();
-            sessionButton.onClick.AddListener(() => LoadSession(session));
+            // Access the SessionButtonController and initialize it with the ChatbotManager instance
+            SessionButtonController buttonController = sessionButtonObj.GetComponent<SessionButtonController>();
+            if (buttonController != null)
+            {
+                buttonController.Initialize(this, session.sessionName);
+
+                // Add OnClick event to turn this button green and reset others
+                Button sessionButton = sessionButtonObj.GetComponent<Button>();
+                sessionButton.onClick.AddListener(buttonController.SetActiveColor);
+                sessionButton.onClick.AddListener(() => LoadSession(session));
+
+            }
         }
     }
+
+
+    public void ResetOtherSessionButtonColors(SessionButtonController activeButton)
+    {
+        // Iterate through all session buttons and reset their color, except the active one
+        foreach (Transform child in sessionListContent.transform)
+        {
+            SessionButtonController buttonController = child.GetComponent<SessionButtonController>();
+            if (buttonController != null && buttonController != activeButton)
+            {
+                buttonController.SetDefaultColor();
+            }
+        }
+    }
+
+    public void DeleteSessionByName(string sessionName)
+    {
+        // Find the session by name
+        ChatSession sessionToDelete = chatSessions.Find(session => session.sessionName == sessionName);
+
+        if (sessionToDelete != null)
+        {
+            // Remove session from list
+            chatSessions.Remove(sessionToDelete);
+
+            // Save the updated chat history
+            SaveChatHistory();
+
+            // Refresh the session list UI
+            RefreshSessionListUI();
+
+            // Load a different session if the deleted session was active
+            if (currentSession == sessionToDelete)
+            {
+                if (chatSessions.Count > 0)
+                {
+                    LoadSession(chatSessions[chatSessions.Count - 1]); // Load the most recent session
+                }
+                else
+                {
+                    CreateNewSession(); // Create a new session if none exist
+                }
+            }
+
+            UnityEngine.Debug.Log("Session deleted: " + sessionName);
+        }
+        else
+        {
+            UnityEngine.Debug.LogError("Session not found: " + sessionName);
+        }
+    }
+
 
     [System.Serializable]
     public class AIResponse
