@@ -13,7 +13,8 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
     public InputField confirmPasswordInput;
     public Text errorMessageText;
 
-    private string resetPasswordUrl = "http://localhost:3000/api/reset-pwd";
+    private string resetPasswordUrl = "https://storai.net/api/reset-pwd"; 
+
 
     void Start()
     {

@@ -21,11 +21,12 @@ public class LoginPopupManager : MonoBehaviour
     public Button MenuLoginButton;
     public Button MenuLogoutButton;
 
-    private string loginUrl = "http://localhost:3000/api/login";
+    private string loginUrl = "https://storai.net/api/login";
     private string sessionFilePath;
 
     void Start()
     {
+
         // Path for saving session token
         sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 

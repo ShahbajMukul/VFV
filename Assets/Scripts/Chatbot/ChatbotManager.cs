@@ -84,7 +84,8 @@ public class ChatbotManager : MonoBehaviour
         }
     }
 
-    private string aiGenerateTextUrl = "http://localhost:3002/ai/generate-text";
+    private string aiGenerateTextUrl = "https://storai.net/ai/generate-text";
+
 
     public void CreateNewSession()
     {

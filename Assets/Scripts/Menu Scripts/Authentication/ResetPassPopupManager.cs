@@ -14,7 +14,8 @@ public class ResetPassPopupManager : MonoBehaviour
     public InputField emailInput;
     public UnityEngine.UI.Text errorMessageText;
 
-    private string resetPasswordUrl = "http://localhost:3000/api/forgot-password";
+    private string resetPasswordUrl = "https://storai.net/api/forgot-password";
+
 
     void Start()
     {

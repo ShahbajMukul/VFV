@@ -18,7 +18,8 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button MenuLoginButton;
 
 
-    private string registrationUrl = "http://localhost:3000/api/register";
+    private string registrationUrl = "https://storai.net/api/register";
+
 
     void Start()
     {
