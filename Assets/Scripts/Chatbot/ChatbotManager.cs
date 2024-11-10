@@ -82,6 +82,12 @@ public class ChatbotManager : MonoBehaviour
         {
             OpenChatbotPopUp();
         }
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            OnSendButtonClicked();
+            chatInputField.ActivateInputField(); // Keep the input field active for convenience
+        }
     }
 
     private string aiGenerateTextUrl = "https://storai.net/ai/generate-text";
