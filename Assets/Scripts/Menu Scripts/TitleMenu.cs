@@ -10,7 +10,7 @@ public class TitleMenu : MonoBehaviour
 
     private void Start() {
         // Minimizing the Options Panel
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0, 0, 0);
+        // GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0, 0, 0);
 
         //initializes fullscreen toggle
         fullscreenToggle = GameObject.Find("FSToggle");
@@ -40,7 +40,8 @@ public class TitleMenu : MonoBehaviour
     }
     public GameObject optionsPanel;
     public void ShowOptions() {
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(2, 2, 1);
+        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(3, 3, 1);
+        UnityEngine.Debug.Log("NYC Halal Eats within two mile radius of their house!");
     }
     public void HideOptions() {
         GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0, 0, 0);
