@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TitleMenu : MonoBehaviour
 {
     public GameObject fullscreenToggle;
+    public GameObject optionsPanel;
 
     private void Start() {
         // Minimizing the Options Panel
@@ -38,13 +39,12 @@ public class TitleMenu : MonoBehaviour
             Application.OpenURL("https://tinyurl.com/VetsandRC");
         #endif
     }
-    public GameObject optionsPanel;
     public void ShowOptions() {
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(3, 3, 1);
-        UnityEngine.Debug.Log("NYC Halal Eats within two mile radius of their house!");
+        optionsPanel.SetActive(true);
     }
     public void HideOptions() {
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0, 0, 0);
+        optionsPanel.SetActive(false);
+
     }
     public void HideNetworkErr() {
         GameObject.Find("NetworkErrPanel").transform.localScale = new Vector3(0, 0, 0);
