@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.5999985, y: 0}
+  m_AnchoredPosition: {x: 0.59999084, y: 0}
   m_SizeDelta: {x: -15.6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39720275
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Amazon Purchase Link
+  m_text: External Purchase Link
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -184,8 +184,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4291590656
+  m_fontColor: {r: 0, g: 0.4784314, b: 0.8000001, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 39720275}
-    characterCount: 20
+    characterCount: 22
     spriteCount: 0
     spaceCount: 2
     wordCount: 3
@@ -490,7 +490,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Brain Teasers
     Cost: 50
@@ -499,7 +499,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6c69a6c29eaca234dae0259514ed66c4, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Team Synergy
     Cost: 50
@@ -508,7 +508,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1697bde0bd65f1d4790217d8269b32e3, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Hiring Manager's Guide to Everything
     Cost: 50
@@ -517,7 +517,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Principles of Management
     Cost: 50
@@ -526,7 +526,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6c69a6c29eaca234dae0259514ed66c4, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Employment Laws
     Cost: 50
@@ -535,7 +535,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6c69a6c29eaca234dae0259514ed66c4, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: CompTia A+ Certification Prep Questions
     Cost: 50
@@ -544,7 +544,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6c69a6c29eaca234dae0259514ed66c4, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Intro to Hardware
     Cost: 50
@@ -553,7 +553,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Troubleshooting 101
     Cost: 50
@@ -562,7 +562,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1697bde0bd65f1d4790217d8269b32e3, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Guide to Networking
     Cost: 50
@@ -571,7 +571,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: How to Be a Better Leader
     Cost: 50
@@ -580,7 +580,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Into to Python
     Cost: 50
@@ -589,7 +589,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1697bde0bd65f1d4790217d8269b32e3, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Software Engineering Principles
     Cost: 50
@@ -598,7 +598,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 6c69a6c29eaca234dae0259514ed66c4, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Debugging 101
     Cost: 50
@@ -607,7 +607,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Game Design
     Cost: 50
@@ -616,7 +616,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1697bde0bd65f1d4790217d8269b32e3, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Working in a Team
     Cost: 50
@@ -625,7 +625,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Microswift Office for Dummies
     Cost: 50
@@ -634,7 +634,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 1697bde0bd65f1d4790217d8269b32e3, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   - Title: Principles of Engineering
     Cost: 50
@@ -643,7 +643,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 91b3d5cb435171e47965f49a9589a1ae, type: 3}
     Dialog: 
     book: 
-    AmazonLink: 
+    ExternalPurchaseLink: 
     bookStoreStats: 
   UnOwnedBooksScrollView: {fileID: 1217111072}
   OwnedBooksScrollView: {fileID: 751786770}
@@ -7163,8 +7163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -148.29, y: 70}
-  m_SizeDelta: {x: 233.63, y: 30}
+  m_AnchoredPosition: {x: -132.55, y: 70}
+  m_SizeDelta: {x: 265.1, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1547377594
 MonoBehaviour:
