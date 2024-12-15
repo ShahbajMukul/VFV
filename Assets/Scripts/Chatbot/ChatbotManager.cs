@@ -19,6 +19,7 @@ public class ChatbotManager : MonoBehaviour
 
     public GameObject sessionListContent;
     public GameObject sessionButtonPrefab;
+    public GameObject noticeText;
 
 
     private List<ChatSession> chatSessions = new List<ChatSession>();
@@ -55,11 +56,14 @@ public class ChatbotManager : MonoBehaviour
         if (chatSessions == null || chatSessions.Count == 0)
         {
             CreateNewSession();
+            noticeText.SetActive(true);
         }
         else
         {
             // Load the last session
             LoadSession(chatSessions[chatSessions.Count - 1]);
+            noticeText.SetActive(false);
+
         }
     }
 

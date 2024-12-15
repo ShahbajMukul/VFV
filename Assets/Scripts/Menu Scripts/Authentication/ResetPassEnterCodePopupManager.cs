@@ -4,20 +4,26 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 public class ResetPassEnterCodePopupManager : MonoBehaviour
 {
     public GameObject resetPassEnterCodePopup;
+    public InputField emailInput;
     public InputField recoveryCodeInput;
     public InputField passwordInput;
     public InputField confirmPasswordInput;
     public Text errorMessageText;
 
-    private string resetPasswordUrl = "https://storai.net/api/reset-pwd"; 
-
+    private string resetPasswordUrl = "https://storai.net/api/reset-pwd";
+    private string verifyCodeUrl = "https://storai.net/api/verify-code";
+    private string sessionFilePath;
 
     void Start()
     {
+        // Path for retriving session token
+        sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
+
         // Hide error message and panel at start
         HideErrorMessage();
     }
@@ -61,12 +67,55 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
         }
 
         Debug.Log("New Password Submit Button Clicked: Sending reset password request...");
-        StartCoroutine(ResetPassword(recoveryCodeInput.text, passwordInput.text));
+        StartCoroutine(VerifyResetCode(recoveryCodeInput.text));
     }
 
-    private IEnumerator ResetPassword(string resetCode, string newPassword)
+    private IEnumerator VerifyResetCode(string resetCode)
     {
-        string jsonData = $"{{\"resetCode\":\"{resetCode}\",\"newPassword\":\"{newPassword}\"}}";
+        string jsonData = $"{{\"email\":\"{emailInput.text}\",\"resetCode\":\"{resetCode}\"}}";
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
+
+        Debug.Log($"Sending verification request with email: {emailInput.text} and code: {resetCode}");
+
+        using (UnityWebRequest www = new UnityWebRequest(verifyCodeUrl, "POST"))
+        {
+            www.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            yield return www.SendWebRequest();
+
+            Debug.Log($"Server Response: {www.downloadHandler.text}");
+            Debug.Log($"Response Code: {www.responseCode}");
+
+            if (www.responseCode == 200)
+            {
+                var cookieHeader = www.GetResponseHeader("Set-Cookie");
+                Debug.Log($"Received cookie: {cookieHeader}");
+
+                if (!string.IsNullOrEmpty(cookieHeader))
+                {
+                    File.WriteAllText(sessionFilePath, cookieHeader);
+                    StartCoroutine(UpdatePassword(passwordInput.text));
+                }
+                else
+                {
+                    Debug.LogError("No session cookie received from server");
+                    ShowErrorMessage("Server error: No session established");
+                }
+            }
+            else
+            {
+                string errorMessage = www.downloadHandler.text;
+                Debug.LogError($"Verify code failed. Status: {www.responseCode}, Error: {errorMessage}");
+                ShowErrorMessage($"Verification failed: {errorMessage}");
+            }
+        }
+    }
+
+    private IEnumerator UpdatePassword(string newPassword)
+    {
+        string jsonData = $"{{\"newPassword\":\"{newPassword}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
 
         using (UnityWebRequest www = new UnityWebRequest(resetPasswordUrl, "POST"))
@@ -75,32 +124,24 @@ public class ResetPassEnterCodePopupManager : MonoBehaviour
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
-            // Adding Cookie header to retain the session
-            if (PlayerPrefs.HasKey("SessionCookie"))
+            if (File.Exists(sessionFilePath))
             {
-                string sessionCookie = PlayerPrefs.GetString("SessionCookie");
-                www.SetRequestHeader("Cookie", sessionCookie);
+                string sessionToken = File.ReadAllText(sessionFilePath);
+                www.SetRequestHeader("Cookie", sessionToken);
             }
 
-            Debug.Log("Sending reset password request with payload: " + jsonData);
             yield return www.SendWebRequest();
 
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.LogError("HTTP Error: " + www.error);
-                Debug.LogError("Server Response: " + www.downloadHandler.text);
-                ShowErrorMessage("Error: Not authorized. Please try again.");
-            }
-            else if (www.responseCode == 200)
+            if (www.responseCode == 200)
             {
                 Debug.Log("Password reset successful!");
-                ShowErrorMessage("Password reset successful!");
-                resetPassEnterCodePopup.SetActive(false);
+                ShowErrorMessage("Password reset successful! Please close this window and login with your username and password!");
+                File.Delete(sessionFilePath);
             }
             else
             {
-                Debug.LogWarning("Unexpected response: " + www.responseCode);
-                ShowErrorMessage($"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}");
+                Debug.LogError($"Password update failed: {www.downloadHandler.text}");
+                ShowErrorMessage("Failed to update password. Please try again.");
             }
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
+using System;
 
 public class ResetPassPopupManager : MonoBehaviour
 {
@@ -14,12 +16,14 @@ public class ResetPassPopupManager : MonoBehaviour
     public InputField emailInput;
     public UnityEngine.UI.Text errorMessageText;
 
-    private string resetPasswordUrl = "https://storai.net/api/forgot-password";
 
+    private string resetPasswordUrl = "https://storai.net/api/forgot-password";
+    private string sessionFilePath;
 
     void Start()
     {
-        
+        // Path for saving session token
+        sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
         HideErrorMessage();
     }
 
@@ -85,6 +89,59 @@ public class ResetPassPopupManager : MonoBehaviour
 
                 if (www.responseCode == 200)
                 {
+                    // Debug cookie headers
+                    Debug.Log("All response headers:");
+                    foreach (var header in www.GetResponseHeaders())
+                    {
+                        Debug.Log($"Header: {header.Key}: {header.Value}");
+                    }
+
+                    // Check for Set-Cookie header (case-insensitive)
+                    string cookieHeader = null;
+                    foreach (var header in www.GetResponseHeaders())
+                    {
+                        if (string.Equals(header.Key, "Set-Cookie", StringComparison.OrdinalIgnoreCase))
+                        {
+                            cookieHeader = header.Value;
+                            break;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(cookieHeader))
+                    {
+                        try
+                        {
+                            Debug.Log($"Attempting to save cookie to: {sessionFilePath}");
+                            // Ensure directory exists
+                            string directory = Path.GetDirectoryName(sessionFilePath);
+                            if (!Directory.Exists(directory))
+                            {
+                                Directory.CreateDirectory(directory);
+                            }
+
+                            // Extract connect.sid value
+                            var match = Regex.Match(cookieHeader, @"connect\.sid=([^;]+)");
+                            if (match.Success)
+                            {
+                                string sessionId = match.Groups[1].Value;
+                                File.WriteAllText(sessionFilePath, $"connect.sid={sessionId}");
+                                Debug.Log("Session cookie saved successfully");
+                            }
+                            else
+                            {
+                                Debug.LogError("Cookie format not recognized: " + cookieHeader);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogError($"Failed to save session cookie: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No Set-Cookie header found in response");
+                    }
+
                     if (www.downloadHandler.text.Contains("Reset code sent successfully"))
                     {
                         Debug.Log("Reset code sent successfully!");
@@ -142,7 +199,7 @@ public class ResetPassPopupManager : MonoBehaviour
         {
             resetPassPopup.SetActive(false);
         }
-        if (resetPassEnterCodePopup  != null)
+        if (resetPassEnterCodePopup != null)
         {
             resetPassEnterCodePopup.SetActive(false);
         }

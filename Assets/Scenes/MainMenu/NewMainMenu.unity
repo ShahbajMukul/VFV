@@ -689,8 +689,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 280332476}
   m_HandleRect: {fileID: 280332475}
   m_Direction: 0
-  m_Value: -0.10875038
-  m_Size: 0.9986013
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3323,7 +3323,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.99860144, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5370,6 +5370,7 @@ RectTransform:
   - {fileID: 933558219}
   - {fileID: 255040446}
   - {fileID: 2111127024}
+  - {fileID: 658086690}
   m_Father: {fileID: 1490319506}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5495,7 +5496,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1415039969}
   m_HandleRect: {fileID: 1415039968}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6186,8 +6187,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1874998945}
   m_HandleRect: {fileID: 1874998944}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6767,6 +6768,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652572052}
   m_CullTransparentMesh: 0
+--- !u!1 &658086687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 658086690}
+  - component: {fileID: 658086689}
+  - component: {fileID: 658086688}
+  m_Layer: 0
+  m_Name: noticeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &658086688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658086687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.97647065, g: 0.97647065, b: 0.97647065, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 50
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Please create a New Chat session first
+--- !u!222 &658086689
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658086687}
+  m_CullTransparentMesh: 0
+--- !u!224 &658086690
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658086687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 519863659}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 294.1, y: -482}
+  m_SizeDelta: {x: 871.9, y: 237.3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &673671595
 GameObject:
   m_ObjectHideFlags: 0
@@ -11127,7 +11205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 6
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -12389,7 +12467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.08715954, y: -0.00020721555}
+  m_AnchoredPosition: {x: -2, y: -0.00020721555}
   m_SizeDelta: {x: 572, y: 5}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1213367217
@@ -16034,6 +16112,7 @@ MonoBehaviour:
   sessionListContent: {fileID: 1213367215}
   sessionButtonPrefab: {fileID: 3294226451254981917, guid: f71bef4d39654194fb968e5628d88a01,
     type: 3}
+  noticeText: {fileID: 658086687}
 --- !u!114 &1490319519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16047,6 +16126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resetPassEnterCodePopup: {fileID: 2052229235}
+  emailInput: {fileID: 850309356}
   recoveryCodeInput: {fileID: 1843669823}
   passwordInput: {fileID: 1451856008}
   confirmPasswordInput: {fileID: 1451856008}
@@ -19515,7 +19595,7 @@ RectTransform:
   m_Father: {fileID: 1909132442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.00000011920929, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
