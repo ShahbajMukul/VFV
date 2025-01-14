@@ -21,9 +21,9 @@ public class Bookstore : MonoBehaviour
 {
     private bool bDebug = false;
     private bool bKeyboardUse = true;  // You must also disable Graphic Raycaster (Script) in BookStore.BookStoreCnvs
-    private enum enlist { BookList, SelectedBooks};
-    private enum enAction {Main, Purchase, Sell };
-    private enum enSection { ActionButtons, LeftBookList, RightBookList};
+    private enum enlist { BookList, SelectedBooks };
+    private enum enAction { Main, Purchase, Sell };
+    private enum enSection { ActionButtons, LeftBookList, RightBookList };
     private enum enScroll { UP, DOWN };
 
 
@@ -80,7 +80,7 @@ public class Bookstore : MonoBehaviour
     public ScrollRect ToBePurchasedScrollView;
     public ScrollRect ToBeSoldScrollView;
     private bool bHelpVisible = false;
- 
+
 
 
     void Start()
@@ -135,7 +135,8 @@ public class Bookstore : MonoBehaviour
                 List<Dropdown.OptionData> oOptions = null;
                 ScrollRect oScrollView = null;
 
-                if (Section == enSection.LeftBookList) {
+                if (Section == enSection.LeftBookList)
+                {
                     oContent = LeftContent;
                     oOptions = LeftOptions;
                     oScrollView = LeftScrollView;
@@ -168,7 +169,8 @@ public class Bookstore : MonoBehaviour
                                 Section = enSection.ActionButtons;
                             }
                             //  Move from the left list to the right if the right has visible books
-                            else if (Section == enSection.LeftBookList && (NewBookIndex = FindFirst(RightContent)) > -1) {
+                            else if (Section == enSection.LeftBookList && (NewBookIndex = FindFirst(RightContent)) > -1)
+                            {
                                 UnSetAllBooks(LeftContent);
                                 EnterBookButton(RightContent, FindFirst(RightContent), enSection.RightBookList);
                                 SelectedBookIndex = NewBookIndex;
@@ -187,7 +189,7 @@ public class Bookstore : MonoBehaviour
                             {
                                 // Disable the selected action button
                                 EventSystem.current.SetSelectedGameObject(null);
-                                EnterBookButton(RightContent, FindFirst(RightContent),enSection.RightBookList);
+                                EnterBookButton(RightContent, FindFirst(RightContent), enSection.RightBookList);
                                 SelectedBookIndex = NewBookIndex;
 
                                 // Bug, oScrollView not set
@@ -199,7 +201,7 @@ public class Bookstore : MonoBehaviour
                                 {
                                     ExitButton(LeftContent, SelectedBookIndex);
                                 }
-                                else if (Section == enSection.RightBookList) 
+                                else if (Section == enSection.RightBookList)
                                 {
                                     ExitButton(RightContent, SelectedBookIndex);
                                 }
@@ -211,7 +213,7 @@ public class Bookstore : MonoBehaviour
                         }
                     }
                 }
-                else if (Section == enSection.ActionButtons && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow )))
+                else if (Section == enSection.ActionButtons && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
                 {
                     if (EventSystem.current.currentSelectedGameObject.GetComponent<Button>() == btnBuySell)
                     {
@@ -248,7 +250,7 @@ public class Bookstore : MonoBehaviour
                         SoundEffect(.8f);
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow ) && Section == enSection.RightBookList)
+                else if (Input.GetKeyDown(KeyCode.LeftArrow) && Section == enSection.RightBookList)
                 {
                     MoveBookLeft(SelectedBookIndex);
 
@@ -287,7 +289,7 @@ public class Bookstore : MonoBehaviour
                     {
                         AdjustScrollBar(oScrollView, enScroll.DOWN);
                     }
-                }       
+                }
                 else if (Input.GetKeyDown(KeyCode.UpArrow) && SelectedBookIndex > 0 && (Section == enSection.LeftBookList || Section == enSection.RightBookList))
                 {
                     // Find a prior selectable button
@@ -307,7 +309,7 @@ public class Bookstore : MonoBehaviour
                         AdjustScrollBar(oScrollView, enScroll.UP);
                     }
                 }
-            }      
+            }
         }
     }
 
@@ -327,7 +329,7 @@ public class Bookstore : MonoBehaviour
         Vector3 positionInScroll = scrollTransform.InverseTransformPoint(positionInWord);
         float childMinY = positionInScroll.y + childTransform.rect.yMin;
         float childMaxY = positionInScroll.y + childTransform.rect.yMax;
-  
+
         float checkRectMinY = scrollTransform.rect.yMin - DistanceMarginForLoad;
         float checkRectMaxY = scrollTransform.rect.yMax + DistanceMarginForLoad;
 
@@ -341,7 +343,7 @@ public class Bookstore : MonoBehaviour
         // Scroll bar movement/size is determined by the visible children
         // 7 is the maximum number of items visible in the list (Should be calculated)
         float Adjustment = 1f / (CountVisible(p_oScrollView) - 7);
-        
+
         if (enScroll.UP == p_enDirection)
         {
             // If scrolling up, add the adjustment to the scrollbar
@@ -359,7 +361,7 @@ public class Bookstore : MonoBehaviour
     /*
      * Count the number of active items in the list
      * *** Used to determine the size of the scrollbar
-     */ 
+     */
     private int CountVisible(ScrollRect p_oScrollView)
     {
         int iVisible = 0;
@@ -379,7 +381,7 @@ public class Bookstore : MonoBehaviour
 
     /*
      * Find the first visible item in the content list
-     */ 
+     */
     private int FindFirst(GameObject p_oContents)
     {
         for (int i = 0; i < p_oContents.transform.childCount; i++)
@@ -389,7 +391,7 @@ public class Bookstore : MonoBehaviour
                 return i;
             }
         }
- 
+
         return -1;
     }
 
@@ -441,8 +443,8 @@ public class Bookstore : MonoBehaviour
      */
     private void HighlightItem(GameObject p_oContents, int p_iIndex)
     {
-        if (p_iIndex >= 0 && 
-            p_iIndex < p_oContents.transform.childCount && 
+        if (p_iIndex >= 0 &&
+            p_iIndex < p_oContents.transform.childCount &&
             p_oContents.transform.GetChild(p_iIndex).gameObject.GetComponent<Button>().IsActive())
         {
             SetItem(p_oContents, p_iIndex);
@@ -459,7 +461,7 @@ public class Bookstore : MonoBehaviour
         Section = enSection.LeftBookList;
         btnBuySell = GameObject.Find("btnAcceptPurchase").GetComponent<Button>();
         btnCancel = GameObject.Find("btnCancelPurchase").GetComponent<Button>();
- 
+
 
         // Items for list navigation
         LeftScrollView = UnOwnedBooksScrollView;
@@ -540,12 +542,12 @@ public class Bookstore : MonoBehaviour
                     book.bookStats = BookStoreItems[i].bookStoreStats;
                     book.isDefaultItem = false;
                     book.value = BookStoreItems[i].Cost;
-                    book.icon = Resources.Load<Sprite>(BookStoreItems[i].book );
-                    
+                    book.icon = Resources.Load<Sprite>(BookStoreItems[i].book);
+
                     book.Use_Dialogue = new string[5];
                     book.Use_Dialogue[0] = "#MULTI_START##INNER_DIALOGUE_BEGIN#I read the book...";
                     book.Use_Dialogue[1] = BookStoreItems[i].Title;
-                    book.Use_Dialogue[2] = "I feel a little bit smarter after reading it."+book.bookStats; //added by Don Murphy see Inventory_Item.cs
+                    book.Use_Dialogue[2] = "I feel a little bit smarter after reading it." + book.bookStats; //added by Don Murphy see Inventory_Item.cs
                     book.Use_Dialogue[3] = "#MULTI_END#This will help me reach my career goals!";
                     book.Use_Dialogue[4] = "You've already read this book";
                     book.details = BookStoreItems[i].Description;
@@ -589,7 +591,7 @@ public class Bookstore : MonoBehaviour
 
         // If the player has nothing to sell, the cancel key should be defaulted
 
-    
+
         ClearBooks(OwnedBooksContent, OwnedBooksOptions);
         ClearBooks(ToBeSoldContent, ToBeSoldOptions);
 
@@ -715,7 +717,7 @@ public class Bookstore : MonoBehaviour
      * The majority of the code is setting up listeners for the buttons that represent books.
      * This code is not currently utilized since the interface was changed to keyboard only.
      * It has been left in place incase we want to revert back to using a mouse.
-     */ 
+     */
     private void AddBooks(List<Dropdown.OptionData> p_oListbox, List<Dropdown.OptionData> p_oItems, GameObject p_oContent, bool p_bActive, bool p_bState, enlist p_enList, string p_sState)
     {
         foreach (var option in p_oItems)
@@ -726,7 +728,7 @@ public class Bookstore : MonoBehaviour
             copy.transform.localScale = Vector3.one;
 
             copy.SetActive(p_bActive);
-            if (p_sState.Contains(option.text+"~"))
+            if (p_sState.Contains(option.text + "~"))
             {
                 copy.SetActive(p_bState);
             }
@@ -776,7 +778,7 @@ public class Bookstore : MonoBehaviour
         }
     }
 
- 
+
     private void SelectBook(int p_iIndex)
     {
         SelectedBookIndex = p_iIndex;
@@ -1058,7 +1060,7 @@ public class Bookstore : MonoBehaviour
         bHelpVisible = true;
         BookPurchases.SetActive(false);
         BookstoreHelp.SetActive(true);
-        
+
         string helpMessage =
         "<margin=1em><br><b><u>Purchasing Books:</b></u><br><br>" +
         "<margin=2em>Highlighting a book in the “Book inventory” or “To be purchased” lists will display the details pertaining to that book.<br><br>" +
@@ -1113,27 +1115,85 @@ public class Bookstore : MonoBehaviour
     //Resources.Load<Sprite>("Assets/Sprites/Items/Book_1")
     public static BookStoreItem[] BS_Items =
     {
+            new BookStoreItem ("I Inc Career Planning",                           50f, "IT~HR~SE",    "Book_1", "Teaches students how to market themselves effectively in today's competitive professional environment.", "",BookStoreItem.Prof, "https://a.co/d/as3DdOi"),
+            new BookStoreItem ("Tiger in the Office",                             50f, "IT~HR~SE",    "Book_3",  "Using lessons developed by entrepreneurs, you will learn how to pursue your next career steps, rediscover buried career goals and learn to take action toward those goals.", "",BookStoreItem.Team, "https://a.co/d/ewTOUXC"),
+            new BookStoreItem("The Start-up of You", 50f, "IT~HR~SE", "Book_1", "A blueprint for thriving in your job and building a career by applying the lessons of Silicon Valley's most innovative entrepreneurs.", "", BookStoreItem.Lead, "https://a.co/d/5JARWDV"),
+            new BookStoreItem(
+                "The Entrepreneurial Mindset",
+                50f,
+                "IT~SE",
+                "Book_4",
+                "Explores strategies for developing an entrepreneurial mindset.",
+                "",
+                BookStoreItem.Crit,
+                "https://a.co/d/3Hzsp3u"
+            ),
+            new BookStoreItem(
+                "The 2-Hour Job Search",
+                50f,
+                "IT~HR~SE",
+                "Book_5",
+                "Provides a time-efficient approach to job searching.",
+                "",
+                BookStoreItem.Com,
+                "https://a.co/d/gom1iNn"
+            ),
+            new BookStoreItem(
+                "Mindset: The New Psychology of Success",
+                50f,
+                "IT~HR~SE",
+                "Book_6",
+                "Delves into the power of mindset in achieving success.",
+                "",
+                BookStoreItem.Crit,
+                "https://a.co/d/5x10eS0"
+            ),
+            new BookStoreItem ("Software Engineering: A Practitioner's Approach",                 60f, "SE",          "Book_1", "Covers the most essential basics of Software Engineering, including project management, determining measurables, reducing costs, and much more!", "", BookStoreItem.Lead, "https://a.co/d/gallFWT"),
+            new BookStoreItem(
+                "The C# Player's Guide (5th Edition)",
+                50f,
+                "IT~HR~SE",
+                "Book_7",
+                "An engaging guide that introduces readers to C# programming, covering fundamental concepts and practical applications.",
+                "",
+                BookStoreItem.Tech,
+                "https://www.amazon.com/C-Players-Guide-5th/dp/0985580151"
+            ),
+
+            new BookStoreItem(
+                "Pathways to Astronomy",
+                50f,
+                "IT~HR~SE",
+                "Book_8",
+                "An introductory astronomy textbook that breaks down the subject into 86 units, making it accessible for beginners.",
+                "",
+                BookStoreItem.Crit,
+                "https://www.amazon.com/Pathways-Astronomy-Stephen-Schneider/dp/1260258068"
+            ),
 
             new BookStoreItem ("What to Say and How to Say It!",                  50f, "SK",          "Book_1", "Communication Book to improve skill", "Dialog", BookStoreItem.Com, "https://a.co/d/54WDveM"),
             new BookStoreItem ("Brain Teasers",                                   50f, "SK",          "Book_3", "Critical Thinking Book to improve Skill", "", BookStoreItem.Crit, "https://a.co/d/ibAfIzJ"),
             new BookStoreItem ("Team Synergy",                                    20f, "HR",          "Book_1", "How to create Team Synergy while working with your employees, and  with their unique life experiences, perspectives, talents, and communication styles.", "",BookStoreItem.Team, "https://a.co/d/fhWKtiS"),
             new BookStoreItem ("Hiring Manager's Guide to Everything",            80f, "HR",          "Book_3", "This book covers a basic overview of the kinds of things that a Hiring Manager would need to know, such as conducting job analysis, planning a recruiting strategy, prescreening candidates, and asking the right questions.", "",BookStoreItem.Lead, "https://a.co/d/cVc9m1h"),
-            new BookStoreItem ("Principles of Management",                        60f, "IT~HR~SE",    "Book_1", "A guide to Fayol's Principles of Management. It talks about concepts such as the 14 Principles of Management and the 5 Functions of Management: planning, organizing, staffing, leading, and controlling.", "",BookStoreItem.Lead, "https://a.co/d/03ySyBR"),
-            new BookStoreItem ("Employment Laws",                                 40f, "HR",          "Book_3", "Discusses previous and current employment laws, including in-depth discussions of The Fair Labor Standards Act, Occupational Safety and Health (OSHA) Laws, Worker's Compensation, and other benefits.", "",BookStoreItem.Prof, "https://a.co/d/239sCB9"),
-            new BookStoreItem ("CompTia A plus Certification Prep Questions",     80f, "IT~SE",       "Book_1", "An in-depth guide to the A+ Certification exams, with troubleshooting steps and previous exam examples.", "",BookStoreItem.Tech, "https://a.co/d/iFw5vcX"),
+
+            new BookStoreItem ("Guide to Federal Employment Laws", 40f, "HR",          "Book_3", "This book explains the 20 most important federal employment laws that come up in the workplace.", "",BookStoreItem.Prof, "https://a.co/d/239sCB9"),
+            new BookStoreItem ("CompTIA A+ Certification Guide",     80f, "IT~SE",       "Book_1", "An in-depth guide to the A+ Certification exams, with troubleshooting steps and previous exam examples.", "",BookStoreItem.Tech, "https://a.co/d/iFw5vcX"),
             new BookStoreItem ("Intro to Hardware",                               40f, "IT",          "Book_3", "An overview of the hardware components in a typical consumer computer, including troubleshooting and installation guides. ", "",BookStoreItem.Tech, "https://a.co/d/0bp9Dhn"),
-            new BookStoreItem ("Troubleshooting 101",                             20f, "IT",          "Book_1", "How to troubleshoot anything! Mostly applies to computers and other electronics, but also teaches you troubleshooting as a way of problem solving.", "",BookStoreItem.Tech, "https://a.co/d/0YTxQz8"),
-            new BookStoreItem ("Guide to Networking",                             60f, "IT",          "Book_3", "This book covers the basics of networking, such as types of networks, wiring techniques, and networking devices.", "",BookStoreItem.Tech, "https://a.co/d/4IsQTJn"),
-            new BookStoreItem ("How to Be a Better Leader",                       50f, "SK",          "Book_1", "Professionalism Book to improve skill", "",BookStoreItem.Prof, "https://a.co/d/fZRTqx9"),
-            new BookStoreItem ("Intro to Python",                                  20f, "SE",          "Book_3", "A basic overview of the Python programming language, with Pi-specific projects as well as programming basics to get you programming fast!", "",BookStoreItem.Tech, "https://a.co/d/ejEShRg"),
-            new BookStoreItem ("Software Engineering Principles",                 60f, "SE",          "Book_1", "Covers the most essential basics of Software Engineering, including project management, determining measurables, reducing costs, and much more!", "", BookStoreItem.Lead, "https://a.co/d/5REc6Fw"),
-            new BookStoreItem ("Debugging 101",                                   40f, "SE",          "Book_3", "A brief guide to stepping through your code. Covers the features of most built-in debuggers for many different programming environments!", "", BookStoreItem.Tech, "https://a.co/d/5uiRwe2"),
-            new BookStoreItem ("Game Design",                                     80f, "SE",          "Book_1", "A great introductory book on the concepts of game design, including planning, level design, finding a team, and much more!", "",BookStoreItem.Tech, "https://a.co/d/cmNkSgu"),
-            new BookStoreItem ("Working in a Team",                               50f, "SK",          "Book_3", "Teamwork Book to improve skill", "", BookStoreItem.Team, "https://a.co/d/3vPbxaq"),
-            new BookStoreItem ("Microswift Office for Dummies",                   50f, "SK",          "Book_1", "Technology Book to improve skill", "",BookStoreItem.Tech, "https://a.co/d/28InqS6"),
-            new BookStoreItem ("Principles of Engineering",                       50f, "SE",          "Book_3", "", "",BookStoreItem.Crit, "https://a.co/d/hjhchkC"),
-            new BookStoreItem ("I Inc Career Planning",                           50f, "IT~HR~SE",    "Book_1", "Teaches students how to market themselves effectively in today's competitive professional environment.", "",BookStoreItem.Prof, "https://a.co/d/as3DdOi"),
-            new BookStoreItem ("Tiger in the Office",                             50f, "IT~HR~SE",    "Book_3",  "Using lessons developed by entrepreneurs, you will learn how to pursue your next career steps, rediscover buried career goals and learn to take action toward those goals.", "",BookStoreItem.Prof, "https://a.co/d/ewTOUXC")
+            new BookStoreItem ("Troubleshooting for Dummies",                             20f, "IT",          "Book_1", "How to troubleshoot anything! Mostly applies to computers and other electronics, but also teaches you troubleshooting as a way of problem solving.", "",BookStoreItem.Tech, "https://a.co/d/0YTxQz8"),
+
+            new BookStoreItem ("Python for Beginners",                                  20f, "SE",          "Book_3", "A basic overview of the Python programming language, with Pi-specific projects as well as programming basics to get you programming fast!", "",BookStoreItem.Tech, "https://a.co/d/ejEShRg"),
+
+            new BookStoreItem ("Working in a Teams",                               50f, "SK",          "Book_3", "Teamwork Book to improve skill", "", BookStoreItem.Team, "https://a.co/d/3vPbxaq"),
+            //new BookStoreItem ("Debugging 101",                                   40f, "SE",          "Book_3", "A brief guide to stepping through your code. Covers the features of most built-in debuggers for many different programming environments!", "", BookStoreItem.Tech, "https://a.co/d/5uiRwe2"),
+            //new BookStoreItem ("Game Design",                                     80f, "SE",          "Book_1", "A great introductory book on the concepts of game design, including planning, level design, finding a team, and much more!", "",BookStoreItem.Tech, "https://a.co/d/cmNkSgu"),
+
+
+
+             //new BookStoreItem ("Guide to Networking",                             60f, "IT",          "Book_3", "This book covers the basics of networking, such as types of networks, wiring techniques, and networking devices.", "",BookStoreItem.Tech, "https://a.co/d/4IsQTJn"),
+            //new BookStoreItem ("How to Be a Better Leader",                       50f, "SK",          "Book_1", "Professionalism Book to improve skill", "",BookStoreItem.Prof, "https://a.co/d/fZRTqx9"),
+            //new BookStoreItem ("Principles of Management",                        60f, "IT~HR~SE",    "Book_1", "A guide to Fayol's Principles of Management. It talks about concepts such as the 14 Principles of Management and the 5 Functions of Management: planning, organizing, staffing, leading, and controlling.", "",BookStoreItem.Lead, "https://a.co/d/03ySyBR"),
+            //new BookStoreItem ("Microswift Office for Dummies",                   50f, "SK",          "Book_1", "Technology Book to improve skill", "",BookStoreItem.Tech, "https://a.co/d/28InqS6"),
+            //new BookStoreItem ("Principles of Engineering",                       50f, "SE",          "Book_3", "", "",BookStoreItem.Crit, "https://a.co/d/hjhchkC")
     };
 }
 
@@ -1155,7 +1215,7 @@ public class BookStoreItem
     public static readonly string Team = "#INCREASE#*Team* +1 to Teamwork!";
     public static readonly string Tech = "#INCREASE#*Tech* +1 to Technology!";
     public static readonly string Prof = "#INCREASE#*Prof* +1 to Professionalism!";
-    public static readonly string Com =  "#INCREASE#*Com* +1 to Communication!";
+    public static readonly string Com = "#INCREASE#*Com* +1 to Communication!";
     public static readonly string Crit = "#INCREASE#*Crit* +1 to Critical Thinking!";
     //end
 
