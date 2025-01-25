@@ -8,6 +8,7 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
+    public GameObject reqRegistrationCodePopup;
     public InputField emailInput;
     public InputField usernameInput;
     public InputField passwordInput;
@@ -17,14 +18,15 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button ChatbotButton;
     public Button MenuLoginButton;
 
-
+    // replace with local urls for development.
+    // API #1 from the drawing not needed. use the new api endpoint: /api/register-optional
     private string registrationUrl = "https://storai.net/api/register";
 
 
     void Start()
     {
         // show LoginPanel by default (done)
-        HideErrorMessage();
+       // HideErrorMessage();
     }
 
     public void ShowRegistrationPopup()
@@ -52,8 +54,8 @@ public class RegistrationPopupManager : MonoBehaviour
         if (string.IsNullOrEmpty(emailInput.text) ||
             string.IsNullOrEmpty(usernameInput.text) ||
             string.IsNullOrEmpty(passwordInput.text) ||
-            string.IsNullOrEmpty(confirmPasswordInput.text) ||
-            string.IsNullOrEmpty(registrationCodeInput.text))
+            string.IsNullOrEmpty(confirmPasswordInput.text)) 
+            // || string.IsNullOrEmpty(registrationCodeInput.text))  optional
         {
             ShowErrorMessage("All fields must be filled!");
             return;
@@ -77,10 +79,13 @@ public class RegistrationPopupManager : MonoBehaviour
         StartCoroutine(RegisterUser(emailInput.text, usernameInput.text, passwordInput.text, registrationCodeInput.text));
     }
 
+    // todo: make the registrationCode optional
     private IEnumerator RegisterUser(string email, string username, string password, string registrationCode)
     {
         string jsonData = $"{{\"email\":\"{email}\",\"username\":\"{username}\",\"password\":\"{password}\",\"secretCode\":\"{registrationCode}\"}}";
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
+
+        // the new API can handle optional registration/ secretCode. So we dont need to make two different API calls, if the secretCode exists, send it with the payload, if it doesn't dont send it. API endpoint: /api/register-optional
 
         using (UnityWebRequest www = new UnityWebRequest(registrationUrl, "POST"))
         {
@@ -110,7 +115,9 @@ public class RegistrationPopupManager : MonoBehaviour
                     //// ToDo: Save user info in game so that they don't have to relogin everytime
                     Debug.Log("Registration successful!");
                     CloseRegistrationPopup();
-                    ShowLoginPopup();
+                    // if responnds with isActive = true, ShowLoginPopup, else ShowReqRegistrationCodePopup();
+                    // ShowLoginPopup();
+                    // ShowReqRegistrationCodePopup();
                 }
                 else
                 {
@@ -154,6 +161,20 @@ public class RegistrationPopupManager : MonoBehaviour
         if (loginPopup != null)
         {
             loginPopup.SetActive(true);
+        }
+    }
+
+    public void ShowReqRegistrationCodePopup()
+    {
+        if (registrationPopup != null)
+        {
+            registrationPopup.SetActive(false);
+        }
+
+        // Open login popup
+        if (loginPopup != null)
+        {
+            reqRegistrationCodePopup.SetActive(true);
         }
     }
 
