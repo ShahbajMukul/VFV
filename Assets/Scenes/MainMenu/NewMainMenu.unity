@@ -1836,7 +1836,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
+      - m_Target: {fileID: 1490319521}
         m_MethodName: ShowLoginPopup
         m_Mode: 1
         m_Arguments:
@@ -9232,8 +9232,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
-        m_MethodName: OnResetButtonClicked
+      - m_Target: {fileID: 1490319521}
+        m_MethodName: OnReqButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13240,8 +13240,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
-        m_MethodName: CloseResetPassPopup
+      - m_Target: {fileID: 1490319521}
+        m_MethodName: CloseReqRegiPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16466,8 +16466,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
-        m_MethodName: CloseResetPassPopup
+      - m_Target: {fileID: 1490319521}
+        m_MethodName: CloseReqRegiPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17769,7 +17769,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
+      - m_Target: {fileID: 1490319521}
         m_MethodName: ShowRegiPopup
         m_Mode: 1
         m_Arguments:
