@@ -18,44 +18,35 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button ChatbotButton;
     public Button MenuLoginButton;
 
-    // replace with local urls for development.
-    // API #1 from the drawing not needed. use the new api endpoint: /api/register-optional
-    private string registrationUrl = "https://storai.net/api/register";
-
+    private string registrationUrl = "http://localhost:3000/api/register-optional";
 
     void Start()
     {
-        // show LoginPanel by default (done)
-       // HideErrorMessage();
+        // Show LoginPanel by default
+        // HideErrorMessage();
     }
 
     public void ShowRegistrationPopup()
     {
-
-        // Close other popups if open
         if (loginPopup != null)
         {
             loginPopup.SetActive(false);
         }
 
-        // Show registration popup
         if (registrationPopup != null)
         {
             registrationPopup.SetActive(true);
         }
-        // Hide error message and panel at start
+
         HideErrorMessage();
     }
 
     public void OnRegisterButtonClicked()
     {
-
-
         if (string.IsNullOrEmpty(emailInput.text) ||
             string.IsNullOrEmpty(usernameInput.text) ||
             string.IsNullOrEmpty(passwordInput.text) ||
-            string.IsNullOrEmpty(confirmPasswordInput.text)) 
-            // || string.IsNullOrEmpty(registrationCodeInput.text))  optional
+            string.IsNullOrEmpty(confirmPasswordInput.text))
         {
             ShowErrorMessage("All fields must be filled!");
             return;
@@ -79,13 +70,24 @@ public class RegistrationPopupManager : MonoBehaviour
         StartCoroutine(RegisterUser(emailInput.text, usernameInput.text, passwordInput.text, registrationCodeInput.text));
     }
 
-    // todo: make the registrationCode optional
     private IEnumerator RegisterUser(string email, string username, string password, string registrationCode)
     {
-        string jsonData = $"{{\"email\":\"{email}\",\"username\":\"{username}\",\"password\":\"{password}\",\"secretCode\":\"{registrationCode}\"}}";
-        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
+        // Build JSON payload dynamically to exclude optional fields
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.Append("{");
+        jsonBuilder.Append($"\"email\":\"{email}\",");
+        jsonBuilder.Append($"\"username\":\"{username}\",");
+        jsonBuilder.Append($"\"password\":\"{password}\"");
 
-        // the new API can handle optional registration/ secretCode. So we dont need to make two different API calls, if the secretCode exists, send it with the payload, if it doesn't dont send it. API endpoint: /api/register-optional
+        if (!string.IsNullOrEmpty(registrationCode))
+        {
+            jsonBuilder.Append($",\"secretCode\":\"{registrationCode}\"");
+        }
+
+        jsonBuilder.Append("}");
+        string jsonData = jsonBuilder.ToString();
+
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonData);
 
         using (UnityWebRequest www = new UnityWebRequest(registrationUrl, "POST"))
         {
@@ -112,12 +114,18 @@ public class RegistrationPopupManager : MonoBehaviour
 
                 if (www.responseCode == 201)
                 {
-                    //// ToDo: Save user info in game so that they don't have to relogin everytime
                     Debug.Log("Registration successful!");
                     CloseRegistrationPopup();
-                    // if responnds with isActive = true, ShowLoginPopup, else ShowReqRegistrationCodePopup();
-                    // ShowLoginPopup();
-                    // ShowReqRegistrationCodePopup();
+
+                    var response = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
+                    if (response.isActive)
+                    {
+                        ShowLoginPopup();
+                    }
+                    else
+                    {
+                        ShowReqRegistrationCodePopup();
+                    }
                 }
                 else
                 {
@@ -132,7 +140,7 @@ public class RegistrationPopupManager : MonoBehaviour
     {
         if (ChatbotButton != null)
         {
-            ChatbotButton.interactable = false;  // Disable the chatbot button
+            ChatbotButton.interactable = false;
         }
         MenuLoginButton?.gameObject.SetActive(true);
         CloseRegistrationPopup();
@@ -150,14 +158,11 @@ public class RegistrationPopupManager : MonoBehaviour
 
     public void ShowLoginPopup()
     {
-
-        // Close registration popup
         if (registrationPopup != null)
         {
             registrationPopup.SetActive(false);
         }
 
-        // Open login popup
         if (loginPopup != null)
         {
             loginPopup.SetActive(true);
@@ -171,8 +176,7 @@ public class RegistrationPopupManager : MonoBehaviour
             registrationPopup.SetActive(false);
         }
 
-        // Open login popup
-        if (loginPopup != null)
+        if (reqRegistrationCodePopup != null)
         {
             reqRegistrationCodePopup.SetActive(true);
         }
@@ -196,17 +200,20 @@ public class RegistrationPopupManager : MonoBehaviour
         return password.Length >= 8 && hasUpperCase && hasLowerCase && hasDigits && hasSpecialChar;
     }
 
-
     private void ShowErrorMessage(string message)
     {
         errorMessageText.text = message;
         errorMessageText.gameObject.SetActive(true);
-
     }
 
     private void HideErrorMessage()
     {
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
+    }
+
+    private class RegistrationResponse
+    {
+        public bool isActive;
     }
 }
