@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Text;
+using System.IO;
 
 public class RegistrationPopupManager : MonoBehaviour
 {
@@ -19,11 +20,27 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button MenuLoginButton;
 
     private string registrationUrl = "http://localhost:3000/api/register-optional";
+    private string sessionTokenFilePath;
 
     void Start()
     {
         // Show LoginPanel by default
         // HideErrorMessage();
+        // Set the file path for saving the session token
+        sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
+
+        // Check if a session token exists
+        string savedSessionToken = LoadSessionToken();
+        if (!string.IsNullOrEmpty(savedSessionToken))
+        {
+            Debug.Log("Session token found, redirecting to Request Code UI.");
+            ShowReqRegistrationCodePopup();
+        }
+        else
+        {
+            Debug.Log("No session token found, showing registration UI.");
+            ShowRegistrationPopup();
+        }
     }
 
     public void ShowRegistrationPopup()
@@ -38,7 +55,7 @@ public class RegistrationPopupManager : MonoBehaviour
             registrationPopup.SetActive(true);
         }
 
-        HideErrorMessage();
+        //HideErrorMessage();
     }
 
     public void OnRegisterButtonClicked()
@@ -118,12 +135,15 @@ public class RegistrationPopupManager : MonoBehaviour
                     CloseRegistrationPopup();
 
                     var response = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
+
                     if (response.isActive)
                     {
                         ShowLoginPopup();
                     }
                     else
                     {
+                        Debug.Log("User is inactive. Saving session token for future validation.");
+                        SaveSessionToken(response.sessionToken); // Save session token for inactive users
                         ShowReqRegistrationCodePopup();
                     }
                 }
@@ -133,6 +153,42 @@ public class RegistrationPopupManager : MonoBehaviour
                     ShowErrorMessage($"Unexpected response from server: {www.responseCode} - {www.downloadHandler.text}");
                 }
             }
+        }
+    }
+
+    private void SaveSessionToken(string sessionToken)
+    {
+        try
+        {
+            File.WriteAllText(sessionTokenFilePath, sessionToken);
+            Debug.Log("Session token saved successfully to: " + sessionTokenFilePath);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error saving session token: " + ex.Message);
+        }
+    }
+
+    private string LoadSessionToken()
+    {
+        try
+        {
+            if (File.Exists(sessionTokenFilePath))
+            {
+                string token = File.ReadAllText(sessionTokenFilePath);
+                Debug.Log("Session token loaded successfully: " + token);
+                return token;
+            }
+            else
+            {
+                Debug.LogWarning("Session token file does not exist.");
+                return null;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error loading session token: " + ex.Message);
+            return null;
         }
     }
 
@@ -215,5 +271,6 @@ public class RegistrationPopupManager : MonoBehaviour
     private class RegistrationResponse
     {
         public bool isActive;
+        public string sessionToken; // Added field for session token
     }
 }
