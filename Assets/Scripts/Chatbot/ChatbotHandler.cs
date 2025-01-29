@@ -25,9 +25,7 @@ public class ChatbotHandler : MonoBehaviour
             string sessionToken = File.ReadAllText(sessionFilePath);
             if (string.IsNullOrEmpty(sessionToken) == false)
             {
-                UnityEngine.Debug.Log("Stored session token found. Skipping login...");
-                
-                
+                Debug.Log("Stored session token found. Skipping login...");
             }
             else
             {
@@ -42,7 +40,16 @@ public class ChatbotHandler : MonoBehaviour
             }
         }
 
-
+        string loggedInUsername = PlayerPrefs.GetString("LoggedInUsername", string.Empty);
+        // hide the button if the user is not logged in
+        if (!string.IsNullOrEmpty(loggedInUsername))
+        {
+            ShowAskChatbotButton();
+        }
+        else
+        {
+            HideAskChatbotButton();
+        }
     }
 
 

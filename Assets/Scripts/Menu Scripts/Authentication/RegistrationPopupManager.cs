@@ -29,6 +29,9 @@ public class RegistrationPopupManager : MonoBehaviour
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
+        // ToDo: Abdullah, this is now conflicting with the login popup when the game first launches.
+        // Implement a method or flag so only one or the other shows up rather than overlapping.
+
         // Check if a session token exists
         string savedSessionToken = LoadSessionToken();
         if (!string.IsNullOrEmpty(savedSessionToken))
@@ -129,7 +132,7 @@ public class RegistrationPopupManager : MonoBehaviour
             {
                 Debug.Log("Server connected successfully! Response: " + www.downloadHandler.text);
 
-                if (www.responseCode == 201)
+                if (www.responseCode == 201 || www.responseCode == 200)
                 {
                     Debug.Log("Registration successful!");
                     CloseRegistrationPopup();

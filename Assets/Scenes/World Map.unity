@@ -3228,6 +3228,7 @@ MonoBehaviour:
   sessionListContent: {fileID: 28968304}
   sessionButtonPrefab: {fileID: 3294226451254981917, guid: f71bef4d39654194fb968e5628d88a01,
     type: 3}
+  noticeText: {fileID: 0}
 --- !u!114 &69211212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4280,7 +4281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1096155.9}
+  m_AnchoredPosition: {x: 0, y: -1096277.8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &112026564
@@ -92558,7 +92559,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 694126392}
   m_HandleRect: {fileID: 694126391}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -121061,7 +121062,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4202066604935689632}
   m_HandleRect: {fileID: 4202066604935689635}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
