@@ -24,43 +24,59 @@ public class RegistrationPopupManager : MonoBehaviour
 
     void Start()
     {
-        // Show LoginPanel by default
-        // HideErrorMessage();
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
-        // ToDo: Abdullah, this is now conflicting with the login popup when the game first launches.
-        // Implement a method or flag so only one or the other shows up rather than overlapping.
-
         // Check if a session token exists
         string savedSessionToken = LoadSessionToken();
+
+        // Show the appropriate UI panel
         if (!string.IsNullOrEmpty(savedSessionToken))
         {
             Debug.Log("Session token found, redirecting to Request Code UI.");
-            ShowReqRegistrationCodePopup();
+            ActivateUIPanel(reqRegistrationCodePopup);
         }
         else
         {
-            Debug.Log("No session token found, showing registration UI.");
-            ShowRegistrationPopup();
+            Debug.Log("No session token found, showing Login UI.");
+            ActivateUIPanel(loginPopup);
         }
+    }
+
+    private void ActivateUIPanel(GameObject targetPanel)
+    {
+        // Deactivate all panels to prevent overlap
+        DeactivateAllPanels();
+
+        // Activate the target panel
+        if (targetPanel != null)
+        {
+            targetPanel.SetActive(true);
+        }
+    }
+
+    private void DeactivateAllPanels()
+    {
+        // Deactivate all UI panels to ensure no overlap
+        if (registrationPopup != null) registrationPopup.SetActive(false);
+        if (loginPopup != null) loginPopup.SetActive(false);
+        if (reqRegistrationCodePopup != null) reqRegistrationCodePopup.SetActive(false);
     }
 
     public void ShowRegistrationPopup()
     {
-        if (loginPopup != null)
-        {
-            loginPopup.SetActive(false);
-        }
-
-        if (registrationPopup != null)
-        {
-            registrationPopup.SetActive(true);
-        }
-
-        //HideErrorMessage();
+        ActivateUIPanel(registrationPopup);
     }
 
+    public void ShowLoginPopup()
+    {
+        ActivateUIPanel(loginPopup);
+    }
+
+    public void ShowReqRegistrationCodePopup()
+    {
+        ActivateUIPanel(reqRegistrationCodePopup);
+    }
     public void OnRegisterButtonClicked()
     {
         if (string.IsNullOrEmpty(emailInput.text) ||
@@ -147,7 +163,7 @@ public class RegistrationPopupManager : MonoBehaviour
                     {
                         Debug.Log("User is inactive. Saving session token for future validation.");
                         SaveSessionToken(response.sessionToken); // Save session token for inactive users
-                        ShowReqRegistrationCodePopup();
+                        ShowRegistrationPopup();
                     }
                 }
                 else
@@ -212,32 +228,6 @@ public class RegistrationPopupManager : MonoBehaviour
         if (registrationPopup != null)
         {
             registrationPopup.SetActive(false);
-        }
-    }
-
-    public void ShowLoginPopup()
-    {
-        if (registrationPopup != null)
-        {
-            registrationPopup.SetActive(false);
-        }
-
-        if (loginPopup != null)
-        {
-            loginPopup.SetActive(true);
-        }
-    }
-
-    public void ShowReqRegistrationCodePopup()
-    {
-        if (registrationPopup != null)
-        {
-            registrationPopup.SetActive(false);
-        }
-
-        if (reqRegistrationCodePopup != null)
-        {
-            reqRegistrationCodePopup.SetActive(true);
         }
     }
 
