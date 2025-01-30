@@ -30,7 +30,6 @@ public class RegistrationPopupManager : MonoBehaviour
         // Check if a session token exists
         string savedSessionToken = LoadSessionToken();
 
-        // Show the appropriate UI panel
         if (!string.IsNullOrEmpty(savedSessionToken))
         {
             Debug.Log("Session token found, redirecting to Request Code UI.");
@@ -45,7 +44,6 @@ public class RegistrationPopupManager : MonoBehaviour
 
     private void ActivateUIPanel(GameObject targetPanel)
     {
-        // Deactivate all panels to prevent overlap
         DeactivateAllPanels();
 
         // Activate the target panel
@@ -57,11 +55,12 @@ public class RegistrationPopupManager : MonoBehaviour
 
     private void DeactivateAllPanels()
     {
-        // Deactivate all UI panels to ensure no overlap
+        Debug.Log("Deactivating all panels.");
         if (registrationPopup != null) registrationPopup.SetActive(false);
         if (loginPopup != null) loginPopup.SetActive(false);
         if (reqRegistrationCodePopup != null) reqRegistrationCodePopup.SetActive(false);
     }
+
 
     public void ShowRegistrationPopup()
     {
@@ -70,7 +69,10 @@ public class RegistrationPopupManager : MonoBehaviour
 
     public void ShowLoginPopup()
     {
-        ActivateUIPanel(loginPopup);
+        loginPopup.SetActive(true);
+        registrationPopup.SetActive(false);
+        reqRegistrationCodePopup.SetActive(false);
+
     }
 
     public void ShowReqRegistrationCodePopup()
@@ -154,6 +156,7 @@ public class RegistrationPopupManager : MonoBehaviour
                     CloseRegistrationPopup();
 
                     var response = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
+                    Debug.Log("User active status: " + response.isActive);
 
                     if (response.isActive)
                     {
@@ -162,8 +165,8 @@ public class RegistrationPopupManager : MonoBehaviour
                     else
                     {
                         Debug.Log("User is inactive. Saving session token for future validation.");
-                        SaveSessionToken(response.sessionToken); // Save session token for inactive users
-                        ShowRegistrationPopup();
+                        SaveSessionToken(response.sessionToken);
+                        ShowReqRegistrationCodePopup();
                     }
                 }
                 else

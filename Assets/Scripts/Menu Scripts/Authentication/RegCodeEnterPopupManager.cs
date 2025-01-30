@@ -45,10 +45,7 @@ public class RegCodeEnterPopupManager : MonoBehaviour
 
     private IEnumerator ActivateAccount(string code)
     {
-        // Create the JSON payload
         string jsonPayload = JsonUtility.ToJson(new RequestPayload { code = code });
-        Debug.Log("Payload: " + jsonPayload);
-
         using (UnityWebRequest www = new UnityWebRequest(regCodeEnterUrl, "POST"))
         {
             byte[] jsonToSend = Encoding.UTF8.GetBytes(jsonPayload);
@@ -56,38 +53,40 @@ public class RegCodeEnterPopupManager : MonoBehaviour
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
-            // Send the request
             yield return www.SendWebRequest();
 
-            // Handle the response
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.LogError("HTTP Error: " + www.error);
-                Debug.LogError("Response: " + www.downloadHandler.text);
-                errorMessageText.text = "An error occurred. Please check your code or try logging in again.";
+                errorMessageText.text = "An error occurred: " + www.error;
             }
             else
             {
                 Debug.Log("Response: " + www.downloadHandler.text);
-
-                // Parse the response
                 var response = JsonUtility.FromJson<ResponseData>(www.downloadHandler.text);
 
                 if (response.active)
                 {
-                    Debug.Log("Activation successful.");
+                    Debug.Log("Activation successful with User ID: " + response.userId);
                     errorMessageText.text = "Activation successful! StorAI is now enabled.";
-                    SaveSession(response.username);
+                    SaveSession(response.userId); // Save the user ID returned from the server
                     ActivateChatbot();
                     CloseRegiCodeEnterPopup();
                 }
                 else
                 {
-                    Debug.LogWarning("Activation failed: " + response.message);
-                    errorMessageText.text = "Invalid registration code. Please check and try again.";
+                    errorMessageText.text = "Invalid registration code: " + response.message;
                 }
             }
         }
+    }
+
+    [System.Serializable]
+    private class ResponseData
+    {
+        public string message;
+        public bool active;
+        public string userId;
     }
 
     private void SaveSession(string username)
@@ -126,13 +125,5 @@ public class RegCodeEnterPopupManager : MonoBehaviour
     private class RequestPayload
     {
         public string code;
-    }
-
-    [System.Serializable]
-    private class ResponseData
-    {
-        public string message;
-        public bool active;
-        public string username;
     }
 }
