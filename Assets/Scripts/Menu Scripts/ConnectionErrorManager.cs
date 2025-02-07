@@ -22,7 +22,7 @@ public class ConnectionErrorManager : MonoBehaviour
     IEnumerator CheckConnectionToServer()
     {
         // This will result in 'loggedIn: false' but we are just checking if we can connect to the server. so it doesn't matter
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://localhost:3000/api/check-session"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("https://storai.net/api/check-session"))
         {
             // Timeout 3 seconds
             webRequest.timeout = 3;

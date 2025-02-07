@@ -9525,8 +9525,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319521}
-        m_MethodName: OnReqButtonClicked
+      - m_Target: {fileID: 1490319503}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13549,7 +13549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1166997694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18022,7 +18022,7 @@ MonoBehaviour:
   ReqButton: {fileID: 843649306}
   CtnuWOButton: {fileID: 1474213900}
   openRegCodeEnterButton: {fileID: 1136035043}
-  panelLoginButton: {fileID: 0}
+  panelLoginButton: {fileID: 1788693542}
   registrationPopup: {fileID: 2130388032}
   loginPopup: {fileID: 164561759}
   reqRegiPopup: {fileID: 1166997693}
