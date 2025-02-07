@@ -32,7 +32,7 @@ public class RegistrationPopupManager : MonoBehaviour
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
-        
+
         SessionData sessionData = LoadSessionData();
 
         if (sessionData != null && !string.IsNullOrEmpty(sessionData.sessionToken))

@@ -86,7 +86,7 @@ public class RegCodeEnterPopupManager : MonoBehaviour
                 else
                 {
                     Debug.LogError(www.error);
-                   errorMessageText.text = "An error occurred. Please try again later."; // Generic error for other HTTP errors
+                    errorMessageText.text = "An error occurred. Please try again later."; // Generic error for other HTTP errors
                 }
             }
             else
