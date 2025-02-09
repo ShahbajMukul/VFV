@@ -8,6 +8,7 @@ public class TitleMenu : MonoBehaviour
 {
     public GameObject fullscreenToggle;
     public GameObject optionsPanel;
+    public GameObject creditsPanel;
 
     private void Start() {
         // Minimizing the Options Panel
@@ -55,10 +56,12 @@ public class TitleMenu : MonoBehaviour
         Screen.fullScreen = !Screen.fullScreen;
     }
     public void ShowCredits() {
-        GameObject.Find("CreditsPanel").transform.localScale = new Vector3(3, 3, 1);
+        //GameObject.Find("CreditsPanel").transform.localScale = new Vector3(3, 3, 1);
+        creditsPanel.SetActive(true);
     }
     public void HideCredits() {
-        GameObject.Find("CreditsPanel").transform.localScale = new Vector3(0, 0, 0);
+        //GameObject.Find("CreditsPanel").transform.localScale = new Vector3(0, 0, 0);
+        creditsPanel.SetActive(false);
     }
     public void ShowAIBanner()
     {
