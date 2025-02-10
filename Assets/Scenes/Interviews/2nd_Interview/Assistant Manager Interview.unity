@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
@@ -291,7 +291,7 @@ RectTransform:
   - {fileID: 1257868397}
   - {fileID: 1507106346}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -581,6 +581,7 @@ MonoBehaviour:
   complete_fade_event:
     m_PersistentCalls:
       m_Calls: []
+  taxiButton: {fileID: 0}
 --- !u!114 &245749622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +650,7 @@ RectTransform:
   m_Children:
   - {fileID: 2993214822240774591}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -809,7 +810,7 @@ RectTransform:
   - {fileID: 292262258}
   - {fileID: 1037941550}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1147,7 +1148,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 421070168}
   m_HandleRect: {fileID: 421070167}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1288,7 +1289,7 @@ RectTransform:
   m_Children:
   - {fileID: 371389039}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1385,8 +1386,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 769765093}
+  - {fileID: 1313089598}
   - {fileID: 821870451}
+  - {fileID: 769765093}
   - {fileID: 116711244}
   - {fileID: 6500084312357721772}
   - {fileID: 269306235810105738}
@@ -1563,7 +1565,7 @@ RectTransform:
   m_LocalScale: {x: 106.52738, y: 106.52738, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1646,106 +1648,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499887791}
     m_Modifications:
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 865
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 757
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: CalendarText
-      value: 
-      objectReference: {fileID: 1037941548}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 784103710649212481, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_Name
@@ -1856,25 +1758,90 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.characterCount
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.wordCount
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
+      propertyPath: m_SizeDelta.x
+      value: 865
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: 757
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3556034531770994593, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
@@ -1922,6 +1889,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3556034532017795208, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: CalendarText
+      value: 
+      objectReference: {fileID: 1037941548}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
@@ -2063,6 +2065,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829320056}
   m_CullTransparentMesh: 0
+--- !u!1 &939020868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 939020869}
+  - component: {fileID: 939020871}
+  - component: {fileID: 939020870}
+  m_Layer: 5
+  m_Name: SweetSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &939020869
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939020868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1640355959}
+  - {fileID: 1496681275}
+  m_Father: {fileID: 6500084312357721772}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 28.6, y: -59.9}
+  m_SizeDelta: {x: 2332.1, y: 1257.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &939020870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939020868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 958e1b0e3008ca145b162db75fd13992, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &939020871
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939020868}
+  m_CullTransparentMesh: 0
 --- !u!1 &978202523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,7 +2176,7 @@ RectTransform:
   - {fileID: 829320057}
   - {fileID: 727660997}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2326,6 +2403,83 @@ RectTransform:
   m_AnchoredPosition: {x: -399.99988, y: 224.99997}
   m_SizeDelta: {x: 215, y: 45}
   m_Pivot: {x: 0, y: 1}
+--- !u!1 &1087654777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087654778}
+  - component: {fileID: 1087654780}
+  - component: {fileID: 1087654779}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1087654778
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087654777}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1313089598}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1087654779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087654777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 593ff32376d779b4899639f1fbbb6a5e, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 60
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Access Your Sweet Spot
+--- !u!222 &1087654780
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087654777}
+  m_CullTransparentMesh: 0
 --- !u!1 &1090818310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,6 +2622,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121163589}
+  m_CullTransparentMesh: 0
+--- !u!1 &1137560629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137560630}
+  - component: {fileID: 1137560632}
+  - component: {fileID: 1137560631}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1137560630
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137560629}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1496681275}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1137560631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137560629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 80
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: X
+--- !u!222 &1137560632
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137560629}
   m_CullTransparentMesh: 0
 --- !u!1 &1257868396
 GameObject:
@@ -2737,6 +2968,148 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1313089597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1313089598}
+  - component: {fileID: 1313089602}
+  - component: {fileID: 1313089601}
+  - component: {fileID: 1313089600}
+  - component: {fileID: 1313089599}
+  m_Layer: 5
+  m_Name: Access SweetSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1313089598
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313089597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1087654778}
+  m_Father: {fileID: 499887791}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 753.7, y: 457.3}
+  m_SizeDelta: {x: 367.7, y: 47.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1313089599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313089597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5119cd81cd25eb7498bc7a4d69d258a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1313089600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313089597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.32156864, g: 0.69803923, b: 0.22352943, a: 1}
+    m_HighlightedColor: {r: 0.9716981, g: 0.24292453, b: 0.26805478, a: 1}
+    m_PressedColor: {r: 0.9725491, g: 0.24313727, b: 0.26666668, a: 1}
+    m_SelectedColor: {r: 0.9725491, g: 0.24313727, b: 0.26666668, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1313089601}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1313089599}
+        m_MethodName: AccessSweetSpot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1313089601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313089597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 8c7a4571c87c62749b8f8e306c6ec0ad, type: 3}
+  m_Color: {r: 0.3647059, g: 0.68235296, b: 0.2901961, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1313089602
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313089597}
+  m_CullTransparentMesh: 0
 --- !u!1 &1322171951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2929,6 +3302,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396923867}
+  m_CullTransparentMesh: 0
+--- !u!1 &1428601189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1428601190}
+  - component: {fileID: 1428601192}
+  - component: {fileID: 1428601191}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1428601190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428601189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1640355959}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -3.199997, y: 3.2000008}
+  m_SizeDelta: {x: -6.5, y: -6.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1428601191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428601189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8c7a4571c87c62749b8f8e306c6ec0ad, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: StorAI
+--- !u!222 &1428601192
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428601189}
   m_CullTransparentMesh: 0
 --- !u!1 &1450321422
 GameObject:
@@ -3292,6 +3742,148 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492612529}
   m_CullTransparentMesh: 0
+--- !u!1 &1496681274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496681275}
+  - component: {fileID: 1496681278}
+  - component: {fileID: 1496681277}
+  - component: {fileID: 1496681276}
+  - component: {fileID: 1496681279}
+  m_Layer: 5
+  m_Name: Close
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1496681275
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496681274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1137560630}
+  m_Father: {fileID: 939020869}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1116.8, y: 580.5}
+  m_SizeDelta: {x: 98.6, y: 96.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1496681276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496681274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 0.11792451, b: 0.3275564, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.11764707, b: 0.32941177, a: 1}
+    m_PressedColor: {r: 1, g: 0.11764707, b: 0.32941177, a: 1}
+    m_SelectedColor: {r: 1, g: 0.11764707, b: 0.32941177, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1496681277}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1496681279}
+        m_MethodName: HideSweetSpotUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1496681277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496681274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.20000002, g: 0.22352943, b: 0.45882356, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1496681278
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496681274}
+  m_CullTransparentMesh: 0
+--- !u!114 &1496681279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496681274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3bc8509295bdd4cbc6be4efd511345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1507106345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,6 +4080,148 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604897467}
   m_CullTransparentMesh: 0
+--- !u!1 &1640355958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640355959}
+  - component: {fileID: 1640355962}
+  - component: {fileID: 1640355961}
+  - component: {fileID: 1640355960}
+  - component: {fileID: 1640355963}
+  m_Layer: 5
+  m_Name: StorAI Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1640355959
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1428601190}
+  m_Father: {fileID: 939020869}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -659, y: 366}
+  m_SizeDelta: {x: 223.3, y: 80.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1640355960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.15850139, g: 1, b: 0, a: 1}
+    m_PressedColor: {r: 0.15686275, g: 1, b: 0, a: 1}
+    m_SelectedColor: {r: 0.15686275, g: 1, b: 0, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1640355961}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1640355963}
+        m_MethodName: OpenStorAI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1640355961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 8c7a4571c87c62749b8f8e306c6ec0ad, type: 3}
+  m_Color: {r: 0.40000004, g: 0.3137255, b: 0.6392157, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1640355962
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355958}
+  m_CullTransparentMesh: 0
+--- !u!114 &1640355963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3bc8509295bdd4cbc6be4efd511345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1753269756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +4395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97c50be261773a48a31270a3dabaff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputSmartGoal: {fileID: 0}
   messages:
   - '#MULTI_START#Hello @! Lets just get straight into the interview!'
   - '#QUESTION# 0 #INVOKE_EVENT#*0*'
@@ -3682,6 +4417,7 @@ MonoBehaviour:
   messageDone: 0
   isItem: 0
   EnemyCommunications: 0
+  input_box: {fileID: 0}
   change_state: 1
   repeating_dialogue: 0
   Dialogue_Event:
@@ -4470,7 +5206,7 @@ RectTransform:
   - {fileID: 245749620}
   - {fileID: 1396923868}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5139,7 +5875,7 @@ RectTransform:
   m_LocalScale: {x: 2.9052923, y: 27.11606, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7965,7 +8701,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2993214822200048321}
   m_Direction: 2
   m_Value: 1.0000004
-  m_Size: 0.76517165
+  m_Size: 0.7651715
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8710,21 +9446,26 @@ MonoBehaviour:
   menu_anim: {fileID: 5237763030532372452}
   questions:
   - question: Shake hands with your interviewer?
+    questionType: 
     answers:
     - entry: Yes
       meter_gain: 0.1
+      properties: []
       Reaction:
       - (A nice firm handshake, while maintaining eye contact is a perfect way to
         give off a good impression.)
     - entry: No
       meter_gain: 0
+      properties: []
       Reaction:
       - (Unless you or the interviewer are unable to, you should always start off
         an interview with shaking the interviewer's hand.)
   - question: What have you done recently to improve your knowledge of people?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8735,6 +9476,7 @@ MonoBehaviour:
     - entry: "*Attended Robert's sweet spot seminar*Attended Robert\u2019s Sweet Spot
         Seminar"
       meter_gain: 0.2
+      properties: []
       Reaction:
       - "Display:  I attended a seminar on the Sweet Spot.  It has helped me understand
         how I can be better informed as an individual.\r\n"
@@ -8743,6 +9485,7 @@ MonoBehaviour:
         accomplished from your action!)\r"
     - entry: '*Cleaned Gutsy''s House*Cleaned Gutsy''s House'
       meter_gain: 0
+      properties: []
       Reaction:
       - (This experience is not the best. The employer is looking for an example of
         you improving your knowledge of people. While helping people is a great experience,
@@ -8750,6 +9493,7 @@ MonoBehaviour:
     - entry: '*Worked with Stefano on making pizzas* Worked with Stefano on making
         pizzas'
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "This experience is okay. It demonstrates that you learned more about Stefano,
         however it doesn\u2019t display your ability to learn more about people. "
@@ -8757,6 +9501,7 @@ MonoBehaviour:
         your people skills.
     - entry: '*Advanced pizza making* Advanced pizza making'
       meter_gain: 0
+      properties: []
       Reaction:
       - "This experience is not the best. While advanced pizza making skills is nice
         to see for this job, it doesn\u2019t display your ability to learn more about
@@ -8765,14 +9510,17 @@ MonoBehaviour:
         your people skills.
     - entry: '*Customer Service* Customer Service'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience is not the best. Customer Service experiences can be used
         to answer this type of question; however, the employer is looking to see how
         you took the initiative to learn about people and what the outcome was.
   - question: What experience do you have in keeping things organized and clean?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8783,12 +9531,14 @@ MonoBehaviour:
     - entry: "*Attended Robert's sweet spot seminar*Attended Robert\u2019s Sweet Spot
         Seminar"
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience is not the best. When the interviewer asks this question,
         they are looking for experiences where your organization and cleanliness abilities
         were necessary to complete a task.
     - entry: '*Cleaned Gutsy''s House*Cleaned Gutsy''s House'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - "I recently cleaned, my neighbor, Gutsy\u2019s House and she said it was the
         best job she had ever seen."
@@ -8800,6 +9550,7 @@ MonoBehaviour:
     - entry: '*Worked with Stefano on making pizzas* Worked with Stefano on making
         pizzas'
       meter_gain: 0.15
+      properties: []
       Reaction:
       - This is a good experience to use for this question! Because of the position
         you are applying for, showing a practical application of your cleanliness
@@ -8811,6 +9562,7 @@ MonoBehaviour:
         you are applying for.
     - entry: '*Advanced pizza making* Advanced pizza making'
       meter_gain: 0.15
+      properties: []
       Reaction:
       - This is a good experience to use for this question! Because of the position
         you are applying for, showing a practical application of your cleanliness
@@ -8822,6 +9574,7 @@ MonoBehaviour:
         you are applying for.
     - entry: '*Customer Service* Customer Service'
       meter_gain: 0
+      properties: []
       Reaction:
       - This is not the best experience to use for this question. While customer service
         is nice skill to have, when the interviewer asks this type of question, they
@@ -8830,9 +9583,11 @@ MonoBehaviour:
       - They are usually looking for these skills because it is important to the job
         you are applying for.
   - question: How did you learn about making pizzas?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8843,17 +9598,20 @@ MonoBehaviour:
     - entry: "*Attended Robert's sweet spot seminar*Attended Robert\u2019s Sweet Spot
         Seminar"
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
     - entry: '*Cleaned Gutsy''s House*Cleaned Gutsy''s House'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
     - entry: '*Worked with Stefano on making pizzas* Worked with Stefano on making
         pizzas'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - "I learned how to make pizzas from Stefano\u2019s pizza workshop. I watched
         Stefano very closely and was able to make pizzas even more quickly than he
@@ -8864,6 +9622,7 @@ MonoBehaviour:
         your dedication to the job.
     - entry: '*Advanced pizza making* Advanced pizza making'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This experience is a good fit for this question. The interviewer is looking
         to learn about how you got involved in making pizzas. While this experience
@@ -8871,13 +9630,16 @@ MonoBehaviour:
         ability to make pizzas.
     - entry: '*Customer Service* Customer Service'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
   - question: Why should we improve our pizza making processes?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8888,22 +9650,26 @@ MonoBehaviour:
     - entry: "*Attended Robert's sweet spot seminar*Attended Robert\u2019s Sweet Spot
         Seminar"
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
     - entry: '*Cleaned Gutsy''s House*Cleaned Gutsy''s House'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
     - entry: '*Worked with Stefano on making pizzas* Worked with Stefano on making
         pizzas'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not apply to the question. The interviewer is looking
         to learn more about you and how you started making pizzas.
     - entry: '*Advanced pizza making* Advanced pizza making'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - "I know that by watching what we are currently doing, I will be better able
         to come up with ways to improve our process.\r"
@@ -8914,14 +9680,17 @@ MonoBehaviour:
         able to improve them.
     - entry: '*Customer Service* Customer Service'
       meter_gain: 0
+      properties: []
       Reaction:
       - "This experience does not relate to the question. The interviewer is asking
         this question to learn more about your opinion on the company\u2019s pizza
         making process."
   - question: Have you ever had to deal with a difficult customer?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8932,6 +9701,7 @@ MonoBehaviour:
     - entry: "*Attended Robert's sweet spot seminar*Attended Robert\u2019s Sweet Spot
         Seminar"
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not relate to the question. The employer is asking this
         question to get a feel of how you deal with difficult customers and to see
@@ -8939,6 +9709,7 @@ MonoBehaviour:
         at work.
     - entry: '*Cleaned Gutsy''s House*Cleaned Gutsy''s House'
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not relate to the question. The employer is asking this
         question to get a feel of how you deal with difficult customers and to see
@@ -8947,6 +9718,7 @@ MonoBehaviour:
     - entry: '*Worked with Stefano on making pizzas* Worked with Stefano on making
         pizzas'
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This experience is not a good example to use for this question. The employer
         is asking this question to get a feel of how you deal with difficult customers
@@ -8956,6 +9728,7 @@ MonoBehaviour:
         which is never a good thing to do.
     - entry: '*Advanced pizza making* Advanced pizza making'
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This experience is not a good example to use for this question. The employer
         is asking this question to get a feel of how you deal with difficult customers
@@ -8965,6 +9738,7 @@ MonoBehaviour:
         which is never a good thing to do.
     - entry: '*Customer Service* Customer Service'
       meter_gain: 0.25
+      properties: []
       Reaction:
       - We had one customer that had the wrong ingredients and by working with my
         manager we were able to satisfy the customer and he still comes in every Friday
@@ -8978,11 +9752,13 @@ MonoBehaviour:
       - This experience demonstrates that and also shows that you have previously
         done this at the current place you are applying for.
   - question: Describe a situation in which you had a dissagreement with a coworker?
+    questionType: 
     answers:
     - entry: 'I can''t recall doing anything that is applicable to this.
 
 '
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8992,6 +9768,7 @@ MonoBehaviour:
         be applicable to the position.
     - entry: Add situation where the dissagreement was resolved between workers peacefully
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not relate to the question. The employer is asking this
         question to get a feel of how you deal with difficult customers and to see
@@ -8999,6 +9776,7 @@ MonoBehaviour:
         at work.
     - entry: Add situation where you went directly to manager
       meter_gain: 0
+      properties: []
       Reaction:
       - This experience does not relate to the question. The employer is asking this
         question to get a feel of how you deal with difficult customers and to see
@@ -9007,6 +9785,7 @@ MonoBehaviour:
     - entry: Add situation where the dissagreement is resolved between coworkers but
         is done aggressively
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This experience is not a good example to use for this question. The employer
         is asking this question to get a feel of how you deal with difficult customers
@@ -9016,6 +9795,7 @@ MonoBehaviour:
         which is never a good thing to do.
     - entry: Add a situation where you ignored the issue
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This experience is not a good example to use for this question. The employer
         is asking this question to get a feel of how you deal with difficult customers
@@ -9298,8 +10078,9 @@ RectTransform:
   - {fileID: 6500084311480851452}
   - {fileID: 148857153634959004}
   - {fileID: 1753438288}
+  - {fileID: 939020869}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
