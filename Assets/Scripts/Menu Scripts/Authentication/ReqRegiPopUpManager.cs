@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class ReqRegiPopupManager : MonoBehaviour
+public class ReqRegiPopUpManager : MonoBehaviour
 {
     public InputField usernameInput;
     public InputField userEmailInput;
@@ -25,7 +25,7 @@ public class ReqRegiPopupManager : MonoBehaviour
 
 
     // url for req access code
-    private string reqAccessCodeUrl = "http://localhost:3003/email/RegReqEmail";
+    private string reqAccessCodeUrl = "https://storai.net/email/RegReqEmail";
 
 
     void Start()

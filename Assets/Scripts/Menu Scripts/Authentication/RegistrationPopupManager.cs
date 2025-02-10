@@ -19,7 +19,7 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button ChatbotButton;
     public Button MenuLoginButton;
 
-    private string registrationUrl = "http://localhost:3000/api/register-optional";
+    private string registrationUrl = "https://storai.net/api/register-optional";
     private string sessionTokenFilePath;
 
     void Start()
