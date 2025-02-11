@@ -38,7 +38,7 @@ public class ReqRegiPopupManager : MonoBehaviour
 
     public void OnReqButtonClicked()
     {
-
+                
 
         if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(userEmailInput.text))
         {
@@ -130,6 +130,7 @@ public class ReqRegiPopupManager : MonoBehaviour
 
     public void ClosereqRegiPopup()
     {
+        Debug.Log("Shahbaj: Closing the req panel");
         if (reqRegiPopup != null)
         {
             reqRegiPopup.SetActive(false);

@@ -18020,13 +18020,13 @@ MonoBehaviour:
   usernameInput: {fileID: 2108729390}
   userEmailInput: {fileID: 498222717}
   ReqButton: {fileID: 843649306}
-  CtnuWOButton: {fileID: 1474213900}
+  CtnuWOButton: {fileID: 1195868962}
   openRegCodeEnterButton: {fileID: 1136035043}
   panelLoginButton: {fileID: 1788693542}
   registrationPopup: {fileID: 2130388032}
-  loginPopup: {fileID: 164561759}
-  reqRegiPopup: {fileID: 1166997693}
-  resetPassPopup: {fileID: 2146434545}
+  loginPopup: {fileID: 154497324}
+  reqRegiPopup: {fileID: 1579002102}
+  resetPassPopup: {fileID: 1320415962}
   errorMessageText: {fileID: 1539926096}
 --- !u!114 &1490319522
 MonoBehaviour:
@@ -21034,7 +21034,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1788693540}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146434545}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -24266,12 +24266,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130388032}
   m_CullTransparentMesh: 0
---- !u!1 &2146434545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7960696974606475162, guid: 54938c6bdf5ee0e4c8a88705bceae68c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1788693540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4095088320797097193
 PrefabInstance:
   m_ObjectHideFlags: 0

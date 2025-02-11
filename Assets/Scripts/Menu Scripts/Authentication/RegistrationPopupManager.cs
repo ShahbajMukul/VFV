@@ -33,7 +33,8 @@ public class RegistrationPopupManager : MonoBehaviour
         if (!string.IsNullOrEmpty(savedSessionToken))
         {
             Debug.Log("Session token found, redirecting to Request Code UI.");
-            ActivateUIPanel(reqRegistrationCodePopup);
+            // test shahbaj
+           // ActivateUIPanel(reqRegistrationCodePopup);
         }
         else
         {
