@@ -120,6 +120,140 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &23036955
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6500084312357721772}
+    m_Modifications:
+    - target: {fileID: 1293015684368780245, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015684368780245, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_FillCenter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312940, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Name
+      value: SweetSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312940, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -59.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2332.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1257.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27b66437265bc7847bf63de559188e18, type: 3}
 --- !u!1001 &62034700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,7 +304,7 @@ PrefabInstance:
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
@@ -291,7 +425,7 @@ RectTransform:
   - {fileID: 1257868397}
   - {fileID: 1507106346}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -581,6 +715,7 @@ MonoBehaviour:
   complete_fade_event:
     m_PersistentCalls:
       m_Calls: []
+  taxiButton: {fileID: 0}
 --- !u!114 &245749622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +784,7 @@ RectTransform:
   m_Children:
   - {fileID: 2993214822240774591}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -809,7 +944,7 @@ RectTransform:
   - {fileID: 292262258}
   - {fileID: 1037941550}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1288,7 +1423,7 @@ RectTransform:
   m_Children:
   - {fileID: 371389039}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1385,8 +1520,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 769765093}
+  - {fileID: 1360342727}
   - {fileID: 821870451}
+  - {fileID: 769765093}
   - {fileID: 116711244}
   - {fileID: 6500084312357721772}
   - {fileID: 269306235810105738}
@@ -1563,7 +1699,7 @@ RectTransform:
   m_LocalScale: {x: 106.52738, y: 106.52738, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1646,106 +1782,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499887791}
     m_Modifications:
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 865
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 757
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: CalendarText
-      value: 
-      objectReference: {fileID: 1037941548}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 784103710649212481, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_Name
@@ -1856,25 +1892,90 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.characterCount
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.wordCount
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
+      propertyPath: m_SizeDelta.x
+      value: 865
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: 757
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3556034531770994593, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
@@ -1922,6 +2023,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3556034532017795208, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: CalendarText
+      value: 
+      objectReference: {fileID: 1037941548}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
@@ -2063,6 +2199,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829320056}
   m_CullTransparentMesh: 0
+--- !u!224 &977199090 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+    type: 3}
+  m_PrefabInstance: {fileID: 23036955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978202523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,7 +2241,7 @@ RectTransform:
   - {fileID: 829320057}
   - {fileID: 727660997}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2857,6 +2999,156 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1360342726
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 499887791}
+    m_Modifications:
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 748.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 457.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 367.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 47.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514494, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Access SweetSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716856, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -12.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.0650005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -4.13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c645464c92da31445833fe8e974b7b7b, type: 3}
+--- !u!224 &1360342727 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1360342726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1396923867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3250,7 +3542,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 153418977}
   m_HandleRect: {fileID: 153418976}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3661,6 +3953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97c50be261773a48a31270a3dabaff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputSmartGoal: {fileID: 0}
   messages:
   - '#MULTI_START#Hello @! Lets just get straight into the interview!'
   - '#QUESTION# 0 #INVOKE_EVENT#*0*'
@@ -3683,6 +3976,7 @@ MonoBehaviour:
   messageDone: 0
   isItem: 0
   EnemyCommunications: 0
+  input_box: {fileID: 0}
   change_state: 1
   repeating_dialogue: 0
   Dialogue_Event:
@@ -4471,7 +4765,7 @@ RectTransform:
   - {fileID: 245749620}
   - {fileID: 1396923868}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5140,7 +5434,7 @@ RectTransform:
   m_LocalScale: {x: 2.9052923, y: 27.11606, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7965,8 +8259,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2993214822200048320}
   m_HandleRect: {fileID: 2993214822200048321}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.7651715
+  m_Value: 1.0000014
+  m_Size: 0.76517165
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8711,21 +9005,26 @@ MonoBehaviour:
   menu_anim: {fileID: 5237763030532372452}
   questions:
   - question: Shake hands with your interviewer?
+    questionType: 
     answers:
     - entry: Yes
       meter_gain: 0.1
+      properties: []
       Reaction:
       - (A nice firm handshake, while maintaining eye contact is a perfect way to
         give off a good impression.)
     - entry: No
       meter_gain: 0
+      properties: []
       Reaction:
       - (Unless you or the interviewer are unable to, you should always start off
         an interview with shaking the interviewer's hand.)
   - question: So, @, tell me about yourself.
+    questionType: 
     answers:
     - entry: "I\u2019m @"
       meter_gain: 0
+      properties: []
       Reaction:
       - '(This answer is very bland. When an interviewer asks you this type of questions
         they are looking for:'
@@ -8735,6 +9034,7 @@ MonoBehaviour:
         not to share personal details.)"
     - entry: My name is @ and I am currently looking for a job as an <JOB_TITLE>
       meter_gain: 0.05
+      properties: []
       Reaction:
       - '(This answer is very bland. When an interviewer asks you this type of questions
         they are looking for:'
@@ -8744,6 +9044,7 @@ MonoBehaviour:
         not to share personal details.)"
     - entry: I am currently looking to expand my skill set as an <JOB_TITLE>.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "This answer shows your aspirations, however, it doesn\u2019t tell the interviewer
         about your experience or what you have to offer. Make sure to highlight relevant
@@ -8755,6 +9056,7 @@ MonoBehaviour:
         make sure not to share personal details.\r\n"
     - entry: '*resumeExp* Select experience'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - "This is one of the best solutions. Talking about your relevant past experiences
         and skills on your resume is a great way to introduce yourself. Make sure
@@ -8767,10 +9069,12 @@ MonoBehaviour:
         that relate to the job. This can help break the ice while showing off some
         of your personality. (However, make sure not to share personal details.)\r)"
   - question: Why do you want to work here?
+    questionType: 
     answers:
     - entry: "This job aligns with my future plans. It pays well and I need the money,
         so having this job is perfect for what I\u2019m looking for."
       meter_gain: 0
+      properties: []
       Reaction:
       - "This answer is very straight forward. While it may be true, a hiring manager
         is looking for how well researched you are in the company. \u201CThis job
@@ -8783,6 +9087,7 @@ MonoBehaviour:
     - entry: I know <COMPANY_NAME> has an emphasis on problem solving and I admire
         that because it aligns with my personal values.
       meter_gain: 0.15
+      properties: []
       Reaction:
       - "This answer highlights your ambition to work for the company, displays your
         research into the company, and states what you like about the company specifically.\r\n"
@@ -8794,6 +9099,7 @@ MonoBehaviour:
         with helping my family. I also have interest in getting into the IT field,
         and I think this would be a good starting point.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "This answer shows you have an interest in helping the community and that
         you have an interest in what the company does. Make sure to phrase your response
@@ -8807,6 +9113,7 @@ MonoBehaviour:
         and I like that I have free time to improve my skills while waiting for customers
         to call in.\r\n"
       meter_gain: -0.1
+      properties: []
       Reaction:
       - 'This answer seems honest and straight to the point, however, it also makes
         the interviewer not want to hire you. #INVOKE_EVENT#*1*'
@@ -8814,9 +9121,11 @@ MonoBehaviour:
         technology and want to improve your skills at this job position. You should
         not mention planning on doing other things during work hours.
   - question: Have you ever had to deal with a difficult customer?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8828,6 +9137,7 @@ MonoBehaviour:
         and by working with my manager we were able to satisfy the customer and he
         still comes in every Friday night.'
       meter_gain: 0.15
+      properties: []
       Reaction:
       - This is a perfect experience to use for this question. The employer is asking
         this question to get a feel of how you deal with difficult customers and to
@@ -8838,12 +9148,14 @@ MonoBehaviour:
     - entry: "*Customer Service* We made a mistake on a frequent customer\u2019s order,
         and remade it to make them happy."
       meter_gain: 0.05
+      properties: []
       Reaction:
       - Try to remember to answer in the STAR format to clarify what happened and
         what resulted from it.
     - entry: '*Phone Call* A customer demanded a coupon to be used but it was for
         a different store. I gave them a similar discount to try and satisfy them.'
       meter_gain: 0.05
+      properties: []
       Reaction:
       - Avoid using negative words to describe others in an interview. Interviewers
         want future employees to put their company in a good light and speak positively
@@ -8855,6 +9167,7 @@ MonoBehaviour:
         a discount, and let the employee know it was not their fault, and satisfied
         the customer.'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - This is a perfect experience to use for this question. The employer is asking
         this question to get a feel of how you deal with difficult customers and to
@@ -8866,9 +9179,11 @@ MonoBehaviour:
         the answer in a clear and concise manner.
   - question: How would you help a customer if their computer was running slower than
       usual?
+    questionType: 
     answers:
     - entry: I can't recall doing anything that is applicable to this.
       meter_gain: 0
+      properties: []
       Reaction:
       - 'It is possible that sometimes you just won''t really have an experience to
         share with the interviewer with every question they ask. But in this situation
@@ -8878,6 +9193,7 @@ MonoBehaviour:
         be applicable to the position.
     - entry: I would ask if they had restarted their computer recently.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - This is a good rule of thumb to fix technical issues, however it does not
         explain how it would fix the problem, and sometimes people will already try
@@ -8885,6 +9201,7 @@ MonoBehaviour:
     - entry: '*IT Seminar*I took a technical seminar recently in preparation for this
         job.'
       meter_gain: 0.15
+      properties: []
       Reaction:
       - I would check if they had a lot of applications open that might be slowing
         down the processing power.
@@ -8894,14 +9211,17 @@ MonoBehaviour:
     - entry: '*IT Seminar*I would try to check if they had any viruses on the computer
         that could be using up their resources.'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This is a good way to try and solve the issue you learned from the IT seminar.
         It would be better if you mentioned that you recently attended the seminar
         to improve your technical skills.
   - question: Can you tell me what a motherboard does?
+    questionType: 
     answers:
     - entry: "I don\u2019t know."
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "It\u2019s okay to admit you don\u2019t know something. It\u2019s better than
         trying to randomly guess and give someone a wrong answer that can result in
@@ -8909,19 +9229,23 @@ MonoBehaviour:
     - entry: "*IT Seminar* It\u2019s an important part of the computer that allows
         for all of the different hardware components to communicate to one another."
       meter_gain: 0.1
+      properties: []
       Reaction:
       - Using information you learned from the seminar will help you get a leg up
         in this interview.
     - entry: "It\u2019s a piece of hardware that processes information."
       meter_gain: -0.05
+      properties: []
       Reaction:
       - "This is incorrect. It\u2019s okay to admit you don\u2019t know something.
         It\u2019s better than trying to randomly guess and give someone a wrong answer
         that can result in something catastrophic."
   - question: How do you stay up to date about new technologies?
+    questionType: 
     answers:
     - entry: "I don\u2019t stay up to date with new technology."
       meter_gain: 0
+      properties: []
       Reaction:
       - "Technology is constantly changing, so it\u2019s a good idea to look into
         ways to learn more about what is being created and improved to show you are
@@ -8929,18 +9253,21 @@ MonoBehaviour:
     - entry: I read tech articles from my favorite magazine in the mail. Recently
         I read about evolution in blockchain technology.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This shows that you are a technology enthusiast. Make sure you are answering
         questions genuinely and include some information about something you learned
         recently to make it more believable or start a conversation.
     - entry: I like to get information from my local news station.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - Local news stations are an okay way to get information, but sometimes they
         are behind on breaking news or may include a biased opinion on the technology.
     - entry: I get information from a variety of websites, google usually recommends
         articles for me to read.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "It\u2019s a good idea to get your information from a variety of sources and
         get it in the latest articles from the internet. Make sure you are answering
@@ -8948,20 +9275,24 @@ MonoBehaviour:
         recently to make it more believable or start a conversation."
   - question: "If you had a problem you didn\u2019t know how to solve, what would
       you do?"
+    questionType: 
     answers:
     - entry: Try some basic troubleshooting like restarting the computer.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - This is a good rule of thumb to fix technical issues, however it does not
         explain how it would fix the problem, and sometimes people will already try
         to do this.
     - entry: "Tell the customer I don\u2019t know how to solve the issue."
       meter_gain: 0
+      properties: []
       Reaction:
       - "It\u2019s okay to admit you don\u2019t know the answer, but you should try
         your best to work towards a solution to help the customer."
     - entry: Ask a colleague to see if they know the answer.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "It\u2019s good to ask your coworkers if they have seen the issue before and
         how they solved it. This is usually the fastest way to get a concrete answer
@@ -8969,6 +9300,7 @@ MonoBehaviour:
         help from a colleague."
     - entry: Search the answer on the internet.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "This may be a good way to find a solution, but it may take some time to find
         the right answer for the specific situation. Sometimes it may be faster to
@@ -9248,8 +9580,9 @@ RectTransform:
   - {fileID: 6500084311480851452}
   - {fileID: 148857153634959004}
   - {fileID: 1753438288}
+  - {fileID: 977199090}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
