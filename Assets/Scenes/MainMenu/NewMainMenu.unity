@@ -17152,7 +17152,7 @@ MonoBehaviour:
   usernameInput: {fileID: 2108729390}
   userEmailInput: {fileID: 498222717}
   ReqButton: {fileID: 843649306}
-  CtnuWOButton: {fileID: 1474213900}
+  CtnuWOButton: {fileID: 1195868962}
   openRegCodeEnterButton: {fileID: 1136035043}
   panelLoginButton: {fileID: 1788693542}
   registrationPopup: {fileID: 2130388032}
