@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2863059584447096663, guid: b5b1c96aa22585c4ebde1f24c6245cca,
         type: 3}
@@ -291,7 +291,7 @@ RectTransform:
   - {fileID: 1257868397}
   - {fileID: 1507106346}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -581,6 +581,7 @@ MonoBehaviour:
   complete_fade_event:
     m_PersistentCalls:
       m_Calls: []
+  taxiButton: {fileID: 0}
 --- !u!114 &245749622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +650,7 @@ RectTransform:
   m_Children:
   - {fileID: 2993214822240774591}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -809,7 +810,7 @@ RectTransform:
   - {fileID: 292262258}
   - {fileID: 1037941550}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1288,7 +1289,7 @@ RectTransform:
   m_Children:
   - {fileID: 371389039}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1385,8 +1386,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 769765093}
+  - {fileID: 692101131}
   - {fileID: 821870451}
+  - {fileID: 769765093}
   - {fileID: 116711244}
   - {fileID: 6500084312357721772}
   - {fileID: 269306235810105738}
@@ -1404,6 +1406,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!224 &692101131 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1648917980}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &727660996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1571,7 @@ RectTransform:
   m_LocalScale: {x: 106.52738, y: 106.52738, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1646,106 +1654,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499887791}
     m_Modifications:
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.275879
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 865
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 757
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: CalendarText
-      value: 
-      objectReference: {fileID: 1037941548}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
-        type: 3}
-      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 784103710649212481, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_Name
@@ -1856,25 +1764,90 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.characterCount
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.275879
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.wordCount
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
+      propertyPath: m_SizeDelta.x
+      value: 865
       objectReference: {fileID: 0}
-    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_SizeDelta.y
+      value: 757
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041203664155393256, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3556034531770994593, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
@@ -1922,6 +1895,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3556034532017795208, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3876255178623653853, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: CalendarText
+      value: 
+      objectReference: {fileID: 1037941548}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: pause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009197127745057682, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: unpause_event.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855465066682916269, guid: 9b399e514c388304a902536ba36cd657,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
@@ -2063,6 +2071,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829320056}
   m_CullTransparentMesh: 0
+--- !u!224 &915674777 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+    type: 3}
+  m_PrefabInstance: {fileID: 2068418694}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978202523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,7 +2113,7 @@ RectTransform:
   - {fileID: 829320057}
   - {fileID: 727660997}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3250,7 +3264,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 153418977}
   m_HandleRect: {fileID: 153418976}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3488,6 +3502,150 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604897467}
   m_CullTransparentMesh: 0
+--- !u!1001 &1648917980
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 499887791}
+    m_Modifications:
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 753.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 457.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 367.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 47.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514493, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192604514494, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Access SweetSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716856, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -25.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00002861023
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085724192695716857, guid: c645464c92da31445833fe8e974b7b7b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -9.08
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c645464c92da31445833fe8e974b7b7b, type: 3}
 --- !u!1 &1753269756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97c50be261773a48a31270a3dabaff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputSmartGoal: {fileID: 0}
   messages:
   - '#MULTI_START#Hello @! Lets just get straight into the interview!'
   - '#QUESTION# 0 #INVOKE_EVENT#*0*'
@@ -3684,6 +3843,7 @@ MonoBehaviour:
   messageDone: 0
   isItem: 0
   EnemyCommunications: 0
+  input_box: {fileID: 0}
   change_state: 1
   repeating_dialogue: 0
   Dialogue_Event:
@@ -4472,7 +4632,7 @@ RectTransform:
   - {fileID: 245749620}
   - {fileID: 1396923868}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4820,6 +4980,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016424407}
   m_CullTransparentMesh: 0
+--- !u!1001 &2068418694
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6500084312357721772}
+    m_Modifications:
+    - target: {fileID: 1293015684368780245, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015684368780245, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_FillCenter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312940, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Name
+      value: SweetSpot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312940, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -59.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2332.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1257.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1293015685865312941, guid: 27b66437265bc7847bf63de559188e18,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27b66437265bc7847bf63de559188e18, type: 3}
 --- !u!212 &2111742250
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5141,7 +5435,7 @@ RectTransform:
   m_LocalScale: {x: 2.9052923, y: 27.11606, z: 1.9368616}
   m_Children: []
   m_Father: {fileID: 499887791}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7966,8 +8260,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2993214822200048320}
   m_HandleRect: {fileID: 2993214822200048321}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.7651715
+  m_Value: 1.0000014
+  m_Size: 0.76517165
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8712,21 +9006,26 @@ MonoBehaviour:
   menu_anim: {fileID: 5237763030532372452}
   questions:
   - question: Shake hands with your interviewer?
+    questionType: 
     answers:
     - entry: Yes
       meter_gain: 0.1
+      properties: []
       Reaction:
       - (A nice firm handshake, while maintaining eye contact is a perfect way to
         give off a good impression.)
     - entry: No
       meter_gain: 0
+      properties: []
       Reaction:
       - (Unless you or the interviewer are unable to, you should always start off
         an interview with shaking the interviewer's hand.)
   - question: What do you like most about working in human resources?
+    questionType: 
     answers:
     - entry: "I like helping people with issues that they can\u2019t solve themselves."
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "That\u2019s a good start to the interview, it shows that you are looking
         to help people with their problems, and that\u2019s what some HR employees
@@ -8734,31 +9033,37 @@ MonoBehaviour:
     - entry: I like to meet new people and try to find the right place for them to
         work and grow within the company.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This shows you are people oriented, which is needed in a HR role. HR should
         also help with employees' development within their career within the company.
     - entry: I like the pay rate, and it seems like the job is easy to do so I can
         develop my skills and look for other opportunities.
       meter_gain: -0.2
+      properties: []
       Reaction:
       - "You shouldn\u2019t mention that you are expecting an easy job or already
         looking for a different job before securing this position."
   - question: What are your future goals as an HR employee?
+    questionType: 
     answers:
     - entry: '*Marketing* I would like to help the company market itself to become
         more consumer friendly, and bring in new customers to keep business booming.'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - This statement shows you are ambitious and looking to help improve the company.
     - entry: I hope to use this experience as a stepping stone towards running my
         own company in the future.
       meter_gain: -0.1
+      properties: []
       Reaction:
       - While it is a good idea to develop skills and work towards your own goals,
         now is not the time to mention this job only as a passing opportunity.
     - entry: '*Problem Solving* I want to make sure that people are working on the
         right team for them, and help resolve conflicts.'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - HR employees are great resources to help solve problems within a team as an
         intermediary, they can help with getting the right message across without
@@ -8766,13 +9071,16 @@ MonoBehaviour:
     - entry: "I want to help people develop their skills in their career and help
         them reach higher levels of success.\r\n"
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "It\u2019s a noble cause to want to help employees improve their skills and
         grow within the company."
   - question: Why do you want to work for our company?
+    questionType: 
     answers:
     - entry: "I\u2019m looking to change careers, and I see HR as a good fit for me."
       meter_gain: -0.05
+      properties: []
       Reaction:
       - You should be more specific about why you would be a good fit for the role
         in HR.
@@ -8780,6 +9088,7 @@ MonoBehaviour:
         solve their problems and being a mediator in an argument. I hope to bring
         those skills to the table and help people get along better within the company."
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "This is a good answer. This shows you are able to bring prior skills to the
         table and help employees with their disagreements.\r\n"
@@ -8788,6 +9097,7 @@ MonoBehaviour:
         I worked for The Pizza Place as a manager, I was able to help sales increase
         by 10%.'
       meter_gain: 0.2
+      properties: []
       Reaction:
       - This is a great answer. You are mentioning prior experiences and how you were
         able to show results with the actions you took.
@@ -8795,21 +9105,25 @@ MonoBehaviour:
         product line over the years, and it would be an honor to be able to bring
         my skills to the company to help its employees and improve sales.'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - Showing that you did research into the company and their product is a good
         sign to the employer.
   - question: As an HR manager, what qualities do you possess that will help you drive
       results in our company?
+    questionType: 
     answers:
     - entry: "*Problem Solving*I\u2019m a good problem solver, I don\u2019t want to
         have colleagues argue if nothing gets solved.\r\n"
       meter_gain: 0.05
+      properties: []
       Reaction:
       - "While problem solving is important, it is worth knowing that sometimes conflict
         is needed to make progress and change within a company.\r\n"
     - entry: '*Marketing*I can make deals people want to take, I can make sure the
         company is running smoothly while still making a profit.'
       meter_gain: 0.05
+      properties: []
       Reaction:
       - While profit is the main reason to start a business, it is not the most important
         thing. As HR you should be looking to hire and keep employees.
@@ -8817,58 +9131,70 @@ MonoBehaviour:
         happy by bringing them their favorite coffee. A happy employee is a working
         employee.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - Encouraging employees to do their best and making their day better is a good
         way to keep them motivated.
     - entry: I put pressure on employees to keep them driven to produce results. Employees
         that make progress are rewarded with praise.
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This management style may be effective, but it can also drive employees away
         from the company if you rule with an iron fist.
   - question: Can you describe your management style?
+    questionType: 
     answers:
     - entry: '*Reprimand Employee*I help employees by guiding them to what they should
         try to do in their roles.'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This is a good coaching standpoint that helps improve overall performance
         and helps improve future decisions.
     - entry: "I think it\u2019s worth getting a feel of what everyone thinks and making
         a decision after meeting a consensus."
       meter_gain: 0.05
+      properties: []
       Reaction:
       - As an HR employee it's a good idea to see what a team thinks it best since
         they have a better understanding of their project.
     - entry: "What I say should go, if someone questions it, they better have a good
         reason, because I\u2019m in charge, and we need results now."
       meter_gain: -0.1
+      properties: []
       Reaction:
       - This is authoritarian and while it can be effective in some situations, the
         company is in a good spot, and you would only be starting in your position.
   - question: How do you win the cooperation of members of a team you are leading?
+    questionType: 
     answers:
     - entry: I spend a lot of time doing team building with them and making sure they
         are comfortable and trusting.
       meter_gain: 0.05
+      properties: []
       Reaction:
       - This is a good idea, but hard to do quickly as it takes time to build trust.
     - entry: '*Marketing*Persuasion is my best skill, so I will explain why my ideas
         work and make sure they have my trust.'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This is a good way to get team members to follow your plan
     - entry: "My ideas are great, if I\u2019m the first one to suggest something then
         they might follow that plan."
       meter_gain: -0.05
+      properties: []
       Reaction:
       - This might work sometimes but it would be a better idea to explain your ideas
         and work on gaining trust with the other team members.
   - question: What is your recruiting strategy as an HR employee?
+    questionType: 
     answers:
     - entry: '*Marketing*Flyers and career fairs are great ways to reach out to people
         looking for opportunities in their area.'
       meter_gain: 0.05
+      properties: []
       Reaction:
       - While this career fair is a good opportunity to view multiple jobs at once,
         it lacks what most people want, which is variety within their career path.
@@ -8877,40 +9203,48 @@ MonoBehaviour:
         the employees our work culture and better pay rate to incentivise them to
         work for us instead."
       meter_gain: 0.05
+      properties: []
       Reaction:
       - This is a decent way to recruit employees with a good record at another good
         company, and you can determine that these employees left on good terms.
     - entry: I can show all the great benefits and work environment and people will
         be lining up to work for our company.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - When recruiting, you should take an active interest in what someone is seeking
         to improve in their job prospects.
     - entry: The reputation of Savanna stands for itself, people want to work for
         the company because of its history.
       meter_gain: -0.1
+      properties: []
       Reaction:
       - "While <COMPANY_NAME> is well known in this town, it\u2019s a good idea to
         find other ways to recruit employees besides their reputation."
   - question: What questions would you ask me if you were the interviewer?
+    questionType: 
     answers:
     - entry: '*Reprimand Employee*How would you deal with an employee who is causing
         an issue with the team?'
       meter_gain: 0.1
+      properties: []
       Reaction:
       - "This is a good way to see someone\u2019s management style or how they might
         act within a conflict."
     - entry: '*Marketing*Sell me this pen.'
       meter_gain: 0.05
+      properties: []
       Reaction:
       - This is a classic question in marketing to see how well someone might persuade
         someone to buy a product.
     - entry: What are your three best qualities?
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This is a good tell of how well someone is prepared, or what they see in themselves.
     - entry: Search the answer on the internet.
       meter_gain: 0.1
+      properties: []
       Reaction:
       - This is a good question to see how well someone deals with a problem, sometimes
         under stress, and how they come to the solution.
@@ -9189,8 +9523,9 @@ RectTransform:
   - {fileID: 6500084311480851452}
   - {fileID: 148857153634959004}
   - {fileID: 1753438288}
+  - {fileID: 915674777}
   m_Father: {fileID: 499887791}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
