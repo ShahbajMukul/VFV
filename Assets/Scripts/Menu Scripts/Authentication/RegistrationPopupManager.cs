@@ -78,7 +78,6 @@ public class RegistrationPopupManager : MonoBehaviour
         if (reqRegistrationCodePopup != null) reqRegistrationCodePopup.SetActive(false);
     }
 
-
     public void ShowRegistrationPopup()
     {
         ActivateUIPanel(registrationPopup);
