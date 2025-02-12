@@ -38,7 +38,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
 
     public void OnReqButtonClicked()
     {
-
+        errorMessageText.text = "Processing Request. Please wait...";
 
         if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(userEmailInput.text))
         {

@@ -17,7 +17,7 @@ public class RegCodeEnterPopupManager : MonoBehaviour
     public GameObject regCodeEnterPopup;
     public Text errorMessageText;
 
-    private string regCodeEnterUrl = "http://localhost:3000/api/enter-code";
+    private string regCodeEnterUrl = "https://storai.net/api/enter-code";
 
     void Start()
     {
