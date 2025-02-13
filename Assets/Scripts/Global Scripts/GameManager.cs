@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     //Instance for easy access
     public static GameManager instance;
 
+    public GameObject optionsPanel;
+
     //Player script for ease of access
     public Player_Movement player_character;
 
@@ -271,11 +273,19 @@ public class GameManager : MonoBehaviour
         }
     }
     public void ShowOptions() {
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0.5f, 0.5f, 1);
+        optionsPanel.gameObject.SetActive(true);
+        Debug.Log("Options button clicked");
+
     }
     public void HideOptions() {
-        GameObject.Find("OptionsPanel").transform.localScale = new Vector3(0, 0, 0);
+        optionsPanel.gameObject.SetActive(false);
     }
+
+    //public void ShowCredits()
+    //{
+    //    creditsPanel.gameObject.SetActive(false);
+
+    //}
     public void ToggleFullScreen() {
         Screen.fullScreen = !Screen.fullScreen;
     }
