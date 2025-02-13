@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameObject optionsPanel;
+    public GameObject creditsPanel;
+
 
     //Player script for ease of access
     public Player_Movement player_character;
@@ -65,6 +67,8 @@ public class GameManager : MonoBehaviour
         //Initialization of instance
         instance = this;
         teleport = true;
+
+        optionsPanel.gameObject.SetActive(false);
 
         watchedBranding = false;
 
@@ -279,13 +283,18 @@ public class GameManager : MonoBehaviour
     }
     public void HideOptions() {
         optionsPanel.gameObject.SetActive(false);
+        Debug.Log("Hide button clicked");
+
     }
-
-    //public void ShowCredits()
-    //{
-    //    creditsPanel.gameObject.SetActive(false);
-
-    //}
+    public void ShowCredits()
+    {
+        creditsPanel.gameObject.SetActive(true);
+    }
+    public void HideCredits()
+    {
+        creditsPanel.gameObject.SetActive(false);
+        optionsPanel.gameObject.SetActive(true);
+    }
     public void ToggleFullScreen() {
         Screen.fullScreen = !Screen.fullScreen;
     }
