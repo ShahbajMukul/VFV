@@ -196,6 +196,10 @@ public class RegistrationPopupManager : MonoBehaviour
                             ShowReqRegistrationCodePopup();
                             MenuLoginButton.gameObject.SetActive(false);
                             MenuLogoutButton.gameObject.SetActive(true);
+
+                            // Save the username in PlayerPrefs
+                            PlayerPrefs.SetString("LoggedInUsername", username);
+                            PlayerPrefs.Save();
                         }
                     }
                     else
