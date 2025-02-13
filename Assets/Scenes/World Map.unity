@@ -2925,9 +2925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072b6fc377db6274e96756303e1c574d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedText: {fileID: 0}
-  IncreaseButton: {fileID: 0}
-  DecreaseButton: {fileID: 0}
+  SpeedText: {fileID: 1017962199}
+  IncreaseButton: {fileID: 939674860}
+  DecreaseButton: {fileID: 1502441083}
 --- !u!114 &69211210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3980,7 +3980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1099876}
+  m_AnchoredPosition: {x: 0, y: -1100299}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &112026564
@@ -48529,6 +48529,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &939674860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2925470342019944745, guid: 2110b18a011ff054687da0756d07ebf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175278948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942293121
 GameObject:
   m_ObjectHideFlags: 0
@@ -52460,6 +52472,18 @@ MonoBehaviour:
   event_active: 0
   end_day_message: []
   fade_out_end: 0
+--- !u!114 &1017962199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2925470343201613361, guid: 2110b18a011ff054687da0756d07ebf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175278948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1018944111
 GameObject:
   m_ObjectHideFlags: 0
@@ -60477,6 +60501,21 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2925470341224975680, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1229225431}
+    - target: {fileID: 2925470341224975680, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResolution
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925470341224975680, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2925470341271226881, guid: 2110b18a011ff054687da0756d07ebf2,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -60581,6 +60620,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925470342019944745, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69211209}
+    - target: {fileID: 2925470342019944745, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseTextSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 2925470342072341540, guid: 2110b18a011ff054687da0756d07ebf2,
         type: 3}
@@ -60825,6 +60874,21 @@ PrefabInstance:
     - target: {fileID: 2925470342749116989, guid: 2110b18a011ff054687da0756d07ebf2,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925470342813245783, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69211209}
+    - target: {fileID: 2925470342813245783, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DecreaseTextSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2925470342908301061, guid: 2110b18a011ff054687da0756d07ebf2,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2925470342908301115, guid: 2110b18a011ff054687da0756d07ebf2,
@@ -79861,6 +79925,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1502441083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2925470342813245783, guid: 2110b18a011ff054687da0756d07ebf2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175278948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504330973
 GameObject:
   m_ObjectHideFlags: 0
@@ -111721,7 +111797,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2993214823230241520}
   m_HandleRect: {fileID: 2993214823230241521}
   m_Direction: 2
-  m_Value: 0.9999998
+  m_Value: 1.0000001
   m_Size: 0.5329815
   m_NumberOfSteps: 0
   m_OnValueChanged:
