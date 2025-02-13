@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System;
 using System.Text.RegularExpressions;
 using System.IO;
+using Debug = UnityEngine.Debug;
 
 public class LoginPopupManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class LoginPopupManager : MonoBehaviour
 
     private string loginUrl = "https://storai.net/api/login";
     private string sessionFilePath;
+    SessionData sessionData = new SessionData();
 
     void Start()
     {
@@ -32,11 +34,13 @@ public class LoginPopupManager : MonoBehaviour
         // Path for saving session token
         sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
+
         // Load the session token from file
         if (File.Exists(sessionFilePath))
         {
             string sessionToken = File.ReadAllText(sessionFilePath);
-            if (!string.IsNullOrEmpty(sessionToken))
+            sessionData = JsonUtility.FromJson<SessionData>(sessionToken);
+            if (!string.IsNullOrEmpty(sessionData.sessionToken))
             {
                 UnityEngine.Debug.Log("Stored session token found. Skipping login...");
                 loginPopup.SetActive(false);
@@ -104,7 +108,7 @@ public class LoginPopupManager : MonoBehaviour
                 string sessionToken = www.GetResponseHeader("Set-Cookie");
                 if (!string.IsNullOrEmpty(sessionToken))
                 {
-                    SaveSessionToken(sessionToken);
+                    SaveSessionData(sessionToken, true);
 
                     // Parse the username from the response
                     string jsonResponse = www.downloadHandler.text;
@@ -155,9 +159,22 @@ public class LoginPopupManager : MonoBehaviour
         }
     }
 
-    private void SaveSessionToken(string token)
+    private void SaveSessionData(string sessionToken, bool isActive)
     {
-        File.WriteAllText(sessionFilePath, token);
+        SessionData data = new SessionData();
+        data.sessionToken = sessionToken;
+        data.isActive = isActive;
+
+        try
+        {
+            string jsonData = JsonUtility.ToJson(data);
+            File.WriteAllText(sessionFilePath, jsonData);
+            Debug.Log("Session data saved.");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error saving session data: " + ex.Message);
+        }
     }
 
     public void Logout()
@@ -245,5 +262,12 @@ public class LoginPopupManager : MonoBehaviour
     private class LoginResponse
     {
         public string username;
+    }
+
+    [System.Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
     }
 }

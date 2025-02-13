@@ -30,27 +30,31 @@ public class RegistrationPopupManager : MonoBehaviour
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
-        // Check if a session token exists
         SessionData sessionData = new SessionData();
 
         if (sessionData != null)
         {
-           if(!sessionData.isActive && sessionData.sessionToken != string.Empty)
-           {
+            if (!sessionData.isActive && !string.IsNullOrEmpty(sessionData.sessionToken))
+            {
                 Debug.Log("Inactive session found, show registration code input.");
                 MenuOpenRegCodeEnterPopup.gameObject.SetActive(true);
                 ChatbotButton.interactable = false;
             }
-
+            else
+            {
+                // User is logged in (active session), hide the registration code button
+                MenuOpenRegCodeEnterPopup.gameObject.SetActive(false);
+                // Update UI based on active session
+                MenuLoginButton.gameObject.SetActive(false);
+                MenuLogoutButton.gameObject.SetActive(true);
+                ChatbotButton.interactable = true;
+            }
         }
         else
         {
-            Debug.Log("No inactive session or token found, show login button");
+            Debug.Log("No session data found, show login button.");
             MenuLoginButton.gameObject.SetActive(true);
             ChatbotButton.interactable = false;
-
-            // This can be annoying if they dont want to use storai at all.
-            // ActivateUIPanel(loginPopup);
         }
     }
 
