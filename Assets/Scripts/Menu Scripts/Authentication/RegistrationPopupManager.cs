@@ -30,41 +30,29 @@ public class RegistrationPopupManager : MonoBehaviour
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
-        // Check if a session token exists
-        string savedSessionToken = LoadSessionToken();
+        
+        SessionData sessionData = LoadSessionData();
 
-        if (!string.IsNullOrEmpty(savedSessionToken))
+        if (sessionData != null && !string.IsNullOrEmpty(sessionData.sessionToken))
         {
-            /*{
-            if (!sessionData.isActive && !string.IsNullOrEmpty(sessionData.sessionToken))
+            if (!sessionData.isActive)
             {
-                Debug.Log("Inactive session found, show registration code input.");
+                Debug.Log("Inactive session - show registration code input");
                 MenuOpenRegCodeEnterPopup.gameObject.SetActive(true);
                 ChatbotButton.interactable = false;
             }
             else
             {
-                // User is logged in (active session), hide the registration code button
+                Debug.Log("Active session - hide reg code button");
                 MenuOpenRegCodeEnterPopup.gameObject.SetActive(false);
-                // Update UI based on active session
                 MenuLoginButton.gameObject.SetActive(false);
                 MenuLogoutButton.gameObject.SetActive(true);
                 ChatbotButton.interactable = true;
             }
-             */
-
-            Debug.Log("Session token found, redirecting to Request Code UI.");
-            // go straight to the code entry if there's an existing (inactive) session,
-            // ActivateUIPanel(reqRegistrationCodePopup);
         }
         else
         {
-            /*Debug.Log("No session data found, show login button.");
-            MenuLoginButton.gameObject.SetActive(true);
-            ChatbotButton.interactable = false;
-             */
-
-            Debug.Log("No session token found, showing Login UI.");
+            Debug.Log("No session - show login UI");
             ActivateUIPanel(loginPopup);
         }
     }
@@ -194,24 +182,20 @@ public class RegistrationPopupManager : MonoBehaviour
                     if (serverResponse != null && serverResponse.user != null)
                     {
                         bool userIsActive = serverResponse.user.isActive;
-                        Debug.Log("User active status: " + userIsActive);
+                        string setCookie = www.GetResponseHeader("Set-Cookie");
+
+                        // Save both session token AND activation status
+                        SaveSessionData(setCookie, userIsActive);
 
                         if (userIsActive)
                         {
-                            // The user provided a valid registration code; proceed to login screen.
                             ShowLoginPopup();
                         }
                         else
                         {
-                            // The user did NOT provide a valid code, or left code empty
-                            // Attempt to save the session cookie for future use:
-                            string setCookie = www.GetResponseHeader("Set-Cookie");
-                            if (!string.IsNullOrEmpty(setCookie))
-                            {
-                                Debug.Log("User is inactive. Saving session token for future validation.");
-                                SaveSessionToken(setCookie);
-                            }
                             ShowReqRegistrationCodePopup();
+                            MenuLoginButton.gameObject.SetActive(false);
+                            MenuLogoutButton.gameObject.SetActive(true);
                         }
                     }
                     else
@@ -229,44 +213,45 @@ public class RegistrationPopupManager : MonoBehaviour
         }
     }
 
-    private void SaveSessionToken(string sessionToken)
+    private void SaveSessionData(string sessionToken, bool isActive)
     {
+        SessionData data = new SessionData();
+        data.sessionToken = sessionToken;
+        data.isActive = isActive;
+
         try
         {
-            File.WriteAllText(sessionTokenFilePath, sessionToken);
-            Debug.Log("Session token saved successfully to: " + sessionTokenFilePath);
+            string jsonData = JsonUtility.ToJson(data);
+            File.WriteAllText(sessionTokenFilePath, jsonData);
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error saving session token: " + ex.Message);
+            Debug.LogError("Error saving session: " + ex.Message);
         }
     }
 
-    private string LoadSessionToken()
+    private SessionData LoadSessionData()
     {
         try
         {
             if (File.Exists(sessionTokenFilePath))
             {
-                /*string jsonData = File.ReadAllText(sessionTokenFilePath);
-                SessionData data = JsonUtility.FromJson<SessionData>(jsonData);
-                Debug.Log("Session data loaded.");*/
-
-                string token = File.ReadAllText(sessionTokenFilePath);
-                Debug.Log("Session token loaded successfully: " + token);
-                return token;
-            }
-            else
-            {
-                Debug.LogWarning("Session token file does not exist.");
-                return null;
+                string jsonData = File.ReadAllText(sessionTokenFilePath);
+                return JsonUtility.FromJson<SessionData>(jsonData);
             }
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error loading session token: " + ex.Message);
-            return null;
+            Debug.LogError("Error loading session: " + ex.Message);
         }
+        return null;
+    }
+
+    [System.Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
     }
 
     public void OnCloseButtonClicked()

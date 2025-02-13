@@ -17,6 +17,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
     public Button openRegCodeEnterButton;
     public Button panelLoginButton;
 
+
     public GameObject registrationPopup;
     public GameObject loginPopup;
     public GameObject reqRegiPopup;
@@ -97,9 +98,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
 
                     ReqButton.interactable = false;
                     CtnuWOButton.interactable = false;
-
                     openRegCodeEnterButton.gameObject.SetActive(true);
-
                 }
                 else
                 {
