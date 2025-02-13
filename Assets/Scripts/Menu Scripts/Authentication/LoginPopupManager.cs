@@ -20,6 +20,8 @@ public class LoginPopupManager : MonoBehaviour
     public Button ChatbotButton;
     public Button MenuLoginButton;
     public Button MenuLogoutButton;
+    public Button MenuOpenRegCodeEnterPopup;
+
 
     private string loginUrl = "https://storai.net/api/login";
     private string sessionFilePath;
@@ -183,6 +185,7 @@ public class LoginPopupManager : MonoBehaviour
         UnityEngine.Debug.Log("Session token and username cleared. User logged out.");
         MenuLoginButton.gameObject.SetActive(true);
         MenuLogoutButton.gameObject.SetActive(false);
+        MenuOpenRegCodeEnterPopup.gameObject.SetActive(false);
     }
 
     private bool IsEmail(string input)

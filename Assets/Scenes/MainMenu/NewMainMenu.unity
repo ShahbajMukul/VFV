@@ -16533,14 +16533,12 @@ GameObject:
   - component: {fileID: 1490319507}
   - component: {fileID: 1490319509}
   - component: {fileID: 1490319510}
-  - component: {fileID: 1490319513}
   - component: {fileID: 1490319511}
   - component: {fileID: 1490319512}
   - component: {fileID: 1490319514}
   - component: {fileID: 1490319515}
   - component: {fileID: 1490319516}
   - component: {fileID: 1490319518}
-  - component: {fileID: 1490319517}
   - component: {fileID: 1490319519}
   - component: {fileID: 1490319520}
   - component: {fileID: 1490319522}
@@ -16795,18 +16793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdde382802c71b4cbd7d6cde8ebd127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1490319513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490319503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c103afded3008984280f27a3659fa2ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1490319514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16830,6 +16816,8 @@ MonoBehaviour:
   errorMessageText: {fileID: 117145160}
   ChatbotButton: {fileID: 692331789}
   MenuLoginButton: {fileID: 1788693542}
+  MenuLogoutButton: {fileID: 1772204691}
+  MenuOpenRegCodeEnterPopup: {fileID: 1136035043}
 --- !u!114 &1490319515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16852,6 +16840,7 @@ MonoBehaviour:
   ChatbotButton: {fileID: 692331789}
   MenuLoginButton: {fileID: 1788693542}
   MenuLogoutButton: {fileID: 1772204691}
+  MenuOpenRegCodeEnterPopup: {fileID: 1136035043}
 --- !u!114 &1490319516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16870,18 +16859,6 @@ MonoBehaviour:
   resetPassEnterCodePopup: {fileID: 2052229235}
   emailInput: {fileID: 850309356}
   errorMessageText: {fileID: 1865309644}
---- !u!114 &1490319517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490319503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c103afded3008984280f27a3659fa2ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1490319518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16978,9 +16955,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regiCodeInput: {fileID: 547100617}
-  openRegCodeEnterPopupButton: {fileID: 1136035043}
+  panelOpenRegiCodeEnterPopup: {fileID: 1136035043}
   activateAccButton: {fileID: 1699777308}
   chatbotButton: {fileID: 692331789}
+  panelOpenRegiCodeEnterPopupButton: {fileID: 1136035043}
   regCodeEnterPopup: {fileID: 1651036855}
   errorMessageText: {fileID: 1690075913}
 --- !u!224 &1495707878 stripped

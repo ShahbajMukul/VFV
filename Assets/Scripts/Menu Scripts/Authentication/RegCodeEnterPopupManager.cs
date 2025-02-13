@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,18 +11,20 @@ public class RegCodeEnterPopupManager : MonoBehaviour
 
     public InputField regiCodeInput;
 
-    public Button openRegCodeEnterPopupButton;
+    public Button panelOpenRegiCodeEnterPopup;
     public Button activateAccButton;
     public Button chatbotButton;
+    public Button panelOpenRegiCodeEnterPopupButton;
 
 
     public GameObject regCodeEnterPopup;
     public Text errorMessageText;
 
     private string regCodeEnterUrl = "https://storai.net/api/enter-code";
-
+    private string sessionFilePath;
     void Start()
     {
+        sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
         // Initialize error message and set chatbot button inactive by default
         errorMessageText.text = "";
     }
@@ -58,7 +62,31 @@ public class RegCodeEnterPopupManager : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                 Debug.LogError("HTTP Error: " + www.error);
-                errorMessageText.text = "An error occurred: " + www.error;
+                if (www.responseCode == 400) // Bad Request
+                {
+                    try
+                    {
+                        // Attempt to parse the error message from the server
+                        var errorResponse = JsonUtility.FromJson<ErrorResponse>(www.downloadHandler.text);
+                        if (!string.IsNullOrEmpty(errorResponse.message))
+                        {
+                            errorMessageText.text = errorResponse.message; // Display server's error message
+                        }
+                        else
+                        {
+                            errorMessageText.text = "Wrong code. Please try again."; // Default message
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError("Failed to parse error response: " + ex.Message);
+                        errorMessageText.text = "Wrong code. Please try again."; // Fallback message
+                    }
+                }
+                else
+                {
+                    errorMessageText.text = "An error occurred. Please try again later."; // Generic error for other HTTP errors
+                }
             }
             else
             {
@@ -69,9 +97,10 @@ public class RegCodeEnterPopupManager : MonoBehaviour
                 {
                     Debug.Log("Activation successful with User ID: " + response.userId);
                     errorMessageText.text = "Activation successful! StorAI is now enabled.";
-                    SaveSession(response.userId); // Save the user ID returned from the server
+                    UpdateSessionDataToActive();  // Update session data first
+                    SaveUserId(response.userId); // Then save user ID
                     ActivateChatbot();
-                    CloseRegiCodeEnterPopup();
+                    MakeUIChanges();
                 }
                 else
                 {
@@ -79,6 +108,32 @@ public class RegCodeEnterPopupManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateSessionDataToActive()
+    {
+        try
+        {
+            if (File.Exists(sessionFilePath))
+            {
+                string jsonData = File.ReadAllText(sessionFilePath);
+                SessionData data = JsonUtility.FromJson<SessionData>(jsonData);
+                data.isActive = true;
+                File.WriteAllText(sessionFilePath, JsonUtility.ToJson(data));
+                Debug.Log("Updated session data to active status");
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error updating session status: " + e.Message);
+        }
+    }
+
+
+    private void MakeUIChanges()
+    {
+        activateAccButton.interactable = false;
+        panelOpenRegiCodeEnterPopup.gameObject.SetActive(false);
     }
 
     [System.Serializable]
@@ -89,12 +144,11 @@ public class RegCodeEnterPopupManager : MonoBehaviour
         public string userId;
     }
 
-    private void SaveSession(string username)
+    private void SaveUserId(string userId)
     {
-        // Save the username for session persistence
-        PlayerPrefs.SetString("LoggedInUsername", username);
+        PlayerPrefs.SetString("LoggedInUsername", userId);
         PlayerPrefs.Save();
-        Debug.Log("Session saved for username: " + username);
+        Debug.Log("Saved user ID: " + userId);
     }
 
     private void ActivateChatbot()
@@ -125,5 +179,17 @@ public class RegCodeEnterPopupManager : MonoBehaviour
     private class RequestPayload
     {
         public string code;
+    }
+    [System.Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
+    }
+
+    [System.Serializable]
+    private class ErrorResponse
+    {
+        public string message;
     }
 }

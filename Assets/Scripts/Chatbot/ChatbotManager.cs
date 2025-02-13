@@ -114,6 +114,8 @@ public class ChatbotManager : MonoBehaviour
         ChatSession newSession = new ChatSession(sessionName);
         chatSessions.Add(newSession);
 
+        noticeText.gameObject.SetActive(false);
+
         // Create a session button in the UI
         GameObject sessionButtonObj = Instantiate(sessionButtonPrefab, sessionListContent.transform);
         sessionButtonObj.GetComponentInChildren<UnityEngine.UI.Text>().text = sessionName;

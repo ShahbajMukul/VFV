@@ -18,6 +18,9 @@ public class RegistrationPopupManager : MonoBehaviour
     public UnityEngine.UI.Text errorMessageText;
     public Button ChatbotButton;
     public Button MenuLoginButton;
+    public Button MenuLogoutButton;
+
+    public Button MenuOpenRegCodeEnterPopup;
 
     private string registrationUrl = "https://storai.net/api/register-optional";
     private string sessionTokenFilePath;
@@ -28,17 +31,26 @@ public class RegistrationPopupManager : MonoBehaviour
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
         // Check if a session token exists
-        string savedSessionToken = LoadSessionToken();
+        SessionData sessionData = new SessionData();
 
-        if (!string.IsNullOrEmpty(savedSessionToken))
+        if (sessionData != null)
         {
-            Debug.Log("Session token found, redirecting to Request Code UI.");
-            ActivateUIPanel(reqRegistrationCodePopup);
+           if(!sessionData.isActive && sessionData.sessionToken != string.Empty)
+           {
+                Debug.Log("Inactive session found, show registration code input.");
+                MenuOpenRegCodeEnterPopup.gameObject.SetActive(true);
+                ChatbotButton.interactable = false;
+            }
+
         }
         else
         {
-            Debug.Log("No session token found, showing Login UI.");
-            ActivateUIPanel(loginPopup);
+            Debug.Log("No inactive session or token found, show login button");
+            MenuLoginButton.gameObject.SetActive(true);
+            ChatbotButton.interactable = false;
+
+            // This can be annoying if they dont want to use storai at all.
+            // ActivateUIPanel(loginPopup);
         }
     }
 
@@ -58,7 +70,6 @@ public class RegistrationPopupManager : MonoBehaviour
         Debug.Log("Deactivating all panels.");
         if (registrationPopup != null) registrationPopup.SetActive(false);
         if (loginPopup != null) loginPopup.SetActive(false);
-        if (reqRegistrationCodePopup != null) reqRegistrationCodePopup.SetActive(false);
     }
 
 
@@ -71,8 +82,6 @@ public class RegistrationPopupManager : MonoBehaviour
     {
         loginPopup.SetActive(true);
         registrationPopup.SetActive(false);
-        reqRegistrationCodePopup.SetActive(false);
-
     }
 
     public void ShowReqRegistrationCodePopup()
@@ -155,6 +164,7 @@ public class RegistrationPopupManager : MonoBehaviour
                     Debug.Log("Registration successful!");
                     CloseRegistrationPopup();
 
+                    // here
                     var response = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
                     Debug.Log("User active status: " + response.isActive);
 
@@ -164,8 +174,22 @@ public class RegistrationPopupManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("User is inactive. Saving session token for future validation.");
-                        SaveSessionToken(response.sessionToken);
+
+
+                        string setCookie = www.GetResponseHeader("Set-Cookie");
+                        if (!string.IsNullOrEmpty(setCookie))
+                        {
+                            Debug.Log("User is inactive. Saving session token for future validation.");
+                            SaveSessionData(setCookie, response.isActive);
+                            MenuLoginButton.gameObject.SetActive(false);
+                            MenuLogoutButton.gameObject.SetActive(true);
+                            ChatbotButton.interactable = false;
+
+                        }
+                        else
+                        {
+                            Debug.Log("User is inactive, could not find a cookie either");
+                        }
                         ShowReqRegistrationCodePopup();
                     }
                 }
@@ -178,38 +202,40 @@ public class RegistrationPopupManager : MonoBehaviour
         }
     }
 
-    private void SaveSessionToken(string sessionToken)
+    private void SaveSessionData(string sessionToken, bool isActive)
     {
+        SessionData data = new SessionData();
+        data.sessionToken = sessionToken;
+        data.isActive = isActive;
+
         try
         {
-            File.WriteAllText(sessionTokenFilePath, sessionToken);
-            Debug.Log("Session token saved successfully to: " + sessionTokenFilePath);
+            string jsonData = JsonUtility.ToJson(data);
+            File.WriteAllText(sessionTokenFilePath, jsonData);
+            Debug.Log("Session data saved.");
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error saving session token: " + ex.Message);
+            Debug.LogError("Error saving session data: " + ex.Message);
         }
     }
 
-    private string LoadSessionToken()
+    private SessionData LoadSessionData()
     {
         try
         {
             if (File.Exists(sessionTokenFilePath))
             {
-                string token = File.ReadAllText(sessionTokenFilePath);
-                Debug.Log("Session token loaded successfully: " + token);
-                return token;
+                string jsonData = File.ReadAllText(sessionTokenFilePath);
+                SessionData data = JsonUtility.FromJson<SessionData>(jsonData);
+                Debug.Log("Session data loaded.");
+                return data;
             }
-            else
-            {
-                Debug.LogWarning("Session token file does not exist.");
-                return null;
-            }
+            return null;
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error loading session token: " + ex.Message);
+            Debug.LogError("Error loading session data: " + ex.Message);
             return null;
         }
     }
@@ -263,10 +289,15 @@ public class RegistrationPopupManager : MonoBehaviour
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
     }
-
     private class RegistrationResponse
-    {
+    { 
         public bool isActive;
         public string sessionToken; // Added field for session token
+    }
+    [System.Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
     }
 }

@@ -130,6 +130,9 @@ public class ReqRegiPopUpManager : MonoBehaviour
 
     public void ClosereqRegiPopup()
     {
+        // Test remove. to not trigger email
+        // openRegCodeEnterButton.gameObject.SetActive(true);
+        //end test
         if (reqRegiPopup != null)
         {
             reqRegiPopup.SetActive(false);
