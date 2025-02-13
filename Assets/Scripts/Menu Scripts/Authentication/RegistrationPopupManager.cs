@@ -30,10 +30,12 @@ public class RegistrationPopupManager : MonoBehaviour
         // Set the file path for saving the session token
         sessionTokenFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
 
-        SessionData sessionData = new SessionData();
+        // Check if a session token exists
+        string savedSessionToken = LoadSessionToken();
 
-        if (sessionData != null)
+        if (!string.IsNullOrEmpty(savedSessionToken))
         {
+            /*{
             if (!sessionData.isActive && !string.IsNullOrEmpty(sessionData.sessionToken))
             {
                 Debug.Log("Inactive session found, show registration code input.");
@@ -49,12 +51,21 @@ public class RegistrationPopupManager : MonoBehaviour
                 MenuLogoutButton.gameObject.SetActive(true);
                 ChatbotButton.interactable = true;
             }
+             */
+
+            Debug.Log("Session token found, redirecting to Request Code UI.");
+            // go straight to the code entry if there's an existing (inactive) session,
+            // ActivateUIPanel(reqRegistrationCodePopup);
         }
         else
         {
-            Debug.Log("No session data found, show login button.");
+            /*Debug.Log("No session data found, show login button.");
             MenuLoginButton.gameObject.SetActive(true);
             ChatbotButton.interactable = false;
+             */
+
+            Debug.Log("No session token found, showing Login UI.");
+            ActivateUIPanel(loginPopup);
         }
     }
 
@@ -74,6 +85,7 @@ public class RegistrationPopupManager : MonoBehaviour
         Debug.Log("Deactivating all panels.");
         if (registrationPopup != null) registrationPopup.SetActive(false);
         if (loginPopup != null) loginPopup.SetActive(false);
+        if (reqRegistrationCodePopup != null) reqRegistrationCodePopup.SetActive(false);
     }
 
 
@@ -86,12 +98,14 @@ public class RegistrationPopupManager : MonoBehaviour
     {
         loginPopup.SetActive(true);
         registrationPopup.SetActive(false);
+        reqRegistrationCodePopup.SetActive(false);
     }
 
     public void ShowReqRegistrationCodePopup()
     {
         ActivateUIPanel(reqRegistrationCodePopup);
     }
+
     public void OnRegisterButtonClicked()
     {
         if (string.IsNullOrEmpty(emailInput.text) ||
@@ -168,33 +182,42 @@ public class RegistrationPopupManager : MonoBehaviour
                     Debug.Log("Registration successful!");
                     CloseRegistrationPopup();
 
-                    // here
+                    /*// here
                     var response = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
                     Debug.Log("User active status: " + response.isActive);
+                    */
 
-                    if (response.isActive)
+                    // Parse the JSON with  the actual structure returned by the server
+                    // { "message":  "user": { "id., "username "email, "isActive" } }
+                    RegistrationResponse serverResponse = JsonUtility.FromJson<RegistrationResponse>(www.downloadHandler.text);
+
+                    if (serverResponse != null && serverResponse.user != null)
                     {
-                        ShowLoginPopup();
-                    }
-                    else
-                    {
+                        bool userIsActive = serverResponse.user.isActive;
+                        Debug.Log("User active status: " + userIsActive);
 
-
-                        string setCookie = www.GetResponseHeader("Set-Cookie");
-                        if (!string.IsNullOrEmpty(setCookie))
+                        if (userIsActive)
                         {
-                            Debug.Log("User is inactive. Saving session token for future validation.");
-                            SaveSessionData(setCookie, response.isActive);
-                            MenuLoginButton.gameObject.SetActive(false);
-                            MenuLogoutButton.gameObject.SetActive(true);
-                            ChatbotButton.interactable = false;
-
+                            // The user provided a valid registration code; proceed to login screen.
+                            ShowLoginPopup();
                         }
                         else
                         {
-                            Debug.Log("User is inactive, could not find a cookie either");
+                            // The user did NOT provide a valid code, or left code empty
+                            // Attempt to save the session cookie for future use:
+                            string setCookie = www.GetResponseHeader("Set-Cookie");
+                            if (!string.IsNullOrEmpty(setCookie))
+                            {
+                                Debug.Log("User is inactive. Saving session token for future validation.");
+                                SaveSessionToken(setCookie);
+                            }
+                            ShowReqRegistrationCodePopup();
                         }
-                        ShowReqRegistrationCodePopup();
+                    }
+                    else
+                    {
+                        // In case parsing fails or unexpected JSON
+                        ShowErrorMessage("Unexpected response format from server.");
                     }
                 }
                 else
@@ -206,40 +229,42 @@ public class RegistrationPopupManager : MonoBehaviour
         }
     }
 
-    private void SaveSessionData(string sessionToken, bool isActive)
+    private void SaveSessionToken(string sessionToken)
     {
-        SessionData data = new SessionData();
-        data.sessionToken = sessionToken;
-        data.isActive = isActive;
-
         try
         {
-            string jsonData = JsonUtility.ToJson(data);
-            File.WriteAllText(sessionTokenFilePath, jsonData);
-            Debug.Log("Session data saved.");
+            File.WriteAllText(sessionTokenFilePath, sessionToken);
+            Debug.Log("Session token saved successfully to: " + sessionTokenFilePath);
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error saving session data: " + ex.Message);
+            Debug.LogError("Error saving session token: " + ex.Message);
         }
     }
 
-    private SessionData LoadSessionData()
+    private string LoadSessionToken()
     {
         try
         {
             if (File.Exists(sessionTokenFilePath))
             {
-                string jsonData = File.ReadAllText(sessionTokenFilePath);
+                /*string jsonData = File.ReadAllText(sessionTokenFilePath);
                 SessionData data = JsonUtility.FromJson<SessionData>(jsonData);
-                Debug.Log("Session data loaded.");
-                return data;
+                Debug.Log("Session data loaded.");*/
+
+                string token = File.ReadAllText(sessionTokenFilePath);
+                Debug.Log("Session token loaded successfully: " + token);
+                return token;
             }
-            return null;
+            else
+            {
+                Debug.LogWarning("Session token file does not exist.");
+                return null;
+            }
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Error loading session data: " + ex.Message);
+            Debug.LogError("Error loading session token: " + ex.Message);
             return null;
         }
     }
@@ -293,15 +318,26 @@ public class RegistrationPopupManager : MonoBehaviour
         errorMessageText.text = "";
         errorMessageText.gameObject.SetActive(false);
     }
+
+    [System.Serializable]
     private class RegistrationResponse
-    { 
+    {
+        /*
         public bool isActive;
         public string sessionToken; // Added field for session token
+        */
+
+
+        public string message;
+        public RegistrationUser user;
     }
+
     [System.Serializable]
-    private class SessionData
+    private class RegistrationUser
     {
-        public string sessionToken;
+        public int id;
+        public string username;
+        public string email;
         public bool isActive;
     }
 }
