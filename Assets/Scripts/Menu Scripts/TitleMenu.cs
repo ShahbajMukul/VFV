@@ -9,6 +9,7 @@ public class TitleMenu : MonoBehaviour
     public GameObject fullscreenToggle;
     public GameObject optionsPanel;
     public GameObject creditsPanel;
+    public GameObject optionsMenuTitle;
 
     private void Start() {
         // Minimizing the Options Panel
@@ -45,7 +46,6 @@ public class TitleMenu : MonoBehaviour
     }
     public void HideOptions() {
         optionsPanel.SetActive(false);
-
     }
     public void HideNetworkErr() {
         GameObject.Find("NetworkErrPanel").transform.localScale = new Vector3(0, 0, 0);
@@ -57,10 +57,12 @@ public class TitleMenu : MonoBehaviour
     }
     public void ShowCredits() {
         //GameObject.Find("CreditsPanel").transform.localScale = new Vector3(3, 3, 1);
+        optionsMenuTitle.gameObject.SetActive(false);
         creditsPanel.SetActive(true);
     }
     public void HideCredits() {
         //GameObject.Find("CreditsPanel").transform.localScale = new Vector3(0, 0, 0);
+        optionsMenuTitle.gameObject.SetActive(true);
         creditsPanel.SetActive(false);
     }
     public void ShowAIBanner()
