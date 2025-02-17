@@ -9,6 +9,8 @@ public class RegistrationPopupManager : MonoBehaviour
 {
     public GameObject registrationPopup;
     public GameObject loginPopup;
+    public GameObject resetPassPopup;
+
     public GameObject reqRegistrationCodePopup;
     public InputField emailInput;
     public InputField usernameInput;
@@ -87,6 +89,12 @@ public class RegistrationPopupManager : MonoBehaviour
         loginPopup.SetActive(true);
         registrationPopup.SetActive(false);
         reqRegistrationCodePopup.SetActive(false);
+    }
+
+    public void ShowResetPopup()
+    {
+        registrationPopup.SetActive(false);
+        resetPassPopup.SetActive(true);
     }
 
     public void ShowReqRegistrationCodePopup()

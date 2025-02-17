@@ -6898,7 +6898,7 @@ Transform:
   - {fileID: 1440999817}
   - {fileID: 1275398661}
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &692331789 stripped
 MonoBehaviour:
@@ -7561,7 +7561,7 @@ RectTransform:
   m_Children:
   - {fileID: 154061980}
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9599,7 +9599,7 @@ RectTransform:
   m_Children:
   - {fileID: 117257157}
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10251,7 +10251,7 @@ RectTransform:
   - {fileID: 1488732772}
   - {fileID: 1345017105}
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10754,7 +10754,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11051,7 +11051,7 @@ PrefabInstance:
     - target: {fileID: 7960696974606475163, guid: 54938c6bdf5ee0e4c8a88705bceae68c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7960696974606475163, guid: 54938c6bdf5ee0e4c8a88705bceae68c,
         type: 3}
@@ -11742,7 +11742,7 @@ RectTransform:
   - {fileID: 1862847990}
   - {fileID: 1142790271}
   m_Father: {fileID: 1238878426}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13296,6 +13296,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children:
+  - {fileID: 1008118146}
   - {fileID: 1495707878}
   - {fileID: 938476072}
   - {fileID: 673671596}
@@ -13303,7 +13304,6 @@ RectTransform:
   - {fileID: 538737430}
   - {fileID: 756326866}
   - {fileID: 1116985678}
-  - {fileID: 1008118146}
   m_Father: {fileID: 1490319506}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13939,7 +13939,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1490319516}
+      - m_Target: {fileID: 1490319514}
         m_MethodName: ShowResetPopup
         m_Mode: 1
         m_Arguments:
@@ -16807,6 +16807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   registrationPopup: {fileID: 2130388032}
   loginPopup: {fileID: 164561759}
+  resetPassPopup: {fileID: 1320415962}
   reqRegistrationCodePopup: {fileID: 1166997693}
   emailInput: {fileID: 498222717}
   usernameInput: {fileID: 2108729390}
@@ -21748,7 +21749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2052229236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23176,7 +23177,7 @@ PrefabInstance:
     - target: {fileID: 4095088321333184511, guid: ede959f6fca281d43b12e77f34c4f0c5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4095088321333184511, guid: ede959f6fca281d43b12e77f34c4f0c5,
         type: 3}

@@ -43,6 +43,7 @@ public class ResetPassPopupManager : MonoBehaviour
 
     public void OnResetButtonClicked()
     {
+        ShowErrorMessage("Processing. Please wait...");
         if (string.IsNullOrEmpty(emailInput.text))
         {
             ShowErrorMessage("All fields must be filled!");
