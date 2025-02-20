@@ -13,6 +13,8 @@ public class InGameMenu : MonoBehaviour
     public GameObject bulletinBoard;
     public Animator anim;
 
+    public GameObject optionsPanel;
+
     public UnityEvent pause_event;
     public UnityEvent unpause_event;
 
@@ -99,6 +101,9 @@ public class InGameMenu : MonoBehaviour
                     }
 
                     menuOpen = true;
+
+                    // We dont want to show the options panel which is a child of the parent
+                    optionsPanel.SetActive(false);
 
                     anim.SetTrigger("Toggle");
 
