@@ -50,15 +50,12 @@ public class URLButtons : MonoBehaviour
     public void FordFund() {
         LaunchURL("https://www.fordfund.org/");
     }
-
-    public void LLCLink()
-    {
-        LaunchURL("https://sites.google.com/a/umich.edu/mike-callahan/");
-    }
     
     public void AddHelp() {
         //LaunchURL("https://tinyurl.com/VetsandRC");
         LaunchURL("https://sites.google.com/a/umich.edu/mike-callahan/home?authuser=0");
+
+
     }
 
     public void LinkedinPage()
