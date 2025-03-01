@@ -25,7 +25,6 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button MenuOpenRegCodeEnterPopup;
 
     private string registrationUrl = "https://storai.net/api/register-optional";
-    private string registrationUrl = "https://storai.net/api/register-optional";
     private string sessionTokenFilePath;
 
     void Start()
@@ -319,7 +318,6 @@ public class RegistrationPopupManager : MonoBehaviour
         errorMessageText.gameObject.SetActive(false);
     }
 
-    [System.Serializable]
     [System.Serializable]
     private class RegistrationResponse
     {

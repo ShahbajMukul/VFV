@@ -25,7 +25,6 @@ public class LoginPopupManager : MonoBehaviour
 
 
     private string loginUrl = "https://storai.net/api/login";
-    private string loginUrl = "https://storai.net/api/login";
     private string sessionFilePath;
     SessionData sessionData = new SessionData();
 
