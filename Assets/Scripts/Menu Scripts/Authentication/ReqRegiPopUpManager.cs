@@ -27,6 +27,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
 
     // url for req access code
     private string reqAccessCodeUrl = "https://storai.net/email/RegReqEmail";
+    private string reqAccessCodeUrl = "https://storai.net/email/RegReqEmail";
 
 
     void Start()

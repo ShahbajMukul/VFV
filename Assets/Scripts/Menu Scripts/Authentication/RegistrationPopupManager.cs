@@ -25,6 +25,7 @@ public class RegistrationPopupManager : MonoBehaviour
     public Button MenuOpenRegCodeEnterPopup;
 
     private string registrationUrl = "https://storai.net/api/register-optional";
+    private string registrationUrl = "https://storai.net/api/register-optional";
     private string sessionTokenFilePath;
 
     void Start()
@@ -100,6 +101,7 @@ public class RegistrationPopupManager : MonoBehaviour
     {
         ActivateUIPanel(reqRegistrationCodePopup);
     }
+
 
     public void OnRegisterButtonClicked()
     {
@@ -213,6 +215,8 @@ public class RegistrationPopupManager : MonoBehaviour
                     {
                         // In case parsing fails or unexpected JSON
                         ShowErrorMessage("Unexpected response format from server.");
+                        // In case parsing fails or unexpected JSON
+                        ShowErrorMessage("Unexpected response format from server.");
                     }
                 }
                 else
@@ -315,6 +319,7 @@ public class RegistrationPopupManager : MonoBehaviour
         errorMessageText.gameObject.SetActive(false);
     }
 
+    [System.Serializable]
     [System.Serializable]
     private class RegistrationResponse
     {

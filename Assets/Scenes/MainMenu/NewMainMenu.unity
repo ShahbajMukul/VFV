@@ -1817,6 +1817,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1490319521}
         m_MethodName: ShowLoginPopup
+      - m_Target: {fileID: 1490319521}
+        m_MethodName: ShowLoginPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12737,7 +12739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1166997694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17153,7 +17155,9 @@ MonoBehaviour:
   userEmailInput: {fileID: 498222717}
   ReqButton: {fileID: 843649306}
   CtnuWOButton: {fileID: 1195868962}
+  CtnuWOButton: {fileID: 1195868962}
   openRegCodeEnterButton: {fileID: 1136035043}
+  panelLoginButton: {fileID: 1788693542}
   panelLoginButton: {fileID: 1788693542}
   registrationPopup: {fileID: 2130388032}
   loginPopup: {fileID: 164561759}
@@ -19906,6 +19910,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1788693540}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
