@@ -45,6 +45,18 @@ public class ChatbotManager : MonoBehaviour
             return;
         }
 
+        if (File.Exists(sessionFilePath))
+        {
+            string fileContent = File.ReadAllText(sessionFilePath);
+            SessionData data = JsonUtility.FromJson<SessionData>(fileContent);
+            if (data != null && !data.isActive)
+            {
+                UnityEngine.Debug.Log("User is not active -> Disabling StorAI chatbot");
+                chatbotPopup.SetActive(false);
+                return;
+            }
+        }
+
         UnityEngine.Debug.Log("Logged in as user: " + userId);
 
         // Initialize paths

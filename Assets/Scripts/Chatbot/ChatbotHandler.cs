@@ -25,7 +25,15 @@ public class ChatbotHandler : MonoBehaviour
             string sessionToken = File.ReadAllText(sessionFilePath);
             if (string.IsNullOrEmpty(sessionToken) == false)
             {
+                SessionData data = JsonUtility.FromJson<SessionData>(sessionToken);
+                if (data != null && !data.isActive)
+                {
+                    Debug.Log("User found but not active -> Hide chatbot button");
+                    HideAskChatbotButton();
+                    return;
+                }
                 Debug.Log("Stored session token found. Skipping login...");
+
             }
             else
             {
@@ -59,7 +67,12 @@ public class ChatbotHandler : MonoBehaviour
             chatbotPopupPanel.SetActive(true);
     }
 
-
+    [System.Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
+    }
 
 
     public void HideAskChatbotButton()

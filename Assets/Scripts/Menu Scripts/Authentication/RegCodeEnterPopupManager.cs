@@ -76,7 +76,7 @@ public class RegCodeEnterPopupManager : MonoBehaviour
             Debug.LogWarning("No registration code entered.");
             return;
         }
-
+        errorMessageText.text = "Activating your StorAI account. Please wait...";
         Debug.Log("Attempting to activate with code: " + code);
 
         // Start the coroutine to activate the account
@@ -139,7 +139,7 @@ public class RegCodeEnterPopupManager : MonoBehaviour
                 if (response.active)
                 {
                     Debug.Log("Activation successful with User ID: " + response.userId);
-                    errorMessageText.text = "Activation successful! StorAI is now enabled.";
+                    errorMessageText.text = "StorAI Activation successful! You can now close this window. Thank you!";
                     UpdateSessionDataToActive();  // Update session data first
                     SaveUserId(response.userId); // Then save user ID
                     ActivateChatbot();

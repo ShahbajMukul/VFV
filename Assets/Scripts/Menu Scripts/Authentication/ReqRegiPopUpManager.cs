@@ -110,7 +110,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
                 if (www.responseCode == 200)
                 {
                     Debug.Log("Request successful!");
-                    errorMessageText.text = "Request successful. You can close this window now.";
+                    errorMessageText.text = "Code request submitted successfully! While you wait, click the red button 'Continue without StorAI' below to start playing and exploring the game.";
 
                     PlayerPrefs.SetString("PartialRegistrationUsername", username);
                     PlayerPrefs.SetString("PartialRegistrationEmail", email);
