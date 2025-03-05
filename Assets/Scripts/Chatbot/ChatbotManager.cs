@@ -252,8 +252,22 @@ public class ChatbotManager : MonoBehaviour
     {
         if (File.Exists(sessionFilePath))
         {
-            string token = File.ReadAllText(sessionFilePath).Trim();
-            return token;
+            string fileContent = File.ReadAllText(sessionFilePath).Trim();
+            if (!string.IsNullOrEmpty(fileContent))
+            {
+                try
+                {
+                    SessionData data = JsonUtility.FromJson<SessionData>(fileContent);
+                    if (data != null && !string.IsNullOrEmpty(data.sessionToken))
+                    {
+                        return data.sessionToken;
+                    }
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogError("Error parsing session file: " + e.Message);
+                }
+            }
         }
         return string.Empty;
     }
@@ -463,6 +477,12 @@ public class ChatbotManager : MonoBehaviour
 
             }
         }
+    }
+    [Serializable]
+    private class SessionData
+    {
+        public string sessionToken;
+        public bool isActive;
     }
 
 

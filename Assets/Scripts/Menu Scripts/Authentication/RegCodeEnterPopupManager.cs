@@ -27,7 +27,43 @@ public class RegCodeEnterPopupManager : MonoBehaviour
         sessionFilePath = Path.Combine(Application.persistentDataPath, "sessionToken.txt");
         // Initialize error message and set chatbot button inactive by default
         errorMessageText.text = "";
+
+        // Always hide the code button by default
+        panelOpenRegiCodeEnterPopup.gameObject.SetActive(false);
+
+        if (File.Exists(sessionFilePath))
+        {
+            string jsonData = File.ReadAllText(sessionFilePath);
+            SessionData data = JsonUtility.FromJson<SessionData>(jsonData);
+
+            // If the session file is valid and has a token
+            if (data != null && !string.IsNullOrEmpty(data.sessionToken))
+            {
+                // If they're NOT active but have a token , show the code button
+                if (!data.isActive)
+                {
+                    panelOpenRegiCodeEnterPopup.gameObject.SetActive(true);
+                }
+                else
+                {
+                    // If they are active, hide the entire code popup
+                    regCodeEnterPopup.SetActive(false);
+                    panelOpenRegiCodeEnterPopup.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                // We have a file but no valid token , treat as logged out = hide
+                panelOpenRegiCodeEnterPopup.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            // No session file at all , user is not logged in = hide
+            panelOpenRegiCodeEnterPopup.gameObject.SetActive(false);
+        }
     }
+
 
 
     public void OnActivateButtonClicked()
@@ -56,6 +92,12 @@ public class RegCodeEnterPopupManager : MonoBehaviour
             www.uploadHandler = new UploadHandlerRaw(jsonToSend);
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
+
+            string sessionToken = LoadSessionToken();
+            if (!string.IsNullOrEmpty(sessionToken))
+            {
+                www.SetRequestHeader("Cookie", sessionToken);
+            }
 
             yield return www.SendWebRequest();
 
@@ -128,6 +170,30 @@ public class RegCodeEnterPopupManager : MonoBehaviour
         {
             Debug.LogError("Error updating session status: " + e.Message);
         }
+    }
+
+    private string LoadSessionToken()
+    {
+        if (File.Exists(sessionFilePath))
+        {
+            string fileContent = File.ReadAllText(sessionFilePath).Trim();
+            if (!string.IsNullOrEmpty(fileContent))
+            {
+                try
+                {
+                    SessionData data = JsonUtility.FromJson<SessionData>(fileContent);
+                    if (data != null && !string.IsNullOrEmpty(data.sessionToken))
+                    {
+                        return data.sessionToken;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Error parsing session file: " + e.Message);
+                }
+            }
+        }
+        return string.Empty;
     }
 
 

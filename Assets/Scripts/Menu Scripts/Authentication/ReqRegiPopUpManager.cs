@@ -33,6 +33,21 @@ public class ReqRegiPopUpManager : MonoBehaviour
     {
         errorMessageText.text = "";
         panelLoginButton.gameObject.SetActive(false);
+
+        string partialUser = PlayerPrefs.GetString("PartialRegistrationUsername", string.Empty);
+        string partialEmail = PlayerPrefs.GetString("PartialRegistrationEmail", string.Empty);
+
+        if (!string.IsNullOrEmpty(partialUser) && !string.IsNullOrEmpty(partialEmail))
+        {
+
+            usernameInput.text = partialUser;
+            userEmailInput.text = partialEmail;
+
+
+            //errorMessageText.text = "Code request already made for this user.\n"
+            //                     + "Check your email or wait for the admin to provide it.";
+            openRegCodeEnterButton.gameObject.SetActive(true);
+        }
     }
 
 
@@ -71,6 +86,7 @@ public class ReqRegiPopUpManager : MonoBehaviour
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
+
             Debug.Log("Sending registration request with payload: " + jsonData);
 
             yield return www.SendWebRequest();
@@ -95,6 +111,10 @@ public class ReqRegiPopUpManager : MonoBehaviour
                 {
                     Debug.Log("Request successful!");
                     errorMessageText.text = "Request successful. You can close this window now.";
+
+                    PlayerPrefs.SetString("PartialRegistrationUsername", username);
+                    PlayerPrefs.SetString("PartialRegistrationEmail", email);
+                    PlayerPrefs.Save();
 
                     ReqButton.interactable = false;
                     CtnuWOButton.interactable = false;

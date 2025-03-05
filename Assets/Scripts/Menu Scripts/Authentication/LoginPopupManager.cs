@@ -46,6 +46,14 @@ public class LoginPopupManager : MonoBehaviour
                 loginPopup.SetActive(false);
                 MenuLogoutButton?.gameObject.SetActive(true);
                 MenuLoginButton?.gameObject.SetActive(false);
+                if (sessionData.isActive)
+                {
+                    MenuOpenRegCodeEnterPopup.gameObject.SetActive(false);
+                }
+                else
+                {
+                    MenuOpenRegCodeEnterPopup.gameObject.SetActive(true);
+                }
             }
             else
             {
@@ -64,6 +72,11 @@ public class LoginPopupManager : MonoBehaviour
     {
         UnityEngine.Debug.LogWarning("No session token found, prompting user to log in.");
         loginPopup.SetActive(true);
+
+        MenuLoginButton?.gameObject.SetActive(true);   // Show Login
+        MenuLogoutButton?.gameObject.SetActive(false); // Hide Logout
+
+        MenuOpenRegCodeEnterPopup?.gameObject.SetActive(false);  //hideEnterRegistrationCode 
     }
 
     public void OnLoginButtonClicked()
