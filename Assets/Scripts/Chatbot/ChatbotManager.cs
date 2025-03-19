@@ -81,23 +81,23 @@ public class ChatbotManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            // Toggle the chatbot popup
-            if (chatbotPopup.activeSelf)
-            {
-                CloseChatbotPopUp();
-            }
-            else
-            {
-                OpenChatbotPopUp();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    // Toggle the chatbot popup
+        //    if (chatbotPopup.activeSelf)
+        //    {
+        //        CloseChatbotPopUp();
+        //    }
+        //    else
+        //    {
+        //        OpenChatbotPopUp();
+        //    }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OpenChatbotPopUp();
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    OpenChatbotPopUp();
+        //}
 
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
